@@ -2,16 +2,16 @@ package com.example.udongmp;
 
 import java.util.Date;
 
-public class circleInfoForDB {
+public class CircleInfoForDB {
     private String name;
     private String school;
     private String date;
 
-    circleInfoForDB(){
+    CircleInfoForDB(){
 
     }
 
-    circleInfoForDB(String name, String school, String date){
+    CircleInfoForDB(String name, String school, String date){
         this.date = date;
         this.school = school;
         this.name = name;
@@ -39,5 +39,10 @@ public class circleInfoForDB {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return school+":"+name;
     }
 }

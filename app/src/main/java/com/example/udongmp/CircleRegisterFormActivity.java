@@ -29,7 +29,7 @@ public class CircleRegisterFormActivity extends AppCompatActivity {
         bu_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                circlrInfoRef.child(et_school.getText().toString()+":"+et_name.getText().toString()+"/info").setValue(new circleInfoForDB(et_name.getText().toString(),et_school.getText().toString(),new Date().toString()));
+                circlrInfoRef.child(et_school.getText().toString()+":"+et_name.getText().toString()+"/info").setValue(new CircleInfoForDB(et_name.getText().toString(),et_school.getText().toString(),new Date().toString()));
                 finish();
             }
         });
