@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <TextView
+            android:id = "@+id/TV_createCircle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "Create Circle"
+            android:textSize="30sp"/>
+
+    <TextView
+            android:id = "@+id/TV_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "name"
+            android:layout_below="@+id/TV_createCircle"
+            android:padding="12dp"
+            android:textSize="20sp"/>
+
+    <EditText
+            android:id="@+id/ET_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/TV_name"
+            android:layout_alignBottom="@+id/TV_name"/>
+
+    <TextView
+            android:id = "@+id/TV_school"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "school"
+            android:layout_below="@+id/TV_name"
+            android:padding="12dp"
+            android:textSize="20sp"/>
+
+    <EditText
+            android:id="@+id/ET_school"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/TV_school"
+            android:layout_alignBottom="@+id/TV_school"
+            android:hint="XX대학교"/>
+
+    <Button
+            android:id = "@+id/Bu_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text = "submit"
+            android:layout_below = "@+id/TV_school"/>
+</RelativeLayout>
