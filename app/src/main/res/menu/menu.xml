@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/menu_home"
+            android:enabled="true"
+            android:title="Home"
+            android:icon="@drawable/home"/>
+
+    <item
+            android:id="@+id/menu_schedule"
+            android:enabled="true"
+            android:title="Schedule"
+            android:icon="@drawable/schedule"/>
+
+    <item
+            android:id="@+id/menu_accounting"
+            android:enabled="true"
+            android:title="Accounting"
+            android:icon="@drawable/accounting"/>
+
+    <item
+            android:id="@+id/menu_setting"
+            android:enabled="true"
+            android:title="Setting"
+            android:icon="@drawable/setting"/>
+
+</menu>

@@ -54,6 +54,9 @@ public class LoginActivity extends AppCompatActivity {
                 if(isValidEmail() && isValidPasswd()) {
                     loginUser(email, password);
                 }
+                else{
+                    Toast.makeText(LoginActivity.this, "잘못된 형식의 아이디 또는 비밀번호입니다!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -86,24 +89,23 @@ public class LoginActivity extends AppCompatActivity {
     // 로그인
     private void loginUser(String email, String password)
     {
-        firebaseAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // 로그인 성공
-                            Toast.makeText(LoginActivity.this, R.string.success_login, Toast.LENGTH_SHORT).show();
-                            FirebaseUser user=firebaseAuth.getCurrentUser();
-                            String uid = user.getUid();
-                            Intent intent = new Intent(getApplicationContext(),CircleListActivity.class);
-                            intent.putExtra("uid",uid);
-                            startActivity(intent);
-                            //동아리 목록
-                        } else {
-                            // 로그인 실패
-                            Toast.makeText(LoginActivity.this, R.string.failed_login, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    // 로그인 성공
+                    Toast.makeText(LoginActivity.this, R.string.success_login, Toast.LENGTH_SHORT).show();
+                    FirebaseUser user=firebaseAuth.getCurrentUser();
+                    String uid = user.getUid();
+                    Intent intent = new Intent(getApplicationContext(),CircleListActivity.class);
+                    intent.putExtra("uid",uid);
+                    startActivity(intent);
+                    //동아리 목록
+                } else {
+                    // 로그인 실패
+                    Toast.makeText(LoginActivity.this, R.string.failed_login, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }
