@@ -2,13 +2,13 @@ package com.example.udongmp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ListView;
+import android.widget.*;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
 
 import java.util.ArrayList;
@@ -20,10 +20,12 @@ public class CircleListActivity extends AppCompatActivity {
     ArrayAdapter<CircleInfoForDB> aad_searchResult;
     ArrayAdapter<CircleInfoForDB> aad_myCircleList;
     EditText et_searchCircle;
+    FirebaseUser user;
 
     private DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-    private DatabaseReference circlrInfoRef = mRootRef.child("circle");
-    static ArrayList<CircleInfoForDB> arrayData = new ArrayList<>();
+    private DatabaseReference circleRef = mRootRef.child("circle");
+    static ArrayList<CircleInfoForDB> arrayDataforsearch = new ArrayList<>();
+    static ArrayList<CircleInfoForDB> arrayDataForMyCircleList = new ArrayList<>();
     static ArrayList<String> arrayIndex = new ArrayList<>();
 
     @Override
@@ -39,6 +41,17 @@ public class CircleListActivity extends AppCompatActivity {
 
         aad_myCircleList = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
         lv_myCircleList.setAdapter(aad_myCircleList);
+        //해당 동아리 메뉴 페이지로 이동
+        lv_myCircleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(CircleListActivity.this, "동아리 메인 페이지로 이동합니다!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(),CircleMainActivity.class);
+                intent.putExtra("circle","circlename");// 동아리 이름 넘기는거 해야함...
+                startActivity(intent);
+            }
+        });
+
 
         aad_searchResult = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1);
         lv_searchResult.setAdapter(aad_searchResult);
@@ -59,22 +72,56 @@ public class CircleListActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("circlefinder","start");
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        Query query = circleRef;
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            CircleInfoForDB get;
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                arrayDataForMyCircleList.clear();
+                Log.d("circlefinder",dataSnapshot.toString());
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    Log.d("circlefinder",postSnapshot.toString());
+                    Log.d("circlefinder",postSnapshot.child("member/"+user.getUid()).toString());
+                    if(postSnapshot.child("member/"+user.getUid()).hasChildren()) {
+                        get = postSnapshot.child("info").getValue(CircleInfoForDB.class);
+                        arrayDataForMyCircleList.add(get);
+                    }
+                }
+
+                aad_myCircleList.clear();
+                aad_myCircleList.addAll(arrayDataForMyCircleList);
+                aad_myCircleList.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     public void getFirebaseDatabase(final String str){
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                arrayData.clear();
+                arrayDataforsearch.clear();
                 arrayIndex.clear();
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     String key = postSnapshot.getKey();
                     CircleInfoForDB get = postSnapshot.child("info").getValue(CircleInfoForDB.class);
                     if(get.getSchool().toLowerCase().contains(str)||get.getName().toLowerCase().contains(str)) {
-                        arrayData.add(get);
+                        arrayDataforsearch.add(get);
                         arrayIndex.add(key);
                     }
                 }
                 aad_searchResult.clear();
-                aad_searchResult.addAll(arrayData);
+                aad_searchResult.addAll(arrayDataforsearch);
                 aad_searchResult.notifyDataSetChanged();
             }
 
