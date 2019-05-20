@@ -1,4 +1,4 @@
-package com.example.udongmp;
+package com.example.udong_mp2019;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.udong_mp2019.R;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -18,13 +20,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         signup= findViewById(R.id.btn_signUp);
-        signin=findViewById(R.id.btn_signIn);
+        signin=findViewById(R.id.btn_signin);
 
         //회원가입 버튼
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentSignup= new Intent(getApplicationContext(), SignUpActivity.class);
+                Intent intentSignup= new Intent(getApplicationContext(), com.example.udong_mp2019.SignUpActivity.class);
                 startActivity(intentSignup);
             }
         });
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentLogin= new Intent(getApplicationContext(), LoginActivity.class);
+                Intent intentLogin= new Intent(getApplicationContext(), com.example.udong_mp2019.LoginActivity.class);
                 startActivity(intentLogin);
             }
         });

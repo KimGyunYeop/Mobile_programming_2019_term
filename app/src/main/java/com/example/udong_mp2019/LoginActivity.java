@@ -1,4 +1,4 @@
-package com.example.udongmp;
+package com.example.udong_mp2019;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.udong_mp2019.CircleListActivity;
+import com.example.udong_mp2019.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -43,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
 
         editTextEmail = findViewById(R.id.et_email);
         editTextPassword = findViewById(R.id.et_password);
-        signIn= findViewById(R.id.btn_signIn);
+        signIn= findViewById(R.id.btn_signin_submit);
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, R.string.success_login, Toast.LENGTH_SHORT).show();
                     FirebaseUser user=firebaseAuth.getCurrentUser();
                     String uid = user.getUid();
-                    Intent intent = new Intent(getApplicationContext(),CircleListActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), CircleListActivity.class);
                     intent.putExtra("uid",uid);
                     startActivity(intent);
                     //동아리 목록

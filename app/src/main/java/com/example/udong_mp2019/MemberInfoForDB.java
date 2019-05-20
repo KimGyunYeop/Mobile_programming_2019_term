@@ -1,4 +1,4 @@
-package com.example.udongmp;
+package com.example.udong_mp2019;
 
 public class MemberInfoForDB {
     private String autority;

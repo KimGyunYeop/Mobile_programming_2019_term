@@ -140,6 +140,51 @@
     },
     {
       "client_info": {
+        "mobilesdk_app_id": "1:806315284174:android:3ca9fbca4fca2147",
+        "android_client_info": {
+          "package_name": "com.example.udong_mp2019"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "806315284174-prt3fhme1j2nj7ierbjro3681kleos4e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.udong_mp2019",
+            "certificate_hash": "c7d232f435dc2fd03709942e3af5d703157cae56"
+          }
+        },
+        {
+          "client_id": "806315284174-lkdvbqe5u7mkthnjeelp93thmvlqvai2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.udong_mp2019",
+            "certificate_hash": "a23d5b6a99b1202fe03ec9503a0f2f56d9b8ea8c"
+          }
+        },
+        {
+          "client_id": "806315284174-q4o32mssaj3u4i0elnqhi42gc5al5v97.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUpJtQZNczrzrM7PWANXeXXpdF7I8G39U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "806315284174-q4o32mssaj3u4i0elnqhi42gc5al5v97.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:806315284174:android:0eb9fe16ec3d09f1",
         "android_client_info": {
           "package_name": "com.example.udongmp"

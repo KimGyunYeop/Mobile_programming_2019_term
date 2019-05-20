@@ -1,14 +1,14 @@
-package com.example.udongmp;
+package com.example.udong_mp2019;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class HomeFragment extends Fragment {
-    public static HomeFragment newInstance() {
-        HomeFragment fragment = new HomeFragment();
+public class AccountingFragment extends Fragment {
+    public static AccountingFragment newInstance() {
+        AccountingFragment fragment = new AccountingFragment();
         return fragment;
     }
 
@@ -20,6 +20,6 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        return inflater.inflate(R.layout.fragment_accounting, container, false);
     }
 }

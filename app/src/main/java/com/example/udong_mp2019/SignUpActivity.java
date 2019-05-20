@@ -1,4 +1,4 @@
-package com.example.udongmp;
+package com.example.udong_mp2019;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -86,7 +86,7 @@ public class SignUpActivity extends AppCompatActivity {
                     createUser(email, password);
                     FirebaseUser user=firebaseAuth.getCurrentUser();
                     // 데이터베이스에 멤버Info 저장
-                    UserInfoForDB userInfoForDB = new UserInfoForDB(email, password, name, school, studentId);
+                    com.example.udong_mp2019.UserInfoForDB userInfoForDB = new com.example.udong_mp2019.UserInfoForDB(email, password, name, school, studentId);
                     userInfoRef.child(user.getUid()).setValue(userInfoForDB);
                 }
             }

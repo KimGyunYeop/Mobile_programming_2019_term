@@ -1,4 +1,4 @@
-package com.example.udongmp;
+package com.example.udong_mp2019;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -46,7 +46,7 @@ public class CircleListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(CircleListActivity.this, "동아리 메인 페이지로 이동합니다!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(),CircleMainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), com.example.udong_mp2019.CircleMainActivity.class);
                 intent.putExtra("circle","circlename");// 동아리 이름 넘기는거 해야함...
                 startActivity(intent);
             }
@@ -59,7 +59,7 @@ public class CircleListActivity extends AppCompatActivity {
         bu_createCircle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),CircleRegisterFormActivity.class);
+                Intent intent = new Intent(getApplicationContext(), com.example.udong_mp2019.CircleRegisterFormActivity.class);
                 startActivity(intent);
             }
         });

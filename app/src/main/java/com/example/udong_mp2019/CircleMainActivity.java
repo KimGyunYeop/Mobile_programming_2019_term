@@ -1,4 +1,4 @@
-package com.example.udongmp;
+package com.example.udong_mp2019;
 
 import android.app.Fragment;
 import android.content.Intent;
@@ -11,7 +11,10 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import static com.example.udongmp.HomeFragment.*;
+import com.example.udong_mp2019.AccountingFragment;
+import com.example.udong_mp2019.R;
+
+import static com.example.udong_mp2019.HomeFragment.*;
 
 public class CircleMainActivity extends AppCompatActivity {
     TextView tv;
@@ -31,16 +34,16 @@ public class CircleMainActivity extends AppCompatActivity {
                         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                         switch (item.getItemId()) {
                             case R.id.menu_home:
-                                transaction.replace(R.id.frame_layout, new HomeFragment());
+                                transaction.replace(R.id.frame_layout, new com.example.udong_mp2019.HomeFragment());
                                 break;
                             case R.id.menu_schedule:
-                                transaction.replace(R.id.frame_layout, new ScheduleFragment());
+                                transaction.replace(R.id.frame_layout, new com.example.udong_mp2019.ScheduleFragment());
                                 break;
                             case R.id.menu_accounting:
                                 transaction.replace(R.id.frame_layout, new AccountingFragment());
                                 break;
                             case R.id.menu_setting:
-                                transaction.replace(R.id.frame_layout, new SettingFragment());
+                                transaction.replace(R.id.frame_layout, new com.example.udong_mp2019.SettingFragment());
                                 break;
                         }
                         transaction.commit();
@@ -50,7 +53,7 @@ public class CircleMainActivity extends AppCompatActivity {
 
         //Manually displaying the first fragment - one time only
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_layout, new HomeFragment());
+        transaction.replace(R.id.frame_layout, new com.example.udong_mp2019.HomeFragment());
         transaction.commit();
     }
 }
