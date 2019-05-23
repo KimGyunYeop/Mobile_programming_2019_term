@@ -45,9 +45,15 @@ public class CircleListActivity extends AppCompatActivity {
         lv_myCircleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(CircleListActivity.this, "동아리 메인 페이지로 이동합니다!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CircleListActivity.this, "동아리 메인 페이지로 이동합니다.", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), com.example.udong_mp2019.CircleMainActivity.class);
-                intent.putExtra("circle","circlename");// 동아리 이름 넘기는거 해야함...
+
+                String circleName=parent.getItemAtPosition(position).toString();
+                Toast.makeText(CircleListActivity.this, circleName, Toast.LENGTH_LONG).show();
+                //동아리 이름 넘김
+                intent.putExtra("circle",circleName);
+                // 회원 id 넘김
+                intent.putExtra("user",user.getUid());
                 startActivity(intent);
             }
         });

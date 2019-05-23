@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.udong_mp2019.AccountingFragment;
 import com.example.udong_mp2019.R;
@@ -23,6 +24,10 @@ public class CircleMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_circle_main);
+
+        Intent receive= new Intent();
+        String circleName=receive.getStringExtra("circleName");
+        String userID=receive.getStringExtra("userName");
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         tv=(TextView) findViewById(R.id.tv_main);

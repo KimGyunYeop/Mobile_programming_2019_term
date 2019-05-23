@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
                     loginUser(email, password);
                 }
                 else{
-                    Toast.makeText(LoginActivity.this, "잘못된 형식의 아이디 또는 비밀번호입니다!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "잘못된 형식의 아이디 또는 비밀번호입니다.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
