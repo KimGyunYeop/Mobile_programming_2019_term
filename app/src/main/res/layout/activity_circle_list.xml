@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="com.example.udongmp.CircleListActivity">
+        tools:context="com.example.udong_mp2019.CircleListActivity">
 
     <TableLayout
             android:layout_width="match_parent"

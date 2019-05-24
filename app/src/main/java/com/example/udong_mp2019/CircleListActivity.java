@@ -49,11 +49,10 @@ public class CircleListActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), com.example.udong_mp2019.CircleMainActivity.class);
 
                 String circleName=parent.getItemAtPosition(position).toString();
-                Toast.makeText(CircleListActivity.this, circleName, Toast.LENGTH_LONG).show();
                 //동아리 이름 넘김
-                intent.putExtra("circle",circleName);
+                intent.putExtra("circleName",circleName);
                 // 회원 id 넘김
-                intent.putExtra("user",user.getUid());
+                intent.putExtra("userID",user.getUid());
                 startActivity(intent);
             }
         });
@@ -61,6 +60,8 @@ public class CircleListActivity extends AppCompatActivity {
 
         aad_searchResult = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1);
         lv_searchResult.setAdapter(aad_searchResult);
+
+
 
         bu_createCircle.setOnClickListener(new View.OnClickListener() {
             @Override

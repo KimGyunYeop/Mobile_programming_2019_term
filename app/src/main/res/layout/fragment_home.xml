@@ -9,7 +9,6 @@
         android:id="@+id/tv_hello"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="안녕하세요!"
         android:layout_marginTop="100dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp" />
@@ -18,7 +17,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_hello"
-        android:text="동아리 페이지에 자주 놀러오세요~"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp" />
@@ -28,6 +26,7 @@
         android:layout_below="@id/tv_circlemain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp" />
 
@@ -37,6 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"/>
 
