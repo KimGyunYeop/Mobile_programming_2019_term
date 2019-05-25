@@ -1,6 +1,6 @@
 package com.example.udong_mp2019;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
@@ -23,6 +23,7 @@ public class CircleMainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     String circleName;
     String userID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,47 +34,44 @@ public class CircleMainActivity extends AppCompatActivity {
         circleName=receive.getStringExtra("circleName");
         userID=receive.getStringExtra("userID");
 
-//        Toast.makeText(CircleMainActivity.this, "홈화면입니다"+circleName+userID, Toast.LENGTH_LONG ).show();
-
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         tv=(TextView) findViewById(R.id.tv_main);
 
+        final Bundle bundle= new Bundle(2);
+        bundle.putString("circleName",circleName);
+        bundle.putString("userID", userID);
         //navigation bar click listener
         bottomNavigationView.setOnNavigationItemSelectedListener
                 (new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         FragmentManager fm = getSupportFragmentManager();
-                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                        FragmentTransaction transaction = fm.beginTransaction();
                         switch (item.getItemId()) {
                             case R.id.menu_home:
-                                Bundle bundle= new Bundle(0b10);
-                                bundle.putString("circleName",circleName);
-                                bundle.putString("userID", userID);
-
                                 com.example.udong_mp2019.HomeFragment fragment= new com.example.udong_mp2019.HomeFragment();
                                 fragment.setArguments(bundle);
-                                fm.beginTransaction().replace(R.id.frame_layout, fragment);
-                                //transaction.replace(R.id.frame_layout, fragment);
+                                transaction.replace(R.id.frame_layout, fragment);
                                 break;
                             case R.id.menu_schedule:
-                                transaction.replace(R.id.frame_layout, new com.example.udong_mp2019.ScheduleFragment());
+                                transaction.replace(R.id.frame_layout, new ScheduleFragment());
                                 break;
                             case R.id.menu_accounting:
-                                transaction.replace(R.id.frame_layout, new com.example.udong_mp2019.AccountingFragment());
+                                transaction.replace(R.id.frame_layout, new AccountingFragment());
                                 break;
                             case R.id.menu_setting:
-                                transaction.replace(R.id.frame_layout, new com.example.udong_mp2019.SettingFragment());
+                                transaction.replace(R.id.frame_layout, new SettingFragment());
                                 break;
                         }
                         transaction.commit();
                         return true;
                     }
                 });
-
-        //첫화면 지정(홈)
+        // 첫 화면
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_layout, new com.example.udong_mp2019.HomeFragment());
+        com.example.udong_mp2019.HomeFragment fragment= new com.example.udong_mp2019.HomeFragment();
+        fragment.setArguments(bundle);
+        transaction.replace(R.id.frame_layout, fragment);
         transaction.commit();
     }
 }

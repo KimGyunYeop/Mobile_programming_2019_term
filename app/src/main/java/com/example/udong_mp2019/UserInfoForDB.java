@@ -17,4 +17,7 @@ public class UserInfoForDB {
         this.school=school;
         this.studentId=studentId;
     }
+    public String getName() {
+        return name;
+    }
 }

@@ -47,7 +47,6 @@ public class CircleListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(CircleListActivity.this, "동아리 메인 페이지로 이동합니다.", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), com.example.udong_mp2019.CircleMainActivity.class);
-
                 String circleName=parent.getItemAtPosition(position).toString();
                 //동아리 이름 넘김
                 intent.putExtra("circleName",circleName);
@@ -57,11 +56,8 @@ public class CircleListActivity extends AppCompatActivity {
             }
         });
 
-
         aad_searchResult = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1);
         lv_searchResult.setAdapter(aad_searchResult);
-
-
 
         bu_createCircle.setOnClickListener(new View.OnClickListener() {
             @Override

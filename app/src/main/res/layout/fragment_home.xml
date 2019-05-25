@@ -11,33 +11,51 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp" />
+        android:layout_marginRight="50dp"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/tv_circlename"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_hello"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:textSize="17sp"/>
+
     <TextView
         android:id="@+id/tv_circlemain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_hello"
-        android:layout_marginTop="20dp"
+        android:layout_below="@id/tv_circlename"
+        android:text="동아리 페이지에 자주 놀러오세요~"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp" />
+        android:layout_marginRight="50dp"
+        android:textSize="15sp"/>
 
     <TextView
-        android:id="@+id/tv_circleName"
+        android:id="@+id/tv_we"
         android:layout_below="@id/tv_circlemain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
+        android:text="우리는 !"
         android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp" />
+        android:layout_marginRight="50dp"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
 
     <TextView
-        android:id="@+id/tv_introduction"
-        android:layout_below="@id/tv_circleName"
+        android:id="@+id/tv_circleIntro"
+        android:layout_below="@id/tv_we"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"/>
+        android:layout_marginRight="50dp"
+        android:textSize="15sp"/>
 
 </RelativeLayout>

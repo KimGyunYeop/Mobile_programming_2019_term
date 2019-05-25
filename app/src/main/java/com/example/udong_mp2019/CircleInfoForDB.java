@@ -6,15 +6,16 @@ public class CircleInfoForDB {
     private String name;
     private String school;
     private String date;
-
+    private String introduction;
     CircleInfoForDB(){
 
     }
 
-    CircleInfoForDB(String name, String school, String date){
+    CircleInfoForDB(String name, String introduction, String school, String date){
         this.date = date;
         this.school = school;
         this.name = name;
+        this.introduction=introduction;
     }
 
     public String getSchool() {
@@ -39,6 +40,14 @@ public class CircleInfoForDB {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
     }
 
     @Override

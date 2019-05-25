@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.udong_mp2019.CircleRegisterFormActivity">
+
+    <TextView
+        android:layout_marginTop="200dp"
+        android:id = "@+id/TV_createCircle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "Create Circle"
+        android:textSize="30sp"/>
+
+    <TextView
+        android:id = "@+id/TV_name"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "name"
+        android:layout_below="@+id/TV_createCircle"
+        android:padding="12dp"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/ET_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/TV_name"
+        android:layout_alignBottom="@+id/TV_name"/>
+
+    <TextView
+        android:id = "@+id/TV_school"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "school"
+        android:layout_below="@+id/TV_name"
+        android:padding="12dp"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/ET_school"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/TV_school"
+        android:layout_alignBottom="@+id/TV_school"
+        android:hint="XX대학교"/>
+
+    <TextView
+        android:id = "@+id/TV_introduction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "introduction"
+        android:layout_below="@+id/ET_school"
+        android:padding="12dp"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/ET_introduction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/TV_introduction"
+        android:layout_alignBottom="@+id/TV_introduction"
+        android:hint="소개 한 마디"/>
+
+    <Button
+        android:id = "@+id/Bu_submit"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text = "submit"
+        android:layout_below = "@+id/ET_introduction"/>
+
+</RelativeLayout>
