@@ -49,18 +49,24 @@ public class CircleMainActivity extends AppCompatActivity {
                         FragmentTransaction transaction = fm.beginTransaction();
                         switch (item.getItemId()) {
                             case R.id.menu_home:
-                                com.example.udong_mp2019.HomeFragment fragment= new com.example.udong_mp2019.HomeFragment();
-                                fragment.setArguments(bundle);
-                                transaction.replace(R.id.frame_layout, fragment);
+                                com.example.udong_mp2019.HomeFragment Hfragment= new com.example.udong_mp2019.HomeFragment();
+                                Hfragment.setArguments(bundle);
+                                transaction.replace(R.id.frame_layout, Hfragment);
                                 break;
                             case R.id.menu_schedule:
-                                transaction.replace(R.id.frame_layout, new ScheduleFragment());
+                                com.example.udong_mp2019.ScheduleFragment Sfragment= new com.example.udong_mp2019.ScheduleFragment();
+                                Sfragment.setArguments(bundle);
+                                transaction.replace(R.id.frame_layout, Sfragment);
                                 break;
                             case R.id.menu_accounting:
-                                transaction.replace(R.id.frame_layout, new AccountingFragment());
+                                com.example.udong_mp2019.AccountingFragment Afragment= new com.example.udong_mp2019.AccountingFragment();
+                                Afragment.setArguments(bundle);
+                                transaction.replace(R.id.frame_layout, Afragment);
                                 break;
                             case R.id.menu_setting:
-                                transaction.replace(R.id.frame_layout, new SettingFragment());
+                                com.example.udong_mp2019.SettingFragment Efragment= new com.example.udong_mp2019.SettingFragment();
+                                Efragment.setArguments(bundle);
+                                transaction.replace(R.id.frame_layout, Efragment);
                                 break;
                         }
                         transaction.commit();

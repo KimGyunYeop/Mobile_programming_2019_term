@@ -45,7 +45,7 @@ public class HomeFragment extends Fragment {
 
         AtomicReference<String> circle= new AtomicReference<>();
         AtomicReference<String> user= new AtomicReference<>();
-        String c="", u="";
+        String circlename="", userid="";
 
         TV_hello=(TextView)v.findViewById(R.id.tv_hello);
         TV_circlename=(TextView) v.findViewById(R.id.tv_circlename);
@@ -55,11 +55,11 @@ public class HomeFragment extends Fragment {
 
         if(bundle!=null){
 
-            c=bundle.getString("circleName");
-            u=bundle.getString("userID");
+            circlename=bundle.getString("circleName");
+            userid=bundle.getString("userID");
 
-            getFirebaseDatabase1(u);
-            getFirebaseDatabase2(c);
+            getFirebaseDatabase1(userid);
+            getFirebaseDatabase2(circlename);
 
         }
         return v;
@@ -71,7 +71,10 @@ public class HomeFragment extends Fragment {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     String key = postSnapshot.getKey();
                     UserInfoForDB get = postSnapshot.getValue(UserInfoForDB.class);
-                    TV_hello.setText(get.getName()+" 님 안녕하세요!");
+
+                    if(key.equals(str)) {
+                        TV_hello.setText(get.getName() + " 님 안녕하세요!");
+                    }
                 }
             }
 
@@ -90,9 +93,10 @@ public class HomeFragment extends Fragment {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     String key = postSnapshot.getKey();
                     CircleInfoForDB get = postSnapshot.child("info").getValue(CircleInfoForDB.class);
-                    TV_circlename.setText(str);
-
-                    TV_circleInfo.setText(get.getIntroduction());
+                    if(key.equals(str)) {
+                        TV_circlename.setText(str);
+                        TV_circleInfo.setText(get.getIntroduction());
+                    }
                 }
             }
 
