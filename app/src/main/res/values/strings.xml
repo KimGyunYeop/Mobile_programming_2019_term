@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyYDong</string>
+    <string name="app_name">MyUDong</string>
 
     <string name="email">이메일</string>
     <string name="password">비밀번호</string>
@@ -14,5 +14,12 @@
     <string name="signup">회원가입</string>
     <string name="success_signup">회원가입되었습니다!</string>
     <string name="failed_signup">이메일형식의 아이디와 6자 이상의 비밀번호를 입력해주세요</string>
+
+
+    <string name="action_settings">Settings</string>
+    <string name="large_text">This is a test app</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 
 </resources>

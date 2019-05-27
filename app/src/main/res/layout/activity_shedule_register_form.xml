@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.udong_mp2019.ScheduleRegisterFormActivity">
+
+    <TextView
+        android:id = "@+id/TV_createCircle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "Create Schedule"
+        android:textSize="30sp"/>
+
+    <TextView
+        android:id = "@+id/TV_time"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "time"
+        android:layout_below="@+id/TV_createCircle"
+        android:padding="12dp"
+        android:textSize="20sp"/>
+
+    <TimePicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/TP_time"
+        android:layout_below="@+id/TV_createCircle"/>
+
+    <TextView
+        android:id = "@+id/TV_schedule_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "name"
+        android:layout_below="@+id/TP_time"
+        android:padding="12dp"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/ET_schedule_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/TV_schedule_name"
+        android:layout_alignBottom="@+id/TV_schedule_name"
+        android:hint="일정이름"/>
+
+    <TextView
+        android:id = "@+id/TV_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "description"
+        android:layout_below="@+id/ET_schedule_name"
+        android:padding="12dp"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/ET_descripsion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/TV_description"
+        android:layout_alignBottom="@+id/TV_description"
+        android:hint="소개 한 마디"/>
+
+    <Button
+        android:id = "@+id/Bu_submit_schedule"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text = "submit"
+        android:layout_below = "@+id/ET_descripsion"/>
+
+</RelativeLayout>

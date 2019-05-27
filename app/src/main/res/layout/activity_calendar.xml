@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.design.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".CalendarActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:fitsSystemWindows="true"
+        android:layout_height="@dimen/app_bar_height"
+        android:layout_width="match_parent"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            android:fitsSystemWindows="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:contentScrim="?attr/colorPrimary"
+            app:titleEnabled="false">
+
+            <FrameLayout
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <io.blackbox_vision.materialcalendarview.view.CalendarView
+                    android:id="@+id/calendar_view"
+                    android:layout_marginTop="56dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginStart="2dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:calendarIsMultiSelectDayEnabled="false"
+                    app:calendarIsOverflowDatesVisible="true"
+                    app:calendarBackgroundColor="@color/colorPrimary"
+                    app:calendarTitleTextColor="@color/colorAccent"
+                    app:calendarCurrentDayTextColor="@color/colorAccent"
+                    app:calendarSelectedDayTextColor="@color/white"
+                    app:calendarDayOfWeekTextColor="@color/grey"
+                    app:calendarDayOfMonthTextColor="@android:color/white"
+                    app:calendarDisabledDayBackgroundColor="@color/colorPrimary"
+                    app:calendarDisabledDayTextColor="@android:color/darker_gray"
+                    app:calendarSelectedDayBackgroundColor="@color/colorAccent"
+                    app:calendarTitleBackgroundColor="@color/colorPrimary"
+                    app:calendarWeekBackgroundColor="@color/colorPrimary"
+                    app:calendarCurrentDayBackgroundColor="@color/teal500"
+                    app:calendarWeekendTextColor="@color/red"
+                    app:calendarButtonBackgroundColor="@color/colorAccent"
+                    app:calendarWeekendDays="saturday|sunday">
+                </io.blackbox_vision.materialcalendarview.view.CalendarView>
+
+            </FrameLayout>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_width="match_parent"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:layout_collapseMode="pin"
+                app:title="@string/app_name"/>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <include layout="@layout/content_scrolling" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_add_white_24dp"
+        app:layout_anchorGravity="bottom|end"
+        app:layout_anchor="@id/app_bar"
+        app:fabSize="normal"/>
+
+</android.support.design.widget.CoordinatorLayout>
