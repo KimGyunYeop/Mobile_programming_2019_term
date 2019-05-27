@@ -13,7 +13,6 @@ public class MemberInfoForDB {
         this.date= date;
     }
 
-
     public String getAutority() {
         return autority;
     }

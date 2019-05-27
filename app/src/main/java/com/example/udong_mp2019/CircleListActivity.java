@@ -92,7 +92,6 @@ public class CircleListActivity extends AppCompatActivity {
                         com.example.udong_mp2019.MemberInfoForDB memberInfoForDB= new com.example.udong_mp2019.MemberInfoForDB("requestor",new Date().toString());
                         circleRef.child(circleName+"/member").child(user.getUid()).setValue(memberInfoForDB);
 
-
                     }
                 });
 

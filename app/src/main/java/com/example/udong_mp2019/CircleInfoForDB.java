@@ -1,5 +1,6 @@
 package com.example.udong_mp2019;
 
+import java.lang.reflect.Member;
 import java.util.Date;
 
 public class CircleInfoForDB {
@@ -18,6 +19,10 @@ public class CircleInfoForDB {
         this.introduction=introduction;
     }
 
+    public String getAutority(String autority) {
+        return autority;
+    }
+
     public String getSchool() {
         return school;
     }
@@ -26,6 +31,9 @@ public class CircleInfoForDB {
         this.school = school;
     }
 
+    public MemberInfoForDB getMemberInfoForDB(MemberInfoForDB memberInfoForDB){
+        return memberInfoForDB;
+    }
     public String getName() {
         return name;
     }
