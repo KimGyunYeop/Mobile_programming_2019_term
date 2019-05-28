@@ -145,7 +145,6 @@ public class CircleListActivity extends AppCompatActivity {
                     Log.d("circlefinder",postSnapshot.toString());
                     if(postSnapshot.child("member/"+user.getUid()).hasChildren()) {
                         if(!postSnapshot.child("member/"+user.getUid()+"/autority").getValue().toString().equals("requestor") ){
-
                             get = postSnapshot.child("info").getValue(CircleInfoForDB.class);
                             arrayDataForMyCircleList.add(get);
                         }

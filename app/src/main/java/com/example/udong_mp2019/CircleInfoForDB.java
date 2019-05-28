@@ -12,7 +12,7 @@ public class CircleInfoForDB {
 
     }
 
-    CircleInfoForDB(String name, String introduction, String school, String date){
+    CircleInfoForDB(String name, String school, String date, String introduction){
         this.date = date;
         this.school = school;
         this.name = name;

@@ -84,10 +84,6 @@ public class SignUpActivity extends AppCompatActivity {
                 // 사용자 등록
                 if(isValidEmail() && isValidPasswd()) {
                     createUser(email, password);
-                    FirebaseUser user=firebaseAuth.getCurrentUser();
-                    // 데이터베이스에 멤버Info 저장
-                    com.example.udong_mp2019.UserInfoForDB userInfoForDB = new com.example.udong_mp2019.UserInfoForDB(email, password, name, school, studentId);
-                    userInfoRef.child(user.getUid()).setValue(userInfoForDB);
                 }
             }
         });
@@ -121,12 +117,15 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     // 회원가입
-    private void createUser(String email, String password) {
+    private void createUser(final String email, final String password) {
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            FirebaseUser user=task.getResult().getUser();
+                            com.example.udong_mp2019.UserInfoForDB userInfoForDB = new com.example.udong_mp2019.UserInfoForDB(email, password, name, school, user.getUid());
+                            userInfoRef.child(user.getUid()).setValue(userInfoForDB);
                             // 회원가입 성공
                             Toast.makeText(SignUpActivity.this, R.string.success_signup, Toast.LENGTH_SHORT).show();
                         } else {
