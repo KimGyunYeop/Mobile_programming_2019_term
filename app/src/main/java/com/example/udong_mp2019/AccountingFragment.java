@@ -73,24 +73,20 @@ public class AccountingFragment extends Fragment {
         //권한 읽어옴
         getFirebaseDatabase1(userid);
 
-        //해당 동아리 메뉴 페이지로 이동
-        LV_receipts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        add_toSend = new ArrayAdapter<>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1);
+        LV_toSend.setAdapter(add_toSend);
+//납부회원 체크 페이지로 이동
+        LV_toSend.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (memberAuth.equals("manager")) {
-                    Toast.makeText(getActivity().getApplicationContext(), "납부여부 체크 페이지로 이동합니다.", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getActivity().getApplicationContext(), com.example.udong_mp2019.CheckPaymentActivity.class);
-                    String circleName = parent.getItemAtPosition(position).toString();
-                    //동아리 이름 넘김
-                    intent.putExtra("circleName", circleName);
+                    Toast.makeText(getContext(), "납부여부 체크 페이지로 이동합니다.", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getContext(), com.example.udong_mp2019.CheckPaymentActivity.class);
+                    intent.putExtra("circleName", circlename);
                     startActivity(intent);
                 }
             }
         });
-
-        add_toSend = new ArrayAdapter<>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1);
-        LV_toSend.setAdapter(add_toSend);
-
         return v;
 
     }
@@ -107,31 +103,29 @@ public class AccountingFragment extends Fragment {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     String key= postSnapshot.getKey();
                     if(key.equals(circlename)){
-                            Query query= circleRef.child(key).child("schedule").child("receipt");
-                            query.addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    arrayDataForReceipts.clear();
-                                    arrayIndex.clear();
-                                    for(DataSnapshot postSnapshot2: dataSnapshot.getChildren()){
-                                        String key2= postSnapshot2.getKey();
-                                        Log.d("key는"+key2,"start");
-                                        String amount= postSnapshot2.child("amount").getValue().toString();
-                                        String date=postSnapshot2.child("date").getValue().toString();
-                                        String alert=date+" "+key2+" "+amount+"원";
-                                        Log.d("alert는"+alert, "start");
-                                        arrayDataForReceipts.add(alert);
-                                        arrayIndex.add(key2);
-                                    }
-                                    add_receipts.clear();
-                                    add_receipts.addAll(arrayDataForReceipts);
-                                    add_receipts.notifyDataSetChanged();
+                        Query query= circleRef.child(key).child("schedule").child("receipt");
+                        query.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                arrayDataForReceipts.clear();
+                                arrayIndex.clear();
+                                for(DataSnapshot postSnapshot2: dataSnapshot.getChildren()){
+                                    String key2= postSnapshot2.getKey();
+                                    String amount= postSnapshot2.child("amount").getValue().toString();
+                                    String date=postSnapshot2.child("date").getValue().toString();
+                                    String alert=date+" "+key2+" "+amount+"원";
+                                    arrayDataForReceipts.add(alert);
+                                    arrayIndex.add(key2);
                                 }
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                add_receipts.clear();
+                                add_receipts.addAll(arrayDataForReceipts);
+                                add_receipts.notifyDataSetChanged();
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                                }
-                            });
+                            }
+                        });
                     }
                 }
             }
@@ -148,9 +142,7 @@ public class AccountingFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     String key= postSnapshot.getKey();
-                    Log.d("ㄴkey는"+key,"start");
                     if(key.equals(circlename)){
-                        Log.d("찾았다","start");
                         Query query= circleRef.child(key).child("schedule").child("finance");
                         query.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -201,11 +193,11 @@ public class AccountingFragment extends Fragment {
                     String key = postSnapshot.getKey();
                     Log.d("circlefinder",postSnapshot.toString());
                     if(key.equals(circlename) && postSnapshot.child("member/"+user.getUid()).hasChildren()) {
-                            memberAuth=postSnapshot.child("member/"+user.getUid()+"/autority").getValue().toString();
-                            get = postSnapshot.child("info").getValue(CircleInfoForDB.class);
-                            Log.d("권한은"+memberAuth,"start");
-                        }
+                        memberAuth=postSnapshot.child("member/"+user.getUid()+"/autority").getValue().toString();
+                        get = postSnapshot.child("info").getValue(CircleInfoForDB.class);
+                        Log.d("권한은"+memberAuth,"start");
                     }
+                }
             }
 
             @Override
