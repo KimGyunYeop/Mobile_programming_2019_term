@@ -64,9 +64,9 @@ public class CircleMainActivity extends AppCompatActivity {
                                 transaction.replace(R.id.frame_layout, Afragment);
                                 break;
                             case R.id.menu_setting:
-                                com.example.udong_mp2019.SettingFragment Efragment= new com.example.udong_mp2019.SettingFragment();
-                                Efragment.setArguments(bundle);
-                                transaction.replace(R.id.frame_layout, Efragment);
+                                com.example.udong_mp2019.SettingFragment settingFragment=new com.example.udong_mp2019.SettingFragment();
+                                settingFragment.setArguments(bundle);
+                                transaction.replace(R.id.frame_layout, settingFragment);
                                 break;
                         }
                         transaction.commit();

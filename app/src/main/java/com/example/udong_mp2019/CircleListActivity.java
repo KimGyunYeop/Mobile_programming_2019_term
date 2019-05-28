@@ -81,6 +81,7 @@ public class CircleListActivity extends AppCompatActivity {
                 ad.setTitle(circleName);       // 제목 설정
                 ad.setMessage("가입 하시겠습니까?");   // 내용 설정
 
+
                 // 확인 버튼 설정
                 ad.setPositiveButton("넴!", new DialogInterface.OnClickListener() {
                     @Override
@@ -90,7 +91,8 @@ public class CircleListActivity extends AppCompatActivity {
                         Toast.makeText(CircleListActivity.this,circleName+"\n가입요청 승인이 날 때까지 기다려주세요:) ", Toast.LENGTH_LONG).show();
                         FirebaseUser user=firebaseAuth.getCurrentUser();
                         com.example.udong_mp2019.MemberInfoForDB memberInfoForDB= new com.example.udong_mp2019.MemberInfoForDB("requestor",new Date().toString());
-                        circleRef.child(circleName+"/member").child(user.getUid()).setValue(memberInfoForDB);
+                        circleRef.child(circleName+"/request").child(user.getUid()).setValue(memberInfoForDB);
+
 
                     }
                 });
