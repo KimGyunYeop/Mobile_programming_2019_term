@@ -11,6 +11,7 @@ import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -23,16 +24,18 @@ public class CustomAdapterSchedule extends BaseAdapter {
     LayoutInflater inflter;
     public static ArrayList<ScheduleInfoForDB> selectedAnswers;
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-    private String uid = "gvGmaQTQ3EfI3SKsLFCIwPvorK23";
+    private String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    private String circleName;
 
-    public CustomAdapterSchedule(Context applicationContext, ArrayList<ScheduleInfoForDB> questionsList) {
-        this.context = context;
+    public CustomAdapterSchedule(Context applicationContext, ArrayList<ScheduleInfoForDB> questionsList,String circleName) {
+        this.context = applicationContext;
         this.selectedAnswers = questionsList;
+        this.circleName = circleName;
         inflter = (LayoutInflater.from(applicationContext));
     }
 
     public void reset(Context applicationContext, ArrayList<ScheduleInfoForDB> questionsList) {
-        this.context = context;
+        this.context = applicationContext;
         this.selectedAnswers = questionsList;
         inflter = (LayoutInflater.from(applicationContext));
     }
@@ -63,7 +66,7 @@ public class CustomAdapterSchedule extends BaseAdapter {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
-                    ref.child("circle/"+"가천대학교:하눌신폭"+"/schedule/plan/"+selectedAnswers.get(i).toString()+"/attendance"+uid).setValue(true);
+                    ref.child("circle/"+circleName+"/schedule/plan/"+selectedAnswers.get(i).toString()+"/attendance"+uid).setValue(true);
                 }
             }
         });
@@ -71,7 +74,7 @@ public class CustomAdapterSchedule extends BaseAdapter {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
-                    ref.child("circle/"+"가천대학교:하눌신폭"+"/schedule/plan/"+selectedAnswers.get(i).toString()+"/attendance"+uid).setValue(false);
+                    ref.child("circle/"+circleName+"/schedule/plan/"+selectedAnswers.get(i).toString()+"/attendance"+uid).setValue(false);
                 }
             }
         });

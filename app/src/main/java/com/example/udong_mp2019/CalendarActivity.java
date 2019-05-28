@@ -62,7 +62,7 @@ public class CalendarActivity extends AppCompatActivity implements CalendarView 
 
         presenter.addCalendarView();
         presenter.addTextView();
-        aad_schedule = new CustomAdapterSchedule(getApplicationContext(), arrayData);
+        aad_schedule = new CustomAdapterSchedule(getApplicationContext(), arrayData,"a");
         listView.setAdapter(aad_schedule);
 
         fab_calendar.setOnClickListener(new View.OnClickListener(){
@@ -71,6 +71,7 @@ public class CalendarActivity extends AppCompatActivity implements CalendarView 
                 anim();
                 Intent intent = new Intent(getApplicationContext(), com.example.udong_mp2019.ScheduleRegisterFormActivity.class);
                 intent.putExtra("date",sdf.format(date));
+                intent.putExtra("circleName","하눌");
                 startActivity(intent);
             }
         });

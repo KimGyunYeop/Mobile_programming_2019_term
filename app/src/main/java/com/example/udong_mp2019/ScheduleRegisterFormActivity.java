@@ -27,17 +27,18 @@ public class ScheduleRegisterFormActivity extends AppCompatActivity {
     Button bu_submit;
     EditText et_name,et_descripsion;
     TimePicker tp_time;
-
+    String circleName;
     private FirebaseAuth firebaseAuth;
 
     private DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-    private DatabaseReference planRef = mRootRef.child("circle/"+"가천대학교:하눌신폭"+"/schedule/plan");
+    private DatabaseReference planRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shedule_register_form);
-
+        String circleName = getIntent().getStringExtra("circleName");
+        planRef = mRootRef.child("circle/"+circleName+"/schedule/plan");
         bu_submit = findViewById(R.id.Bu_submit_schedule);
         tp_time = findViewById(R.id.TP_time);
         et_name = findViewById(R.id.ET_schedule_name);
@@ -75,7 +76,7 @@ public class ScheduleRegisterFormActivity extends AppCompatActivity {
                     public void onCancelled(DatabaseError databaseError) {
                     }
                 };
-                Query qurey = FirebaseDatabase.getInstance().getReference().child("circle/"+"가천대학교:하눌신폭"+"/member").orderByKey();
+                Query qurey = FirebaseDatabase.getInstance().getReference().child("circle/"+circleName+"/member").orderByKey();
                 qurey.addListenerForSingleValueEvent(postListener);
             }
         });

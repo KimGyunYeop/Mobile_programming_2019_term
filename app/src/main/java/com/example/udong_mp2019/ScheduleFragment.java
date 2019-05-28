@@ -44,6 +44,7 @@ public class ScheduleFragment extends Fragment implements CalendarView {
     private final CalendarPresenter presenter = new CalendarPresenter(this);
     private ArrayList<ScheduleInfoForDB> arrayData = new ArrayList<>();
     private CustomAdapterSchedule aad_schedule;
+    String circlename, userid;
 
     @BindView(R.id.LV_schedule)
     ListView listView;
@@ -67,14 +68,23 @@ public class ScheduleFragment extends Fragment implements CalendarView {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_home, container, false);
-        ButterKnife.bind(v);
+        View v = inflater.inflate(R.layout.activity_calendar, container, false);
+        Bundle bundle=getArguments();
+
+        if(bundle!=null){
+
+            circlename=bundle.getString("circleName");
+            Log.d(circlename,"이름");
+            userid=bundle.getString("userID");
+
+        }
+        ButterKnife.bind(this,v);
 
         fab_click = AnimationUtils.loadAnimation(getContext(), R.anim.fab_click);
 
         presenter.addCalendarView();
         presenter.addTextView();
-        aad_schedule = new CustomAdapterSchedule(getContext(), arrayData);
+        aad_schedule = new CustomAdapterSchedule(getContext(), arrayData,circlename);
         listView.setAdapter(aad_schedule);
 
         fab_calendar.setOnClickListener(new View.OnClickListener(){
@@ -83,6 +93,7 @@ public class ScheduleFragment extends Fragment implements CalendarView {
                 anim();
                 Intent intent = new Intent(getContext(), com.example.udong_mp2019.ScheduleRegisterFormActivity.class);
                 intent.putExtra("date",sdf.format(date));
+                intent.putExtra("circleName",circlename);
                 startActivity(intent);
             }
         });
@@ -175,8 +186,8 @@ public class ScheduleFragment extends Fragment implements CalendarView {
             public void onCancelled(DatabaseError databaseError) {
             }
         };
-        Query qurey = FirebaseDatabase.getInstance().getReference().child("circle/"+"가천대학교:하눌신폭"+"/schedule/plan/"+date).orderByValue();
-        Log.d("date","circle/"+"가천대학교:하눌신폭"+"/schedule/plan/"+date);
+        Query qurey = FirebaseDatabase.getInstance().getReference().child("circle/"+circlename+"/schedule/plan/"+date).orderByValue();
+        Log.d("date","circle/"+circlename+"/schedule/plan/"+date);
         qurey.addListenerForSingleValueEvent(postListener);
     }
 }
