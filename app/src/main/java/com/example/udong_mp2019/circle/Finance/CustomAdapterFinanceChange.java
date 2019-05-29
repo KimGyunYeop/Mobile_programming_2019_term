@@ -1,4 +1,4 @@
-package com.example.udong_mp2019;
+package com.example.udong_mp2019.circle.Finance;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,15 +11,16 @@ import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.example.udong_mp2019.R;
+import com.example.udong_mp2019.circle.Schedule.ScheduleInfoForDB;
+import com.example.udong_mp2019.circle.Schedule.CheckAttendanceActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-import static java.security.AccessController.getContext;
-
-public class CustomAdapterSchedule extends BaseAdapter {
+public class CustomAdapterFinanceChange extends BaseAdapter {
     Context context;
     LayoutInflater inflter;
     public static ArrayList<ScheduleInfoForDB> selectedAnswers;
@@ -27,7 +28,7 @@ public class CustomAdapterSchedule extends BaseAdapter {
     private String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private String circleName;
 
-    public CustomAdapterSchedule(Context applicationContext, ArrayList<ScheduleInfoForDB> questionsList,String circleName) {
+    public CustomAdapterFinanceChange(Context applicationContext, ArrayList<ScheduleInfoForDB> questionsList, String circleName) {
         this.context = applicationContext;
         this.selectedAnswers = questionsList;
         this.circleName = circleName;
@@ -81,8 +82,9 @@ public class CustomAdapterSchedule extends BaseAdapter {
         btn_checkAttendance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(viewGroup.getContext(), com.example.udong_mp2019.CheckAttendanceActivity.class);
+                Intent intent = new Intent(viewGroup.getContext(), CheckAttendanceActivity.class);
                 intent.putExtra("path",selectedAnswers.get(i).toString());
+                intent.putExtra("circleName",circleName);
                 viewGroup.getContext().startActivity(intent);
             }
         });

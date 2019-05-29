@@ -9,19 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ToSendRegisterActivity"></activity>
-        <activity android:name=".ReceiptRegisterActivity" />
-        <activity android:name=".CheckAttendanceActivity" />
-        <activity android:name=".ScheduleRegisterFormActivity" />
-        <activity android:name=".CircleRegisterFormActivity" />
-        <activity android:name=".CircleMainActivity" />
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".CalendarActivity" />
+        <activity android:name=".circle.Finance.ToSendRegisterActivity"></activity>
+        <activity android:name=".circle.Finance.ReceiptRegisterActivity" />
+        <activity android:name=".circle.Schedule.CheckAttendanceActivity" />
+        <activity android:name=".circle.Schedule.ScheduleRegisterFormActivity" />
+        <activity android:name=".circleList.CircleRegisterFormActivity" />
+        <activity android:name=".circle.CircleMainActivity" />
+        <activity android:name=".login.SignUpActivity" />
+        <activity android:name=".login.LoginActivity" />
         <activity
-            android:name=".CircleListActivity"
+            android:name=".circleList.CircleListActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".login.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

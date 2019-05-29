@@ -1,4 +1,4 @@
-package com.example.udong_mp2019;
+package com.example.udong_mp2019.circle.Schedule;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.udong_mp2019.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -18,10 +19,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-import java.sql.Time;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class ScheduleRegisterFormActivity extends AppCompatActivity {
     Button bu_submit;
@@ -50,7 +47,7 @@ public class ScheduleRegisterFormActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseUser user= firebaseAuth.getCurrentUser();
-                ScheduleInfoForDB data = new  com.example.udong_mp2019.ScheduleInfoForDB(et_name.getText().toString(),et_descripsion.getText().toString(),tp_time.getCurrentHour()+":"+tp_time.getCurrentMinute(),intent.getStringExtra("date"));
+                ScheduleInfoForDB data = new ScheduleInfoForDB(et_name.getText().toString(),et_descripsion.getText().toString(),tp_time.getCurrentHour()+":"+tp_time.getCurrentMinute(),intent.getStringExtra("date"));
                 Log.d("date","dasf");
                 Log.d("date","e"+data.toString());
                 String path = data.toString();

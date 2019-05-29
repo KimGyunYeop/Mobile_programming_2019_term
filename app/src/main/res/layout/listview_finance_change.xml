@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <!-- TextView for displaying question-->
+    <TextView
+        android:id = "@+id/TV_listVIewFinanceStdID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/TV_listVIewFinanceCheckName"
+        android:layout_alignLeft="@id/TV_listVIewFinanceCheckName"
+        android:textSize="30sp"
+        android:text = "sample"/>
+
+    <TextView
+        android:id = "@+id/TV_listVIewFinanceCheckName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:text = "sample"/>
+
+    <RadioGroup
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:layout_alignParentRight="true"
+        android:weightSum="2">
+
+        <RadioButton
+            android:id="@+id/yes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:text="Yes"
+            android:textColor="#000" />
+
+        <RadioButton
+            android:id="@+id/no"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:text="No"
+            android:textColor="#000" />
+    </RadioGroup>
+</RelativeLayout>

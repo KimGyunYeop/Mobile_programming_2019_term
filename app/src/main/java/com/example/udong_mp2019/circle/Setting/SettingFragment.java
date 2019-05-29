@@ -1,8 +1,7 @@
-package com.example.udong_mp2019;
+package com.example.udong_mp2019.circle.Setting;
 
 import android.app.Activity;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -16,11 +15,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.udong_mp2019.R;
+import com.example.udong_mp2019.circleList.MemberInfoForDB;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -263,11 +262,11 @@ public class SettingFragment extends Fragment {
 
                         LV_requestJoin.setAdapter(add_requestJoin);
 
-                        com.example.udong_mp2019.MemberInfoForDB memberInfoForDB= new com.example.udong_mp2019.MemberInfoForDB("member",new Date().toString());
+                        MemberInfoForDB memberInfoForDB= new MemberInfoForDB("member",new Date().toString());
 
                         Log.d("가입 시키자",requestorUid[checked]);
                         mRootRef.child("circle").child(circleName).child("request").child(requestorUid[checked]).setValue("가입 승인");
-                        com.example.udong_mp2019.MemberInfoForDB memberInfoForDB2= new com.example.udong_mp2019.MemberInfoForDB("member",new Date().toString());
+                        MemberInfoForDB memberInfoForDB2= new MemberInfoForDB("member",new Date().toString());
                         circleRef = mRootRef.child("circle").child(circleName).child("member");
                         circleRef.child(requestorUid[checked]).setValue(memberInfoForDB2);
                         Toast.makeText(getContext(),"동아리에 가입 시켰습니다 ", Toast.LENGTH_LONG).show();

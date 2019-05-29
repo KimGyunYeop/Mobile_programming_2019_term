@@ -1,8 +1,6 @@
 package com.example.udong_mp2019;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -17,6 +15,12 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ListView;
 
+import com.example.udong_mp2019.circle.Schedule.CustomAdapterSchedule;
+import com.example.udong_mp2019.circle.Schedule.ScheduleInfoForDB;
+import com.example.udong_mp2019.circle.Schedule.ScheduleRegisterFormActivity;
+import com.example.udong_mp2019.circleList.CircleInfoForDB;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -40,11 +44,12 @@ public class ScheduleFragment extends Fragment implements CalendarView {
     private ListView lv_schedule;
     private Date date;
     SimpleDateFormat sdf = new SimpleDateFormat(DATE_TEMPLATE);
+    private String memberAuth;
 
     private final CalendarPresenter presenter = new CalendarPresenter(this);
     private ArrayList<ScheduleInfoForDB> arrayData = new ArrayList<>();
     private CustomAdapterSchedule aad_schedule;
-    String circlename, userid;
+    String circleName, userid;
 
     @BindView(R.id.LV_schedule)
     ListView listView;
@@ -73,30 +78,32 @@ public class ScheduleFragment extends Fragment implements CalendarView {
 
         if(bundle!=null){
 
-            circlename=bundle.getString("circleName");
-            Log.d(circlename,"이름");
+            circleName=bundle.getString("circleName");
+            Log.d(circleName,"이름");
             userid=bundle.getString("userID");
 
         }
         ButterKnife.bind(this,v);
 
-        fab_click = AnimationUtils.loadAnimation(getContext(), R.anim.fab_click);
-
         presenter.addCalendarView();
         presenter.addTextView();
-        aad_schedule = new CustomAdapterSchedule(getContext(), arrayData,circlename);
+        aad_schedule = new CustomAdapterSchedule(getContext(), arrayData,circleName);
         listView.setAdapter(aad_schedule);
 
-        fab_calendar.setOnClickListener(new View.OnClickListener(){
+        getAutorityFirebase();
+
+        fab_click = AnimationUtils.loadAnimation(getContext(), R.anim.fab_click);
+        fab_calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 anim();
-                Intent intent = new Intent(getContext(), com.example.udong_mp2019.ScheduleRegisterFormActivity.class);
-                intent.putExtra("date",sdf.format(date));
-                intent.putExtra("circleName",circlename);
+                Intent intent = new Intent(getContext(), ScheduleRegisterFormActivity.class);
+                intent.putExtra("date", sdf.format(date));
+                intent.putExtra("circleName", circleName);
                 startActivity(intent);
             }
         });
+
         return v;
     }
 
@@ -186,8 +193,37 @@ public class ScheduleFragment extends Fragment implements CalendarView {
             public void onCancelled(DatabaseError databaseError) {
             }
         };
-        Query qurey = FirebaseDatabase.getInstance().getReference().child("circle/"+circlename+"/schedule/plan/"+date).orderByValue();
-        Log.d("date","circle/"+circlename+"/schedule/plan/"+date);
+        Query qurey = FirebaseDatabase.getInstance().getReference().child("circle/"+circleName+"/schedule/plan/"+date).orderByValue();
+        Log.d("date","circle/"+circleName+"/schedule/plan/"+date);
         qurey.addListenerForSingleValueEvent(postListener);
+    }
+
+    // autority 반환
+    public void getAutorityFirebase(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        Query query = FirebaseDatabase.getInstance().getReference().child("circle");
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.d("circlefinder",dataSnapshot.toString());
+
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    String key = postSnapshot.getKey();
+                    Log.d("circlefinder",postSnapshot.toString());
+                    if(key.equals(circleName) && postSnapshot.child("member/"+user.getUid()).hasChildren()) {
+                        memberAuth=postSnapshot.child("member/"+user.getUid()+"/autority").getValue().toString();
+                        if(memberAuth.equals("manager")) {
+                        }else{
+                            fab_calendar.hide();
+                        }
+                        Log.d("권한은"+memberAuth,"start");
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
     }
 }

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.udong_mp2019.ScheduleRegisterFormActivity">
+    tools:context="com.example.udong_mp2019.circle.Schedule.ScheduleRegisterFormActivity">
 
     <TextView
         android:id = "@+id/TV_createCircle"

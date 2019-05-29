@@ -1,4 +1,4 @@
-package com.example.udong_mp2019;
+package com.example.udong_mp2019.circleList;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,6 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
+
+import com.example.udong_mp2019.R;
+import com.example.udong_mp2019.circle.CircleMainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
@@ -54,7 +57,7 @@ public class CircleListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(CircleListActivity.this, "동아리 메인 페이지로 이동합니다.", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), com.example.udong_mp2019.CircleMainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), CircleMainActivity.class);
 
                 String circleName=parent.getItemAtPosition(position).toString();
                 //동아리 이름 넘김
@@ -90,7 +93,7 @@ public class CircleListActivity extends AppCompatActivity {
                         dialog.dismiss();     //닫기
                         Toast.makeText(CircleListActivity.this,circleName+"\n가입요청 승인이 날 때까지 기다려주세요:) ", Toast.LENGTH_LONG).show();
                         FirebaseUser user=firebaseAuth.getCurrentUser();
-                        com.example.udong_mp2019.MemberInfoForDB memberInfoForDB= new com.example.udong_mp2019.MemberInfoForDB("requestor",new Date().toString());
+                        MemberInfoForDB memberInfoForDB= new MemberInfoForDB("requestor",new Date().toString());
                         circleRef.child(circleName+"/request").child(user.getUid()).setValue(memberInfoForDB);
 
 
@@ -116,7 +119,7 @@ public class CircleListActivity extends AppCompatActivity {
         bu_createCircle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), com.example.udong_mp2019.CircleRegisterFormActivity.class);
+                Intent intent = new Intent(getApplicationContext(), CircleRegisterFormActivity.class);
                 startActivity(intent);
             }
         });

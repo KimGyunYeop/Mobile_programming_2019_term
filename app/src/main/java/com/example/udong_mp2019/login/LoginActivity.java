@@ -1,4 +1,4 @@
-package com.example.udong_mp2019;
+package com.example.udong_mp2019.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.udong_mp2019.CircleListActivity;
+import com.example.udong_mp2019.circleList.CircleListActivity;
 import com.example.udong_mp2019.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

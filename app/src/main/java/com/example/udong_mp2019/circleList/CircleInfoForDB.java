@@ -1,7 +1,4 @@
-package com.example.udong_mp2019;
-
-import java.lang.reflect.Member;
-import java.util.Date;
+package com.example.udong_mp2019.circleList;
 
 public class CircleInfoForDB {
     private String name;

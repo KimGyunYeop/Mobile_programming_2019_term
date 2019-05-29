@@ -1,4 +1,4 @@
-package com.example.udong_mp2019;
+package com.example.udong_mp2019.circle.Finance;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -8,7 +8,8 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.udong_mp2019.R;
+import com.example.udong_mp2019.login.UserInfoForDB;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

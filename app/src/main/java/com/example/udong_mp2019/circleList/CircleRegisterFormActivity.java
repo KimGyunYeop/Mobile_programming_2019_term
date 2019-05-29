@@ -1,4 +1,4 @@
-package com.example.udong_mp2019;
+package com.example.udong_mp2019.circleList;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.udong_mp2019.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -40,9 +41,9 @@ public class CircleRegisterFormActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseUser user=firebaseAuth.getCurrentUser();
-                circleInfoRef.child(et_school.getText().toString()+":"+et_name.getText().toString()+"/info").setValue(new  com.example.udong_mp2019.CircleInfoForDB(et_name.getText().toString(),et_school.getText().toString(),new Date().toString(),et_introduction.getText().toString()));
+                circleInfoRef.child(et_school.getText().toString()+":"+et_name.getText().toString()+"/info").setValue(new CircleInfoForDB(et_name.getText().toString(),et_school.getText().toString(),new Date().toString(),et_introduction.getText().toString()));
                 // 생성한 user manager로 등록
-                com.example.udong_mp2019.MemberInfoForDB memberInfoForDB= new com.example.udong_mp2019.MemberInfoForDB("manager",new Date().toString());
+                MemberInfoForDB memberInfoForDB= new MemberInfoForDB("manager",new Date().toString());
                 circleInfoRef.child(et_school.getText().toString()+":"+et_name.getText().toString()+"/member").child(user.getUid()).setValue(memberInfoForDB);
                 Toast.makeText(CircleRegisterFormActivity.this, "동아리가 생성되었습니다.", Toast.LENGTH_SHORT).show();
                 finish();

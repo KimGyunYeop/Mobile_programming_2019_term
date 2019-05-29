@@ -1,7 +1,4 @@
-package com.example.udong_mp2019;
-
-import java.sql.Date;
-import java.sql.Time;
+package com.example.udong_mp2019.circle.Schedule;
 
 public class ScheduleInfoForDB implements Comparable<ScheduleInfoForDB>{
     private String name;

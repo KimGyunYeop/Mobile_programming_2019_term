@@ -1,4 +1,4 @@
-package com.example.udong_mp2019;
+package com.example.udong_mp2019.login;
 
 public class UserInfoForDB {
     public String email;

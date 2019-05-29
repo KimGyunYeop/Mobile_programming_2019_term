@@ -1,4 +1,4 @@
-package com.example.udong_mp2019;
+package com.example.udong_mp2019.circle.Finance;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,18 +9,10 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import com.example.udong_mp2019.R;
 import com.google.firebase.database.DatabaseReference;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.Date;
 
 public class ReceiptRegisterActivity extends AppCompatActivity {
     Button btn_register;

@@ -1,14 +1,14 @@
-package com.example.udong_mp2019;
+package com.example.udong_mp2019.circleList;
 
 public class MemberInfoForDB {
     private String autority;
     private String date;
 
-    MemberInfoForDB(){
+    public MemberInfoForDB(){
 
     }
 
-    MemberInfoForDB(String autority, String date){
+    public MemberInfoForDB(String autority, String date){
         this.autority = autority;
         this.date= date;
     }

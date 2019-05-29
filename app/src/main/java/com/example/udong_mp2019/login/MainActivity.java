@@ -1,4 +1,4 @@
-package com.example.udong_mp2019;
+package com.example.udong_mp2019.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentSignup= new Intent(getApplicationContext(), com.example.udong_mp2019.SignUpActivity.class);
+                Intent intentSignup= new Intent(getApplicationContext(), SignUpActivity.class);
                 startActivity(intentSignup);
             }
         });
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentLogin= new Intent(getApplicationContext(), com.example.udong_mp2019.LoginActivity.class);
+                Intent intentLogin= new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intentLogin);
             }
         });

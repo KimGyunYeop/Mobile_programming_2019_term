@@ -1,9 +1,7 @@
-package com.example.udong_mp2019;
+package com.example.udong_mp2019.circle;
 
-import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -11,12 +9,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.udong_mp2019.AccountingFragment;
+import com.example.udong_mp2019.circle.Finance.AccountingFragment;
 import com.example.udong_mp2019.R;
-
-import static com.example.udong_mp2019.HomeFragment.*;
+import com.example.udong_mp2019.circle.Setting.SettingFragment;
 
 public class CircleMainActivity extends AppCompatActivity {
     TextView tv;
@@ -49,7 +45,7 @@ public class CircleMainActivity extends AppCompatActivity {
                         FragmentTransaction transaction = fm.beginTransaction();
                         switch (item.getItemId()) {
                             case R.id.menu_home:
-                                com.example.udong_mp2019.HomeFragment Hfragment= new com.example.udong_mp2019.HomeFragment();
+                                HomeFragment Hfragment= new HomeFragment();
                                 Hfragment.setArguments(bundle);
                                 transaction.replace(R.id.frame_layout, Hfragment);
                                 break;
@@ -59,12 +55,12 @@ public class CircleMainActivity extends AppCompatActivity {
                                 transaction.replace(R.id.frame_layout, Sfragment);
                                 break;
                             case R.id.menu_accounting:
-                                com.example.udong_mp2019.AccountingFragment Afragment= new com.example.udong_mp2019.AccountingFragment();
+                                AccountingFragment Afragment= new AccountingFragment();
                                 Afragment.setArguments(bundle);
                                 transaction.replace(R.id.frame_layout, Afragment);
                                 break;
                             case R.id.menu_setting:
-                                com.example.udong_mp2019.SettingFragment settingFragment=new com.example.udong_mp2019.SettingFragment();
+                                SettingFragment settingFragment=new SettingFragment();
                                 settingFragment.setArguments(bundle);
                                 transaction.replace(R.id.frame_layout, settingFragment);
                                 break;
@@ -75,7 +71,7 @@ public class CircleMainActivity extends AppCompatActivity {
                 });
         // 첫 화면
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        com.example.udong_mp2019.HomeFragment fragment= new com.example.udong_mp2019.HomeFragment();
+        HomeFragment fragment= new HomeFragment();
         fragment.setArguments(bundle);
         transaction.replace(R.id.frame_layout, fragment);
         transaction.commit();
