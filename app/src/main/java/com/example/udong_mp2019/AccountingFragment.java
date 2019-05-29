@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 
 public class AccountingFragment extends Fragment {
     ListView LV_receipts, LV_toSend;
+    ImageButton btn_plusReceipt, btn_plustoSend;
     ArrayAdapter<String> add_receipts;
     ArrayAdapter<String> add_toSend;
     FirebaseUser user;
@@ -60,6 +62,8 @@ public class AccountingFragment extends Fragment {
         LV_receipts=(ListView)v.findViewById(R.id.LV_receipts);
         LV_toSend=(ListView)v.findViewById(R.id.LV_toSend);
         firebaseAuth = FirebaseAuth.getInstance();
+        btn_plusReceipt=(ImageButton)v.findViewById(R.id.btn_plusReceipt);
+        btn_plustoSend=(ImageButton)v.findViewById(R.id.btn_plustoSend);
 
         Bundle bundle=getArguments();
 
@@ -68,6 +72,22 @@ public class AccountingFragment extends Fragment {
             userid = bundle.getString("userID");
         }
 
+        btn_plusReceipt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), com.example.udong_mp2019.ReceiptRegisterActivity.class);
+                intent.putExtra("circlename", circlename);
+                startActivity(intent);
+            }
+        });
+        btn_plustoSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), com.example.udong_mp2019.ToSendRegisterActivity.class);
+                intent.putExtra("circlename", circlename);
+                startActivity(intent);
+            }
+        });
         add_receipts = new ArrayAdapter<>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1);
         LV_receipts.setAdapter(add_receipts);
         //권한 읽어옴
@@ -111,10 +131,10 @@ public class AccountingFragment extends Fragment {
                                 arrayIndex.clear();
                                 for(DataSnapshot postSnapshot2: dataSnapshot.getChildren()){
                                     String key2= postSnapshot2.getKey();
-                                    String amount= postSnapshot2.child("amount").getValue().toString();
-                                    String date=postSnapshot2.child("date").getValue().toString();
-                                    String alert=date+" "+key2+" "+amount+"원";
-                                    arrayDataForReceipts.add(alert);
+                                    Log.d(key2,"key2");
+                                    String name=postSnapshot2.child("name").getValue().toString();
+                                    String amount=postSnapshot2.child("amount").getValue().toString();
+                                    arrayDataForReceipts.add(key2+" "+name+" "+amount+"원");
                                     arrayIndex.add(key2);
                                 }
                                 add_receipts.clear();
@@ -143,7 +163,7 @@ public class AccountingFragment extends Fragment {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     String key= postSnapshot.getKey();
                     if(key.equals(circlename)){
-                        Query query= circleRef.child(key).child("schedule").child("finance");
+                        Query query= circleRef.child(key).child("schedule").child("tosend");
                         query.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -152,11 +172,9 @@ public class AccountingFragment extends Fragment {
                                 for(DataSnapshot postSnapshot2: dataSnapshot.getChildren()){
                                     String key2= postSnapshot2.getKey();
                                     Log.d("key는"+key2,"start");
-                                    String amount= postSnapshot2.child("amount").getValue().toString();
-                                    String date=postSnapshot2.child("date").getValue().toString();
-                                    String alert=date+" "+key2+" "+amount+"원";
-                                    Log.d("alert는"+alert, "start");
-                                    arrayDataForToSend.add(alert);
+                                    String name=postSnapshot2.child("name").getValue().toString();
+                                    String amount=postSnapshot2.child("amount").getValue().toString();
+                                    arrayDataForToSend.add(key2+" "+name+" "+amount+"원");
                                     arrayIndex.add(key2);
                                 }
                                 add_toSend.clear();

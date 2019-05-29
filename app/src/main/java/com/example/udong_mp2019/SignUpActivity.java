@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 public class SignUpActivity extends AppCompatActivity {
     Button signUp;
     // 비밀번호 정규식
-    private static final Pattern PASSWORD_PATTERN = Pattern.compile("^[a-zA-Z0-9!@.#$%^&*?_~]{4,16}$");
+    private static final Pattern PASSWORD_PATTERN = Pattern.compile("^[a-zA-Z0-9!@.#$%^&*?_~]{6,10}$");
 
     // 파이어베이스 인증 객체 생성
     private FirebaseAuth firebaseAuth;
@@ -81,8 +81,14 @@ public class SignUpActivity extends AppCompatActivity {
                 school=editTextSchool.getText().toString();
                 studentId=editTextStudentId.getText().toString();
 
+                if(!isValidEmail()){
+                    Toast.makeText(SignUpActivity.this,"유효하지 않은 이메일 형식입니다.",Toast.LENGTH_LONG).show();
+                }
+                else if(!isValidPasswd()){
+                    Toast.makeText(SignUpActivity.this,"유효하지 않은 비밀번호 형식입니다.",Toast.LENGTH_LONG).show();
+                }
                 // 사용자 등록
-                if(isValidEmail() && isValidPasswd()) {
+                else{
                     createUser(email, password);
                 }
             }
@@ -124,13 +130,13 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             FirebaseUser user=task.getResult().getUser();
-                            com.example.udong_mp2019.UserInfoForDB userInfoForDB = new com.example.udong_mp2019.UserInfoForDB(email, password, name, school, user.getUid());
+                            com.example.udong_mp2019.UserInfoForDB userInfoForDB = new com.example.udong_mp2019.UserInfoForDB(email, password, name, school, studentId);
                             userInfoRef.child(user.getUid()).setValue(userInfoForDB);
                             // 회원가입 성공
                             Toast.makeText(SignUpActivity.this, R.string.success_signup, Toast.LENGTH_SHORT).show();
                         } else {
                             // 회원가입 실패
-                            Toast.makeText(SignUpActivity.this, R.string.failed_signup, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUpActivity.this, "중복된 아이디입니다.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

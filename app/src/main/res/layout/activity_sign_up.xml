@@ -6,11 +6,21 @@
                 tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/tv_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="비밀번호는 6글자 이상 10글자 이하의,\n영어와 숫자으로 입력해주세요."
+        android:layout_marginTop="150dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp" />
+
+    <TextView
             android:id="@+id/tv_email"
             android:layout_width="match_parent"
+        android:layout_below="@+id/tv_info"
             android:layout_height="wrap_content"
             android:text="이메일"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="30dp"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp" />
 

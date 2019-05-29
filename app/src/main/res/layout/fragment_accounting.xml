@@ -7,16 +7,30 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.udong_mp2019.AccountingFragment">
-    <TextView
-        android:id="@+id/tv_title"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="1년 영수증"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
+        android:orientation="horizontal"
+        android:layout_marginTop="50dp">
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1년 영수증"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+        <ImageButton
+            android:id="@+id/btn_plusReceipt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/add"
+            android:background="@color/white"
+            android:layout_marginLeft="100dp">
+        </ImageButton>
+
+    </LinearLayout>
 
     <ListView
         android:id = "@+id/LV_receipts"
@@ -25,15 +39,30 @@
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
-    <TextView
-        android:id="@+id/tv_list"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="잊지 않으셨죠?"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
+        android:orientation="horizontal"
+        android:layout_marginTop="50dp">
+        <TextView
+            android:id="@+id/tv_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="잊지 않으셨죠?"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+        <ImageButton
+            android:id="@+id/btn_plustoSend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/add"
+            android:background="@color/white"
+            android:layout_marginLeft="100dp">
+        </ImageButton>
+
+    </LinearLayout>
 
     <ListView
         android:id = "@+id/LV_toSend"
