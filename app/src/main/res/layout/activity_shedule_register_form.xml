@@ -7,26 +7,21 @@
 
     <TextView
         android:id = "@+id/TV_createCircle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAlignment="center"
         android:text = "Create Schedule"
-        android:textSize="30sp"/>
-
-    <TextView
-        android:id = "@+id/TV_time"
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text = "time"
-        android:layout_below="@+id/TV_createCircle"
-        android:padding="12dp"
-        android:textSize="20sp"/>
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        android:background="@color/main"/>
 
     <TimePicker
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/TP_time"
-        android:layout_below="@+id/TV_createCircle"/>
+        android:layout_below="@+id/TV_createCircle"
+        android:headerBackground="@color/main"
+        android:numbersSelectorColor="@color/main"/>
 
     <TextView
         android:id = "@+id/TV_schedule_name"

@@ -10,13 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:layout_gravity="center"
-        android:background="@color/design_default_color_primary"
+        android:background="@color/main"
         android:text="멤버리스트"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
     <ListView
         android:id = "@+id/LV_memberList"
-        android:divider="#000000"
+        android:divider="@color/divider"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"/>
@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:layout_gravity="center"
-        android:background="@android:color/holo_orange_light"
+        android:background="@color/main"
         android:text="가입 승인"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 

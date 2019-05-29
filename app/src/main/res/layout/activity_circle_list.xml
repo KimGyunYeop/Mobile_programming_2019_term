@@ -31,13 +31,13 @@
                     android:scaleType="fitXY"/>
         </TableRow>
         <View
-                android:background="#AEFEAE"
+                android:background="@color/divider"
                 android:layout_height="2dp"/>
     </TableLayout>
 
     <ListView
         android:id = "@+id/LV_searchResult"
-        android:divider="#000000"
+        android:divider="@color/divider"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"/>
@@ -47,7 +47,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:background="#AEFEAE"
+            android:background="@color/main"
             android:stretchColumns="0">
         <TableRow>
             <TextView
@@ -58,7 +58,7 @@
                     android:textStyle="bold"
                     android:textColor="#000000"
                     android:textSize="30sp"
-                    android:background="#AEFEAE"
+                    android:background="@color/main"
             />
             <ImageButton
                     android:id = "@+id/IB_createCircle"
@@ -66,19 +66,19 @@
                     android:layout_height="41dp"
                     android:layout_gravity="end"
                     android:padding="0dp"
-                    android:src="@drawable/plusicon"
-                    android:background="#AEFEAE"
+                    android:src="@drawable/ic_add_black_24dp"
+                    android:background="@color/main"
                     android:scaleType="fitXY"/>
         </TableRow>
         <View
-                android:background="#AEFEAE"
+                android:background="@color/main"
                 android:layout_height="2dp"/>
     </TableLayout>
 
     <ListView
         android:id = "@+id/LV_myCircleList"
-        android:divider="#000000"
+        android:divider="@color/divider"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 </LinearLayout>
