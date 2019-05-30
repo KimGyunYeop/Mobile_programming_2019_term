@@ -141,9 +141,11 @@ public class CircleListActivity extends AppCompatActivity {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Log.d("circlefinder","mycircleList"+postSnapshot.child("info").getValue().toString());
                     String key = postSnapshot.getKey();
-                    CircleInfoForDB get = postSnapshot.child("info").getValue(CircleInfoForDB.class);
-                    arrayDataForMyCircleList.add(get);
-                    arrayIndex.add(key);
+                    if(!postSnapshot.child("member/"+user.getUid()).child("autority").getValue().toString().equals("secession")) {
+                        CircleInfoForDB get = postSnapshot.child("info").getValue(CircleInfoForDB.class);
+                        arrayDataForMyCircleList.add(get);
+                        arrayIndex.add(key);
+                    }
                 }
 
                 aad_myCircleList.clear();
