@@ -136,6 +136,7 @@ public class SignUpActivity extends AppCompatActivity {
                             userInfoRef.child(user.getUid()).setValue(userInfoForDB);
                             // 회원가입 성공
                             Toast.makeText(SignUpActivity.this, R.string.success_signup, Toast.LENGTH_SHORT).show();
+                            finish();
                         } else {
                             // 회원가입 실패
                             Toast.makeText(SignUpActivity.this, "중복된 아이디입니다.", Toast.LENGTH_SHORT).show();

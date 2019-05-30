@@ -103,6 +103,7 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), CircleListActivity.class);
                     intent.putExtra("uid",uid);
                     startActivity(intent);
+                    finish();
                     //동아리 목록
                 } else {
                     // 로그인 실패

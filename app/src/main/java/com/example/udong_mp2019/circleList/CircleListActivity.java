@@ -78,12 +78,10 @@ public class CircleListActivity extends AppCompatActivity {
 
                 circleName=parent.getItemAtPosition(position).toString();
 
-
                 AlertDialog.Builder ad = new AlertDialog.Builder(CircleListActivity.this);
 
-                ad.setTitle(circleName);       // 제목 설정
-                ad.setMessage("가입 하시겠습니까?");   // 내용 설정
-
+                ad.setTitle(circleName);// 제목 설정
+                ad.setMessage("가입 하시겠습니까?");// 내용 설정
 
                 // 확인 버튼 설정
                 ad.setPositiveButton("넴!", new DialogInterface.OnClickListener() {
@@ -95,11 +93,8 @@ public class CircleListActivity extends AppCompatActivity {
                         FirebaseUser user=firebaseAuth.getCurrentUser();
                         MemberInfoForDB memberInfoForDB= new MemberInfoForDB("requestor",new Date().toString());
                         circleRef.child(circleName+"/request").child(user.getUid()).setValue(memberInfoForDB);
-
-
                     }
                 });
-
 
                 // 취소 버튼 설정
                 ad.setNegativeButton("아니욤", new DialogInterface.OnClickListener() {
@@ -130,7 +125,6 @@ public class CircleListActivity extends AppCompatActivity {
                 getFirebaseDatabase(et_searchCircle.getText().toString());
             }
         });
-
     }
 
     @Override
@@ -138,23 +132,18 @@ public class CircleListActivity extends AppCompatActivity {
         super.onResume();
         Log.d("circlefinder","start");
         user = FirebaseAuth.getInstance().getCurrentUser();
-        Query query = circleRef;
+        Query query = FirebaseDatabase.getInstance().getReference().child("circle").orderByChild("member/"+user.getUid()).startAt("autority");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             CircleInfoForDB get;
-
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 arrayDataForMyCircleList.clear();
-                Log.d("circlefinder",dataSnapshot.toString());
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    Log.d("circlefinder",postSnapshot.toString());
-                    if(postSnapshot.child("member/"+user.getUid()).hasChildren()) {
-                        if(!postSnapshot.child("member/"+user.getUid()+"/autority").getValue().toString().equals("requestor") ){
-                            get = postSnapshot.child("info").getValue(CircleInfoForDB.class);
-                            arrayDataForMyCircleList.add(get);
-                        }
-
-                    }
+                    Log.d("circlefinder","mycircleList"+postSnapshot.child("info").getValue().toString());
+                    String key = postSnapshot.getKey();
+                    CircleInfoForDB get = postSnapshot.child("info").getValue(CircleInfoForDB.class);
+                    arrayDataForMyCircleList.add(get);
+                    arrayIndex.add(key);
                 }
 
                 aad_myCircleList.clear();
@@ -170,17 +159,18 @@ public class CircleListActivity extends AppCompatActivity {
     }
 
     public void getFirebaseDatabase(final String str){
-        ValueEventListener postListener = new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("circle").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 arrayDataforsearch.clear();
                 arrayIndex.clear();
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    Log.d("circlefinder",postSnapshot.toString());
                     String key = postSnapshot.getKey();
+                    if(key.contains(str)){
                     CircleInfoForDB get = postSnapshot.child("info").getValue(CircleInfoForDB.class);
-                    if(get.getSchool().toLowerCase().contains(str)||get.getName().toLowerCase().contains(str)) {
-                        arrayDataforsearch.add(get);
-                        arrayIndex.add(key);
+                    arrayDataforsearch.add(get);
+                    arrayIndex.add(key);
                     }
                 }
                 aad_searchResult.clear();
@@ -191,9 +181,7 @@ public class CircleListActivity extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
-        };
-        Query sortbyAge = FirebaseDatabase.getInstance().getReference().child("circle").orderByKey();
-        sortbyAge.addListenerForSingleValueEvent(postListener);
+        });
     }
 
     @Override
