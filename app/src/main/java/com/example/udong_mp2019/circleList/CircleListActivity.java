@@ -27,6 +27,7 @@ public class CircleListActivity extends AppCompatActivity {
     ArrayAdapter<CircleInfoForDB> aad_myCircleList;
     EditText et_searchCircle;
     FirebaseUser user;
+    ImageButton secession_App;
 
     private DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
     private DatabaseReference circleRef = mRootRef.child("circle");
@@ -49,6 +50,8 @@ public class CircleListActivity extends AppCompatActivity {
         bu_createCircle = findViewById(R.id.IB_createCircle);
         et_searchCircle = findViewById(R.id.ET_searchCircle);
         firebaseAuth = FirebaseAuth.getInstance();
+        secession_App=findViewById(R.id.secession_App);
+
 
         aad_myCircleList = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
         lv_myCircleList.setAdapter(aad_myCircleList);
@@ -68,7 +71,6 @@ public class CircleListActivity extends AppCompatActivity {
             }
         });
 
-        CircleName();
         aad_searchResult = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1);
         lv_searchResult.setAdapter(aad_searchResult);
 
@@ -125,6 +127,54 @@ public class CircleListActivity extends AppCompatActivity {
                 getFirebaseDatabase(et_searchCircle.getText().toString());
             }
         });
+
+       //탈퇴 버튼
+        secession_App.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                FirebaseUser user=firebaseAuth.getCurrentUser();
+
+                AlertDialog.Builder ad = new AlertDialog.Builder(CircleListActivity.this);
+
+                ad.setTitle("너동나동 어플 탈퇴");       // 제목 설정
+                ad.setMessage(" 너동나동 어플을 탈퇴 하시겠습니까?");   // 내용 설정
+
+                // 확인 버튼 설정
+                ad.setPositiveButton("네", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        dialog.dismiss();     //닫기
+                        Toast.makeText(getApplicationContext(), "그 동안 저희 어플을 이용해 주셔서 감사합니다.", Toast.LENGTH_LONG).show();
+
+                     //firebaseAuth.signOut();
+                     user.delete();
+                        Toast.makeText(getApplicationContext(), "계정이 삭제되었습니다.", Toast.LENGTH_LONG).show();
+
+                       finish();
+                        // Event
+                    }
+                });
+
+
+                // 취소 버튼 설정
+                ad.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //  Log.v(TAG,"No Btn Click");
+                        dialog.dismiss();     //닫기
+                        // Event
+                    }
+                });
+
+                // 창 띄우기
+                ad.show();
+
+
+            }
+        });
+
     }
 
     @Override
@@ -141,9 +191,11 @@ public class CircleListActivity extends AppCompatActivity {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Log.d("circlefinder","mycircleList"+postSnapshot.child("info").getValue().toString());
                     String key = postSnapshot.getKey();
-                    CircleInfoForDB get = postSnapshot.child("info").getValue(CircleInfoForDB.class);
-                    arrayDataForMyCircleList.add(get);
-                    arrayIndex.add(key);
+                    if(!postSnapshot.child("member/"+user.getUid()).child("autority").getValue().toString().equals("secession")) {
+                        CircleInfoForDB get = postSnapshot.child("info").getValue(CircleInfoForDB.class);
+                        arrayDataForMyCircleList.add(get);
+                        arrayIndex.add(key);
+                    }
                 }
 
                 aad_myCircleList.clear();
@@ -189,8 +241,5 @@ public class CircleListActivity extends AppCompatActivity {
         super.onStart();
     }
 
-    public String CircleName()
-    {
-        return circleName;
-    }
+
 }

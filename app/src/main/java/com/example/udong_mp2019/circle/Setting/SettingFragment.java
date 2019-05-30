@@ -2,6 +2,7 @@ package com.example.udong_mp2019.circle.Setting;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -12,10 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.udong_mp2019.R;
+import com.example.udong_mp2019.circleList.CircleRegisterFormActivity;
 import com.example.udong_mp2019.circleList.MemberInfoForDB;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -52,6 +55,8 @@ public class SettingFragment extends Fragment {
     Query query;
     Query query2;
     int count, checked ;
+    String  memberAuth;
+    Button B_secession;
 
     static ArrayList<String> arrayMemberList = new ArrayList<>();
     static ArrayList<String> arrayrequestList = new ArrayList<>();
@@ -67,13 +72,14 @@ public class SettingFragment extends Fragment {
             circleName = circle;
             Log.d("circleName!!!",circleName);
 
+
         }
 
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         circleRef = mRootRef.child("circle").child(circleName).child("member");
         query = circleRef;
-
+        Log.d("권한은" + memberAuth, "start");
 
         query.addValueEventListener(new ValueEventListener() {
             @Override
@@ -84,8 +90,18 @@ public class SettingFragment extends Fragment {
 
                     String findMember = postSnapshot.getKey().toString();
                     Log.d("첫번째 listfinder", findMember);
-                    memberUid[memberCount] = findMember;
-                    memberCount++;
+                    if( !postSnapshot.child("autority/").getValue().toString().equals("secession")) {
+                        memberUid[memberCount] = findMember;
+                        memberCount++;
+                    }
+
+                    if(findMember.equals(user.getUid())) {
+
+                        memberAuth=postSnapshot.child("autority/").getValue().toString();
+                        Log.d("권한은 " + memberAuth, "start");
+
+
+                    }
 
                 }
 
@@ -184,35 +200,23 @@ public class SettingFragment extends Fragment {
 
         LV_memberList.setAdapter(add_memberList);
         LV_requestJoin.setAdapter(add_requestJoin);
-
-        LV_memberList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        B_secession=setting.findViewById(R.id.secession);
+        B_secession.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                checked=position;
+            public void onClick(View v) {
                 AlertDialog.Builder ad = new AlertDialog.Builder(getContext());
 
-                ad.setTitle("강퇴");       // 제목 설정
-                ad.setMessage("강퇴 시키겠습니까?");   // 내용 설정
+                ad.setTitle("탈퇴");       // 제목 설정
+                ad.setMessage(circleName+ " 동아리 탈퇴 하시겠습니까?");   // 내용 설정
 
                 // 확인 버튼 설정
                 ad.setPositiveButton("네", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //Log.v(TAG,"Yes Btn Click");
-                        Log.d("체크ㅡㅡ",""+checked+arrayMemberList);
-                        arrayMemberList.remove(checked);
-                        Log.d("체크ㅡㅡ",""+checked+arrayMemberList);
-
-                        LV_memberList.clearChoices();
-
-                        // listview 갱신.
-                        add_memberList.notifyDataSetChanged();
-                        LV_memberList.setAdapter(add_memberList);
 
                         circleRef = mRootRef.child("circle").child(circleName).child("member");
-                        circleRef.child(memberUid[checked]).child("autority").setValue("secession");
-                        Toast.makeText(getContext(),"강퇴 시켰습니다 ", Toast.LENGTH_LONG).show();
+                        circleRef.child(user.getUid()).child("autority").setValue("secession");
+                        Toast.makeText(getContext(), circleName+" 동아리 탈퇴하였습니다 ", Toast.LENGTH_LONG).show();
                         dialog.dismiss();     //닫기
                         // Event
                     }
@@ -232,62 +236,116 @@ public class SettingFragment extends Fragment {
                 // 창 띄우기
                 ad.show();
             }
+
+        });
+
+        LV_memberList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                if (memberAuth.equals("manager")) {
+                    checked = position;
+                    AlertDialog.Builder ad = new AlertDialog.Builder(getContext());
+
+                    ad.setTitle("강퇴");       // 제목 설정
+                    ad.setMessage("강퇴 시키겠습니까?");   // 내용 설정
+
+                    // 확인 버튼 설정
+                    ad.setPositiveButton("네", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //Log.v(TAG,"Yes Btn Click");
+                            Log.d("체크ㅡㅡ", "" + checked + arrayMemberList);
+                            arrayMemberList.remove(checked);
+                            Log.d("체크ㅡㅡ", "" + checked + arrayMemberList);
+
+                            LV_memberList.clearChoices();
+
+                            // listview 갱신.
+                            add_memberList.notifyDataSetChanged();
+                            LV_memberList.setAdapter(add_memberList);
+
+                            circleRef = mRootRef.child("circle").child(circleName).child("member");
+                            circleRef.child(memberUid[checked]).child("autority").setValue("secession");
+                            Toast.makeText(getContext(), "강퇴 시켰습니다 ", Toast.LENGTH_LONG).show();
+                            dialog.dismiss();     //닫기
+                            // Event
+                        }
+                    });
+
+
+                    // 취소 버튼 설정
+                    ad.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //  Log.v(TAG,"No Btn Click");
+                            dialog.dismiss();     //닫기
+                            // Event
+                        }
+                    });
+
+                    // 창 띄우기
+                    ad.show();
+                }
+            }
         });
 
         LV_requestJoin.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                checked=position;
-                AlertDialog.Builder ad = new AlertDialog.Builder(getContext());
+                if (memberAuth.equals("manager")) {
+                    checked = position;
+                    AlertDialog.Builder ad = new AlertDialog.Builder(getContext());
 
-                ad.setTitle("가입 승인");       // 제목 설정
-                ad.setMessage("가입 승인 시키겠습니까?");   // 내용 설정
+                    ad.setTitle("가입 승인");       // 제목 설정
+                    ad.setMessage("가입 승인 시키겠습니까?");   // 내용 설정
 
-                // 확인 버튼 설정
-                ad.setPositiveButton("네", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //Log.v(TAG,"Yes Btn Click");
+                    // 확인 버튼 설정
+                    ad.setPositiveButton("네", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //Log.v(TAG,"Yes Btn Click");
 
-                        count = add_requestJoin.getCount() ;
+                            count = add_requestJoin.getCount();
 
-                        arrayrequestList.remove(checked);
+                            arrayrequestList.remove(checked);
 
-                        // listview 선택 초기화.
-                        LV_requestJoin.clearChoices();
+                            // listview 선택 초기화.
+                            LV_requestJoin.clearChoices();
 
-                        // listview 갱신.
-                        add_requestJoin.notifyDataSetChanged();
+                            // listview 갱신.
+                            add_requestJoin.notifyDataSetChanged();
 
-                        LV_requestJoin.setAdapter(add_requestJoin);
+                            LV_requestJoin.setAdapter(add_requestJoin);
 
-                        MemberInfoForDB memberInfoForDB= new MemberInfoForDB("member",new Date().toString());
+                            MemberInfoForDB memberInfoForDB = new MemberInfoForDB("member", new Date().toString());
 
-                        Log.d("가입 시키자",requestorUid[checked]);
-                        mRootRef.child("circle").child(circleName).child("request").child(requestorUid[checked]).setValue("가입 승인");
-                        MemberInfoForDB memberInfoForDB2= new MemberInfoForDB("member",new Date().toString());
-                        circleRef = mRootRef.child("circle").child(circleName).child("member");
-                        circleRef.child(requestorUid[checked]).setValue(memberInfoForDB2);
-                        Toast.makeText(getContext(),"동아리에 가입 시켰습니다 ", Toast.LENGTH_LONG).show();
-                        dialog.dismiss();     //닫기
-                        // Event
-                    }
-                });
+                            Log.d("가입 시키자", requestorUid[checked]);
+                            mRootRef.child("circle").child(circleName).child("request").child(requestorUid[checked]).setValue("가입 승인");
+                            MemberInfoForDB memberInfoForDB2 = new MemberInfoForDB("member", new Date().toString());
+                            circleRef = mRootRef.child("circle").child(circleName).child("member");
+                            circleRef.child(requestorUid[checked]).setValue(memberInfoForDB2);
+                            Toast.makeText(getContext(), "동아리에 가입 시켰습니다 ", Toast.LENGTH_LONG).show();
+                            dialog.dismiss();     //닫기
+                            // Event
+                        }
+                    });
 
 
-                // 취소 버튼 설정
-                ad.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //  Log.v(TAG,"No Btn Click");
-                        dialog.dismiss();     //닫기
-                        // Event
-                    }
-                });
+                    // 취소 버튼 설정
+                    ad.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //  Log.v(TAG,"No Btn Click");
+                            dialog.dismiss();     //닫기
+                            // Event
+                        }
+                    });
 
-                // 창 띄우기
-                ad.show();
+                    // 창 띄우기
+                    ad.show();
+                }
             }
         });
 

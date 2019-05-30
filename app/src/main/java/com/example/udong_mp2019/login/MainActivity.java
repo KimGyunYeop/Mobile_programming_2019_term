@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         signup= findViewById(R.id.btn_signUp);
         signin=findViewById(R.id.btn_signin);
 
+
         //회원가입 버튼
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,5 +39,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intentLogin);
             }
         });
+
+
     }
 }
