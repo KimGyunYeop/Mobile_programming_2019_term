@@ -46,7 +46,7 @@
                     app:calendarCurrentDayTextColor="@color/accent"
                     app:calendarSelectedDayTextColor="@color/white"
                     app:calendarDayOfWeekTextColor="@color/text"
-                    app:calendarDayOfMonthTextColor="@android:color/white"
+                    app:calendarDayOfMonthTextColor="@android:color/black"
                     app:calendarDisabledDayBackgroundColor="@color/main"
                     app:calendarDisabledDayTextColor="@android:color/darker_gray"
                     app:calendarSelectedDayBackgroundColor="@color/accent"

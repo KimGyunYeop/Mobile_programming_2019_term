@@ -71,7 +71,7 @@
                     android:scaleType="fitXY"/>
         </TableRow>
         <View
-                android:background="@color/main"
+                android:background="@color/main_dark"
                 android:layout_height="2dp"/>
     </TableLayout>
 
