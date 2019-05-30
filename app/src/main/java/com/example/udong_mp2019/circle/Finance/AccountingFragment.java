@@ -30,15 +30,18 @@ import java.util.ArrayList;
 public class AccountingFragment extends Fragment {
     ListView LV_receipts, LV_toSend;
     ImageButton btn_plusReceipt, btn_plustoSend;
-    ArrayAdapter<String> add_receipts;
+    CustomAdapterReceipt add_receipts;
     CustomAdapterFinanceCheck add_toSend;
     FirebaseUser user;
 
-    static ArrayList<String> arrayDataForReceipts = new ArrayList<>();
     static ArrayList<String> cafc_name = new ArrayList<>();
     static ArrayList<String> cafc_due = new ArrayList<>();
     static ArrayList<String> cafc_amount = new ArrayList<>();
     static ArrayList<Boolean> cafc_check = new ArrayList<>();
+
+    static ArrayList<String> car_name = new ArrayList<>();
+    static ArrayList<String> car_due = new ArrayList<>();
+    static ArrayList<String> car_amount = new ArrayList<>();
 
     private DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
     private DatabaseReference circleRef = mRootRef.child("circle");
@@ -102,28 +105,30 @@ public class AccountingFragment extends Fragment {
                 }
             }
         });
-        add_receipts = new ArrayAdapter<>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1);
+        add_receipts = new CustomAdapterReceipt(getActivity().getApplicationContext(),car_due,car_amount,car_name);
         LV_receipts.setAdapter(add_receipts);
         //권한 읽어옴
         getFirebaseDatabase1(userid);
         Log.d(memberAuth,"권한이야");
 
-        add_toSend = new CustomAdapterFinanceCheck(getContext(),cafc_due,cafc_amount,cafc_name,cafc_check,circlename);
+        add_toSend = new CustomAdapterFinanceCheck(getActivity().getApplicationContext(),cafc_due,cafc_amount,cafc_name,cafc_check,circlename);
         LV_toSend.setAdapter(add_toSend);
         //납부회원 체크 페이지로 이동
         LV_toSend.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (memberAuth.equals("manager")) {
-                    Toast.makeText(getContext(), "납부여부 체크 페이지로 이동합니다.", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getContext(), CheckPaymentActivity.class);
+                    CustomAdapterFinanceCheck data = (CustomAdapterFinanceCheck)parent.getAdapter();
+                    Intent intent = new Intent(getActivity().getApplicationContext(), CheckPaymentActivity.class);
                     intent.putExtra("circleName", circlename);
+                    intent.putExtra("planName",data.name.get(position));
+                    intent.putExtra("date",data.due.get(position));
                     startActivity(intent);
                 }
             }
         });
-        return v;
 
+        return v;
     }
 
     @Override
@@ -135,12 +140,24 @@ public class AccountingFragment extends Fragment {
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot postSnapshot: dataSnapshot.getChildren()){
-                    postSnapshot.getKey();
-                    for(DataSnapshot postSnapshot2: dataSnapshot.getChildren()){
-
+                car_due.clear();
+                car_name.clear();
+                car_amount.clear();
+                Log.d("getReceipt",dataSnapshot.toString());
+                for(DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    Log.d("getReceipt",postSnapshot.toString());
+                    String due = postSnapshot.getKey();
+                    Log.d("getReceipt",postSnapshot.toString());
+                    for(DataSnapshot childSnapshot: postSnapshot.getChildren()){
+                        Log.d("getReceipt",childSnapshot.toString());
+                        car_due.add(due);
+                        car_name.add(childSnapshot.getKey());
+                        car_amount.add(childSnapshot.child("amount").getValue().toString());
+                        Log.d("AF_getToSend",childSnapshot.toString());
                     }
                 }
+                add_receipts.reset(getActivity().getApplicationContext(),car_due,car_name,car_amount);
+                add_receipts.notifyDataSetChanged();
             }
 
             @Override
@@ -158,18 +175,14 @@ public class AccountingFragment extends Fragment {
                 cafc_name.clear();
                 cafc_check.clear();
                 for(DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    cafc_due.add(postSnapshot.getKey());
+                    String due = postSnapshot.getKey();
+                    Log.d("AF_getToSend",postSnapshot.toString());
                     for(DataSnapshot childSnapshot: postSnapshot.getChildren()){
-                        String childKey=childSnapshot.getKey();
-                        Log.d(childKey,"child is");
+                        cafc_due.add(due);
                         cafc_name.add(childSnapshot.getKey());
-                        if(childSnapshot.child(childKey.toString()).equals("amount")){
-                            cafc_amount.add(childSnapshot.child(childSnapshot.getKey()).getValue().toString());
-                        }
-                        if(childSnapshot.child(childKey.toString()).getKey().equals("member")){
-                            cafc_check.add((Boolean)childSnapshot.child(childSnapshot.getKey()).child(user.getUid()).getValue());
-                        }
-                        Log.d("toSend",childSnapshot.toString());
+                        cafc_amount.add(childSnapshot.child("amount").getValue().toString());
+                        cafc_check.add((Boolean)childSnapshot.child("member").child(user.getUid()).getValue());
+                        Log.d("AF_getToSend",cafc_check.toString());
                     }
                 }
 

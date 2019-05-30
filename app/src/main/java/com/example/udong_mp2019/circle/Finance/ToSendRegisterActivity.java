@@ -55,7 +55,6 @@ public class ToSendRegisterActivity extends AppCompatActivity {
                 String date=dp.getYear()+"-"+dp.getMonth()+"-"+dp.getDayOfMonth();
                 Log.d(et_name.getText().toString(),"ET_NAME");
                 toSendRef.child(date).child(et_name.getText().toString()).child("amount").setValue(et_amount.getText().toString());
-                toSendRef.child(date).child(et_name.getText().toString()).child("member").child(" ").setValue(user.getUid()+":"+"false");
                 setCheckFinanceFirebaseDatabase(date);
             }
 
@@ -66,7 +65,7 @@ public class ToSendRegisterActivity extends AppCompatActivity {
                         Log.d("toSendActivity","startsetMemeber");
                         for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                             String key = postSnapshot.getKey();
-                            toSendRef.child(date+"/member/"+key).setValue(false);
+                            toSendRef.child(date).child(et_name.getText().toString()+"/member/"+key).setValue(false);
                             finish();
                         }
                     }

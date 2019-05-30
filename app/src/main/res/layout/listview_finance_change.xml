@@ -5,44 +5,39 @@
     android:orientation="vertical">
     <!-- TextView for displaying question-->
     <TextView
-        android:id = "@+id/TV_listVIewFinanceStdID"
+        android:id = "@+id/TV_listVIewFinanceChangeStdID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/TV_listVIewFinanceCheckName"
-        android:layout_alignLeft="@id/TV_listVIewFinanceCheckName"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:text = "sample"/>
 
     <TextView
-        android:id = "@+id/TV_listVIewFinanceCheckName"
+        android:id = "@+id/TV_listVIewFinanceChangeName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15sp"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
         android:text = "sample"/>
 
     <RadioGroup
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
         android:weightSum="2">
 
         <RadioButton
-            android:id="@+id/yes"
-            android:layout_width="0dp"
+            android:id="@+id/RB_financeChangeYes"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_weight="1"
             android:text="Yes"
             android:textColor="#000" />
 
         <RadioButton
-            android:id="@+id/no"
-            android:layout_width="0dp"
+            android:id="@+id/RB_financeChangeNo"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_weight="1"
             android:text="No"
             android:textColor="#000" />
     </RadioGroup>

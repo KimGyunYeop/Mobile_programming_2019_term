@@ -22,15 +22,15 @@ import java.util.ArrayList;
 
 public class CheckPaymentActivity extends AppCompatActivity {
     ListView LV_members;
-    ArrayList<String> arrayFormembers= new ArrayList<String>();
-    ArrayList<String> arrayIndex = new ArrayList<>();
-    ArrayAdapter<String> add_members;
+    CustomAdapterFinanceChange cafc_aad;
 
     private DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
     private DatabaseReference circleRef = mRootRef.child("circle");
     private DatabaseReference userRef = mRootRef.child("user");
 
-    String circleName;
+    ArrayList<String> uid = new ArrayList<>();
+    ArrayList<Boolean> check = new ArrayList<>();
+    String circleName, planName, due;
     String user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,51 +39,30 @@ public class CheckPaymentActivity extends AppCompatActivity {
 
         Intent receive =getIntent();
         circleName=receive.getStringExtra("circleName");
+        planName = receive.getStringExtra("planName");
+        due = receive.getStringExtra("date");
 
         LV_members=(ListView) findViewById(R.id.LV_memberList);
 
-        add_members= new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, arrayFormembers);
-        LV_members.setAdapter(add_members);
+        cafc_aad= new CustomAdapterFinanceChange(getApplicationContext(),uid,check,circleName,due,planName);
+        LV_members.setAdapter(cafc_aad);
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Query query = circleRef;
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("circle/"+circleName+"/schedule/tosend/"+due).child(planName+"/member").addListenerForSingleValueEvent(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.d(circleName,"name");
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    String key= postSnapshot.getKey();
-                    if(key.equals(circleName)){
-                        Query query= circleRef.child(key).child("member");
-                        query.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                arrayFormembers.clear();
-                                arrayIndex.clear();
-                                for(DataSnapshot postSnapshot2: dataSnapshot.getChildren()){
-                                    String key2= postSnapshot2.getKey();
-                                    //           Log.d("key2는"+key2,"start");
-//                                    String name=userRef.child(key2).child("name").toString();
-                                    getFirebaseDatabase1(key2);
-                                    Log.d("유저이름은 "+user,"이름");
-                                    arrayFormembers.add(user);
-                                    arrayIndex.add(key2);
-                                }
-                                add_members.clear();
-                                add_members.addAll(arrayFormembers);
-                                add_members.notifyDataSetChanged();
-                            }
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
-                    }
+                uid.clear();
+                check.clear();
+                for(DataSnapshot postSnapshot: dataSnapshot.getChildren()){
+                    uid.add(postSnapshot.getKey());
+                    check.add((Boolean)postSnapshot.getValue());
                 }
+                cafc_aad.reset(getApplicationContext(),uid,check);
             }
 
             @Override
