@@ -45,7 +45,7 @@ public class AccountingFragment extends Fragment {
 
     static ArrayList<String> arrayIndex = new ArrayList<>();
     private FirebaseAuth firebaseAuth;
-    String memberAuth; // memeber인지 manager인지
+    String memberAuth=""; // memeber인지 manager인지
     String circlename="", userid="";
 
     public static AccountingFragment newInstance() {
@@ -106,6 +106,7 @@ public class AccountingFragment extends Fragment {
         LV_receipts.setAdapter(add_receipts);
         //권한 읽어옴
         getFirebaseDatabase1(userid);
+        Log.d(memberAuth,"권한이야");
 
         add_toSend = new CustomAdapterFinanceCheck(getContext(),cafc_due,cafc_amount,cafc_name,cafc_check,circlename);
         LV_toSend.setAdapter(add_toSend);
@@ -130,36 +131,14 @@ public class AccountingFragment extends Fragment {
         super.onResume();
         Log.d("circlefinder","start");
         user = FirebaseAuth.getInstance().getCurrentUser();
-        Query query = circleRef;
+        Query query = FirebaseDatabase.getInstance().getReference().child("circle/"+circlename+"/schedule/receipt");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    String key= postSnapshot.getKey();
-                    if(key.equals(circlename)){
-                        Query query= circleRef.child(key).child("schedule").child("receipt");
-                        query.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                arrayDataForReceipts.clear();
-                                arrayIndex.clear();
-                                for(DataSnapshot postSnapshot2: dataSnapshot.getChildren()){
-                                    String key2= postSnapshot2.getKey();
-                                    Log.d(key2,"key2");
-                                    String name=postSnapshot2.child("name").getValue().toString();
-                                    String amount=postSnapshot2.child("amount").getValue().toString();
-                                    arrayDataForReceipts.add(key2+" "+name+" "+amount+"원");
-                                    arrayIndex.add(key2);
-                                }
-                                add_receipts.clear();
-                                add_receipts.addAll(arrayDataForReceipts);
-                                add_receipts.notifyDataSetChanged();
-                            }
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                for(DataSnapshot postSnapshot: dataSnapshot.getChildren()){
+                    postSnapshot.getKey();
+                    for(DataSnapshot postSnapshot2: dataSnapshot.getChildren()){
 
-                            }
-                        });
                     }
                 }
             }
@@ -168,7 +147,7 @@ public class AccountingFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+        })
 
         FirebaseDatabase.getInstance().getReference().child("circle/"+circlename+"/schedule/tosend").addValueEventListener(new ValueEventListener() {
             @Override
@@ -181,14 +160,14 @@ public class AccountingFragment extends Fragment {
                 for(DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     cafc_due.add(postSnapshot.getKey());
                     for(DataSnapshot childSnapshot: postSnapshot.getChildren()){
-                        if(childSnapshot.getKey().equals("amount")){
-                            cafc_amount.add(childSnapshot.getValue().toString());
+                        String childKey=childSnapshot.getKey();
+                        Log.d(childKey,"child is");
+                        cafc_name.add(childSnapshot.getKey());
+                        if(childSnapshot.child(childKey.toString()).equals("amount")){
+                            cafc_amount.add(childSnapshot.child(childSnapshot.getKey()).getValue().toString());
                         }
-                        if(childSnapshot.getKey().equals("name")){
-                            cafc_name.add(childSnapshot.getValue().toString());
-                        }
-                        if(childSnapshot.getKey().equals("member")){
-                            cafc_check.add((Boolean)childSnapshot.child(user.getUid()).getValue());
+                        if(childSnapshot.child(childKey.toString()).getKey().equals("member")){
+                            cafc_check.add((Boolean)childSnapshot.child(childSnapshot.getKey()).child(user.getUid()).getValue());
                         }
                         Log.d("toSend",childSnapshot.toString());
                     }

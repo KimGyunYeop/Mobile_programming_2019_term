@@ -10,6 +10,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.example.udong_mp2019.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 
 import com.google.firebase.database.FirebaseDatabase;
@@ -21,6 +23,7 @@ public class ReceiptRegisterActivity extends AppCompatActivity {
     EditText et_amount;
 
     DatePicker dp;
+    FirebaseUser user;
 
     private DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
     private DatabaseReference circleRef = mRootRef.child("circle");
@@ -37,6 +40,7 @@ public class ReceiptRegisterActivity extends AppCompatActivity {
         et_amount=(EditText)findViewById(R.id.et_amount);
 
         dp=(DatePicker)findViewById(R.id.datepicker);
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
         Intent intent= getIntent();
         String circlename= ((Intent) intent).getStringExtra("circlename");
@@ -48,8 +52,7 @@ public class ReceiptRegisterActivity extends AppCompatActivity {
                 receiptRef=mRootRef.child("circle/"+circlename+"/schedule/receipt");
                 Log.d("find receipt","find");
                 String date=dp.getYear()+"-"+dp.getMonth()+"-"+dp.getDayOfMonth();
-                receiptRef.child(date.toString()).child("name").setValue(et_name.getText().toString());
-                receiptRef.child(date.toString()).child("amount").setValue(et_amount.getText().toString());
+                receiptRef.child(date).child("name").child(et_name.getText().toString()).child("amount").setValue(et_amount.getText().toString());
                 finish();
             }
         });
