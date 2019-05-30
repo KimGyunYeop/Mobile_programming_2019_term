@@ -45,7 +45,7 @@ public class ReceiptRegisterActivity extends AppCompatActivity {
         Intent intent= getIntent();
         String circlename= ((Intent) intent).getStringExtra("circlename");
 
-        btn_register=(Button)findViewById(R.id.btn_register);
+        btn_register=(Button)findViewById(R.id.btn_receipt_register);
         btn_register.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

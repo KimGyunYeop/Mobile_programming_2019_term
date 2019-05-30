@@ -38,16 +38,16 @@ public class ToSendRegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_to_send_register);
-
+        Log.d("toSendActivity","startToSendActivity");
         et_name = (EditText) findViewById(R.id.et_name);
         et_amount = (EditText) findViewById(R.id.et_amount);
         dp=(DatePicker) findViewById(R.id.datepicker);
         user = FirebaseAuth.getInstance().getCurrentUser();
 
         Intent intent = getIntent();
-        String circlename = ((Intent) intent).getStringExtra("circlename");
+        String circlename = ((Intent) intent).getStringExtra("circleName");
 
-        btn_register = (Button) findViewById(R.id.btn_register);
+        btn_register = (Button) findViewById(R.id.btn_tosend_register);
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,16 +57,17 @@ public class ToSendRegisterActivity extends AppCompatActivity {
                 toSendRef.child(date).child(et_name.getText().toString()).child("amount").setValue(et_amount.getText().toString());
                 toSendRef.child(date).child(et_name.getText().toString()).child("member").child(" ").setValue(user.getUid()+":"+"false");
                 setCheckFinanceFirebaseDatabase(date);
-                finish();
             }
 
             void setCheckFinanceFirebaseDatabase(String date){
                 ValueEventListener postListener = new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        Log.d("toSendActivity","startsetMemeber");
                         for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                             String key = postSnapshot.getKey();
                             toSendRef.child(date+"/member/"+key).setValue(false);
+                            finish();
                         }
                     }
 
