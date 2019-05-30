@@ -81,4 +81,14 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
+
+    <ImageButton
+        android:layout_width="43dp"
+        android:layout_height="60dp"
+        android:gravity="right"
+        android:scaleType="centerCrop"
+        android:src="@drawable/secession"
+        android:layout_gravity="right"
+        android:id="@+id/secession_App"/>
+
 </LinearLayout>

@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="299dp"
         android:layout_height="55dp"
-        android:text="<멤버리스트>"
+        android:text="멤버리스트"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
     <Button
@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:layout_gravity="center"
-        android:text="<가입 승인>"
+        android:text="가입 승인"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
     <ListView
