@@ -79,17 +79,27 @@ public class AccountingFragment extends Fragment {
         btn_plusReceipt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), ReceiptRegisterActivity.class);
-                intent.putExtra("circlename", circlename);
-                startActivity(intent);
+                if(memberAuth.equals("manager")) {
+                    Intent intent = new Intent(getContext(), ReceiptRegisterActivity.class);
+                    intent.putExtra("circlename", circlename);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(getContext(), "등록은 매니저만 가능합니다.", Toast.LENGTH_LONG).show();
+                }
             }
         });
         btn_plustoSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), ToSendRegisterActivity.class);
-                intent.putExtra("circlename", circlename);
-                startActivity(intent);
+                if(memberAuth.equals("manager")) {
+                    Intent intent = new Intent(getContext(), ToSendRegisterActivity.class);
+                    intent.putExtra("circlename", circlename);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(getContext(), "등록은 매니저만 가능합니다.", Toast.LENGTH_LONG).show();
+                }
             }
         });
         add_receipts = new ArrayAdapter<>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1);
