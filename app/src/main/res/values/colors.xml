@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#00BCD4</color>
-    <color name="colorPrimaryDark">#0097A7</color>
-    <color name="colorAccent">#009688</color>
+    <color name="colorPrimary">#FAFAB2</color>
+    <color name="colorPrimaryDark">#FFE65A</color>
+    <color name="colorAccent">#FFE65A</color>
 
     <color name="teal500">#009688</color>
     <color name="white">#ffffff</color>
     <color name="off_white">#FAFAFA</color>
     <color name="background">#E0E0E0</color>
     <color name="indigo">#3F51B5</color>
-    <color name="blue">#03A7E9</color>
-    <color name="grey">#757575</color>
+    <color name="blue">#03A7E9</color>0
+0    <color name="grey">#757575</color>
     <color name="red">#ed2121</color>
+    <color name="black">#000000</color>
 
-    <color name = "main_dark">#0097A7</color>
-    <color name = "main_light">#B2EBF2</color>
-    <color name = "main">#00BCD4</color>
-    <color name = "accent">#009688</color>
+    <color name = "main_dark">#FFE65A</color>
+    <color name = "main_light">#FFFF80</color>
+    <color name = "main">#FAFAB2</color>
+    <color name = "accent">#FF7F50</color>
     <color name = "text">#212121</color>
     <color name = "secondary_text">#757575</color>
-    <color name = "divider">#BDBDBD</color>
+    <color name = "divider">#FFE65A</color>
 </resources>

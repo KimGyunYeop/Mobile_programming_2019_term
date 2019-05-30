@@ -50,5 +50,6 @@
             android:layout_centerInParent="true"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="0dp"
+        android:background="@color/main"
             android:text="확인" />
 </RelativeLayout>

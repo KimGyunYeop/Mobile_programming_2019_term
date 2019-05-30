@@ -10,7 +10,7 @@
         android:layout_height="150dp"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="200dp"
-        android:src="@drawable/noodles"/>
+        android:src="@drawable/logo"/>
 
     <Button
             android:id="@+id/btn_signUp"
@@ -19,6 +19,7 @@
             android:text="@string/signup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+        android:background="@color/main"
             android:layout_weight="1"
             android:layout_gravity="center"
             android:layout_marginLeft="100dp"/>
@@ -27,6 +28,7 @@
             android:id="@+id/btn_signin"
         android:layout_below="@+id/img"
         android:layout_marginTop="50dp"
+        android:background="@color/main"
             android:text="@string/signin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

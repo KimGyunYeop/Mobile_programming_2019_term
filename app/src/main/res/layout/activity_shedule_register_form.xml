@@ -10,9 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:text = "Create Schedule"
-        android:textColor="@color/white"
-        android:textSize="40sp"
+        android:text = "New Schedule"
+        android:textColor="@color/black"
+        android:textSize="25sp"
         android:background="@color/main"/>
 
     <TimePicker
@@ -20,8 +20,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/TP_time"
         android:layout_below="@+id/TV_createCircle"
+        android:amPmTextColor="@color/black"
         android:headerBackground="@color/main"
-        android:numbersSelectorColor="@color/main"/>
+        android:numbersSelectorColor="@color/main_dark"/>
 
     <TextView
         android:id = "@+id/TV_schedule_name"
@@ -59,11 +60,13 @@
 
     <Button
         android:id = "@+id/Bu_submit_schedule"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:text = "submit"
+        android:background="@color/main"
+        android:textColor="@color/black"
         android:layout_below = "@+id/ET_descripsion"/>
 
 </RelativeLayout>
