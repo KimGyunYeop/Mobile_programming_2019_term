@@ -94,7 +94,7 @@ public class AccountingFragment extends Fragment {
             public void onClick(View v) {
                 if(memberAuth.equals("manager")) {
                     Intent intent = new Intent(getContext(), ToSendRegisterActivity.class);
-                    intent.putExtra("circlename", circlename);
+                    intent.putExtra("circleName", circlename);
                     startActivity(intent);
                 }
                 else{
