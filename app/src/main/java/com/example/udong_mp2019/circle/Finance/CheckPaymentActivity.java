@@ -118,4 +118,3 @@ public class CheckPaymentActivity extends AppCompatActivity {
         });
     }
 }
-
