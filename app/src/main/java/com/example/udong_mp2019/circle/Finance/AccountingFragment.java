@@ -147,7 +147,7 @@ public class AccountingFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        })
+        });
 
         FirebaseDatabase.getInstance().getReference().child("circle/"+circlename+"/schedule/tosend").addValueEventListener(new ValueEventListener() {
             @Override
