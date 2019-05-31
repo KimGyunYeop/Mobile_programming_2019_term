@@ -1,33 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.daimajia.swipe.SwipeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swipe_receipt"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-    <!-- TextView for displaying question-->
-    <TextView
-        android:id = "@+id/TV_listVIewReceiptDate"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id = "@+id/delete_receipt"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="10sp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="80dp"
-        android:text = "sample"/>
-    <TextView
-        android:id = "@+id/TV_listVIewReceiptPlanName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:layout_marginLeft="30dp"
-        android:text = "sample"/>
+        android:layout_height="match_parent"
+        android:background="@color/red">
 
-    <TextView
-        android:id = "@+id/TV_listVIewReceiptAmount"
-        android:layout_width="wrap_content"
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_clear_black_24dp"/>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:layout_below="@id/TV_listVIewReceiptDate"
-        android:layout_alignLeft="@id/TV_listVIewReceiptDate"
-        android:layout_alignParentRight="true"
-        android:text = "sample"/>
+        android:orientation="vertical">
+        <!-- TextView for displaying question-->
+        <TextView
+            android:id = "@+id/TV_listVIewReceiptDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="80dp"
+            android:text = "sample"/>
+        <TextView
+            android:id = "@+id/TV_listVIewReceiptPlanName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:layout_marginLeft="30dp"
+            android:text = "sample"/>
 
-</RelativeLayout>
+        <TextView
+            android:id = "@+id/TV_listVIewReceiptAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_below="@id/TV_listVIewReceiptDate"
+            android:layout_alignLeft="@id/TV_listVIewReceiptDate"
+            android:layout_alignParentRight="true"
+            android:text = "sample"/>
+
+    </RelativeLayout>
+</com.daimajia.swipe.SwipeLayout>

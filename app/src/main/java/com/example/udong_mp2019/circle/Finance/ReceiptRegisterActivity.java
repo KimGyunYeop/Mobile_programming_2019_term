@@ -43,7 +43,7 @@ public class ReceiptRegisterActivity extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
 
         Intent intent= getIntent();
-        String circlename= ((Intent) intent).getStringExtra("circlename");
+        String circlename= ((Intent) intent).getStringExtra("circleName");
 
         btn_register=(Button)findViewById(R.id.btn_receipt_register);
         btn_register.setOnClickListener(new View.OnClickListener(){

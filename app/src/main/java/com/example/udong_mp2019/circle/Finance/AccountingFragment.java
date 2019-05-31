@@ -9,10 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.udong_mp2019.R;
 import com.example.udong_mp2019.circleList.CircleInfoForDB;
@@ -20,7 +18,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
@@ -43,13 +40,9 @@ public class AccountingFragment extends Fragment {
     static ArrayList<String> car_due = new ArrayList<>();
     static ArrayList<String> car_amount = new ArrayList<>();
 
-    private DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-    private DatabaseReference circleRef = mRootRef.child("circle");
-
-    static ArrayList<String> arrayIndex = new ArrayList<>();
     private FirebaseAuth firebaseAuth;
     String memberAuth=""; // memeber인지 manager인지
-    String circlename="", userid="";
+    String circleName ="", userid="";
 
     public static AccountingFragment newInstance() {
         AccountingFragment fragment = new AccountingFragment();
@@ -73,60 +66,50 @@ public class AccountingFragment extends Fragment {
         btn_plustoSend=(ImageButton)v.findViewById(R.id.btn_plustoSend);
 
         Bundle bundle=getArguments();
-
         if(bundle!=null) {
-            circlename = bundle.getString("circleName");
+            circleName = bundle.getString("circleName");
             userid = bundle.getString("userID");
         }
+
+        getAutorityFirebase();
+
+        add_toSend = new CustomAdapterFinanceCheck(getActivity().getApplicationContext(),cafc_due,cafc_amount,cafc_name,cafc_check, circleName);
+        LV_toSend.setAdapter(add_toSend);
+
+        LV_toSend.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(memberAuth.equalsIgnoreCase("manager")) {
+                    CustomAdapterFinanceCheck data = (CustomAdapterFinanceCheck) parent.getAdapter();
+                    Intent intent = new Intent(getActivity().getApplicationContext(), CheckPaymentActivity.class);
+                    intent.putExtra("circleName", circleName);
+                    intent.putExtra("planName", data.name.get(position));
+                    intent.putExtra("date", data.due.get(position));
+                    startActivity(intent);
+                }
+            }
+        });
 
         btn_plusReceipt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(memberAuth.equals("manager")) {
-                    Intent intent = new Intent(getContext(), ReceiptRegisterActivity.class);
-                    intent.putExtra("circlename", circlename);
-                    startActivity(intent);
-                }
-                else{
-                    Toast.makeText(getContext(), "등록은 매니저만 가능합니다.", Toast.LENGTH_LONG).show();
-                }
+                Intent intent = new Intent(getContext(), ReceiptRegisterActivity.class);
+                intent.putExtra("circleName", circleName);
+                startActivity(intent);
             }
         });
         btn_plustoSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(memberAuth.equals("manager")) {
-                    Intent intent = new Intent(getContext(), ToSendRegisterActivity.class);
-                    intent.putExtra("circleName", circlename);
-                    startActivity(intent);
-                }
-                else{
-                    Toast.makeText(getContext(), "등록은 매니저만 가능합니다.", Toast.LENGTH_LONG).show();
-                }
+                Intent intent = new Intent(getContext(), ToSendRegisterActivity.class);
+                intent.putExtra("circleName", circleName);
+                startActivity(intent);
             }
         });
-        add_receipts = new CustomAdapterReceipt(getActivity().getApplicationContext(),car_due,car_amount,car_name);
-        LV_receipts.setAdapter(add_receipts);
-        //권한 읽어옴
-        getAutorityFirebase();
-        Log.d(memberAuth,"권한이야");
 
-        add_toSend = new CustomAdapterFinanceCheck(getActivity().getApplicationContext(),cafc_due,cafc_amount,cafc_name,cafc_check,circlename);
-        LV_toSend.setAdapter(add_toSend);
-        //납부회원 체크 페이지로 이동
-        LV_toSend.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (memberAuth.equals("manager")) {
-                    CustomAdapterFinanceCheck data = (CustomAdapterFinanceCheck)parent.getAdapter();
-                    Intent intent = new Intent(getActivity().getApplicationContext(), CheckPaymentActivity.class);
-                    intent.putExtra("circleName", circlename);
-                    intent.putExtra("planName",data.name.get(position));
-                    intent.putExtra("date",data.due.get(position));
-                    startActivity(intent);
-                }
-            }
-        });
+
+        add_receipts = new CustomAdapterReceipt(getActivity().getApplicationContext(),car_due,car_amount,car_name, circleName);
+        LV_receipts.setAdapter(add_receipts);
 
         return v;
     }
@@ -136,7 +119,7 @@ public class AccountingFragment extends Fragment {
         super.onResume();
         Log.d("circlefinder","start");
         user = FirebaseAuth.getInstance().getCurrentUser();
-        Query query = FirebaseDatabase.getInstance().getReference().child("circle/"+circlename+"/schedule/receipt");
+        Query query = FirebaseDatabase.getInstance().getReference().child("circle/"+ circleName +"/schedule/receipt");
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -156,7 +139,7 @@ public class AccountingFragment extends Fragment {
                         Log.d("AF_getToSend",childSnapshot.toString());
                     }
                 }
-                add_receipts.reset(getActivity(),car_due,car_name,car_amount);
+                add_receipts.reset(getActivity(),car_due,car_amount,car_name);
                 add_receipts.notifyDataSetChanged();
             }
 
@@ -166,7 +149,7 @@ public class AccountingFragment extends Fragment {
             }
         });
 
-        FirebaseDatabase.getInstance().getReference().child("circle/"+circlename+"/schedule/tosend").addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("circle/"+ circleName +"/schedule/tosend").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 user = FirebaseAuth.getInstance().getCurrentUser();
@@ -178,10 +161,12 @@ public class AccountingFragment extends Fragment {
                     String due = postSnapshot.getKey();
                     Log.d("AF_getToSend",postSnapshot.toString());
                     for(DataSnapshot childSnapshot: postSnapshot.getChildren()){
+                        Boolean myCheck = (Boolean)childSnapshot.child("member").child(user.getUid()).getValue();
+                        if(myCheck == null) continue;
+                        cafc_check.add(myCheck);
                         cafc_due.add(due);
                         cafc_name.add(childSnapshot.getKey());
                         cafc_amount.add(childSnapshot.child("amount").getValue().toString());
-                        cafc_check.add((Boolean)childSnapshot.child("member").child(user.getUid()).getValue());
                         Log.d("AF_getToSend",cafc_check.toString());
                     }
                 }
@@ -198,17 +183,22 @@ public class AccountingFragment extends Fragment {
         });
 
     }
+
     // autority 반환
     public void getAutorityFirebase(){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        Query query = FirebaseDatabase.getInstance().getReference().child("circle/"+circlename+"/member/"+user.getUid()+"/autority");
+        Query query = FirebaseDatabase.getInstance().getReference().child("circle/"+ circleName +"/member/"+user.getUid()+"/autority");
+        Log.d("circlefinder","circle/"+ circleName +"/member/"+user.getUid()+"/autority");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
-            CircleInfoForDB get;
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.d("circlefinder",dataSnapshot.toString());
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    memberAuth = postSnapshot.getValue().toString();
+                memberAuth = dataSnapshot.getValue().toString();
+                Log.d("circlefinder",memberAuth );
+                if(!memberAuth.equalsIgnoreCase("manager")) {
+                    //납부회원 체크 페이지로 이동
+                    btn_plusReceipt.setVisibility(View.INVISIBLE);
+                    btn_plustoSend.setVisibility(View.INVISIBLE);
                 }
             }
 

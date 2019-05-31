@@ -207,8 +207,9 @@ public class ScheduleFragment extends Fragment implements CalendarView {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.d("circlefinder",dataSnapshot.toString());
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    memberAuth = postSnapshot.getValue().toString();
+                memberAuth = dataSnapshot.getValue().toString();
+                if(memberAuth.equalsIgnoreCase("member")){
+                    fab_calendar.hide();
                 }
             }
 

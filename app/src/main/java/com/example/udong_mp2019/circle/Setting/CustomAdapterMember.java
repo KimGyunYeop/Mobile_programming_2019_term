@@ -97,7 +97,7 @@ public class CustomAdapterMember extends BaseSwipeAdapter {
                 ad.setPositiveButton("네", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if(autority.get(position).equals("manager")) {
+                        if(autority.get(position).equals("member")) {
                             ref.child("circle/" + circleName + "/member/" + uid.get(position)+"/autority").setValue("member");
                             Toast.makeText(convertView.getContext(), tv_name.getText()+"님이 매니저로 변경되었습니다.", Toast.LENGTH_LONG).show();
                         }else {

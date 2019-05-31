@@ -68,12 +68,12 @@ public class CustomAdapterSchedule extends BaseAdapter {
         RadioButton yes = (RadioButton) view.findViewById(R.id.yes);
         RadioButton no = (RadioButton) view.findViewById(R.id.no);
         Button btn_checkAttendance = (Button) view.findViewById(R.id.btn_checkAttendance);
-        ref.child("circle/"+circleName+"/schedule/plan/"+selectedAnswers.get(i).toString()+"/attendance/"+uid).addValueEventListener(new ValueEventListener() {
+        ref.child("circle/" + circleName + "/schedule/plan/" + selectedAnswers.get(i).toString() + "/attendance/" + uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if((boolean)dataSnapshot.getValue()){
+                if ((boolean) dataSnapshot.getValue()) {
                     yes.setChecked(true);
-                }else{
+                } else {
                     no.setChecked(true);
                 }
             }
@@ -86,48 +86,40 @@ public class CustomAdapterSchedule extends BaseAdapter {
         yes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    ref.child("circle/"+circleName+"/schedule/plan/"+selectedAnswers.get(i).toString()+"/attendance/"+uid).setValue(true);
+                if (isChecked) {
+                    ref.child("circle/" + circleName + "/schedule/plan/" + selectedAnswers.get(i).toString() + "/attendance/" + uid).setValue(true);
                 }
             }
         });
         no.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    ref.child("circle/"+circleName+"/schedule/plan/"+selectedAnswers.get(i).toString()+"/attendance/"+uid).setValue(false);
+                if (isChecked) {
+                    ref.child("circle/" + circleName + "/schedule/plan/" + selectedAnswers.get(i).toString() + "/attendance/" + uid).setValue(false);
                 }
             }
         });
-        getAutorityFirebase();
-        if(memberAuth == "member"){
-            btn_checkAttendance.setVisibility(View.INVISIBLE);
-        }else {
-            btn_checkAttendance.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(viewGroup.getContext(), CheckAttendanceActivity.class);
-                    intent.putExtra("path", selectedAnswers.get(i).toString());
-                    intent.putExtra("circleName",circleName);
-                    viewGroup.getContext().startActivity(intent);
-                }
-            });
-        }
-        question.setText(selectedAnswers.get(i).toString());
-        return view;
-    }
-
-    // autority 반환
-    public void getAutorityFirebase(){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        Query query = FirebaseDatabase.getInstance().getReference().child("circle/"+circleName+"/member/"+user.getUid()+"/autority");
+        Query query = FirebaseDatabase.getInstance().getReference().child("circle/" + circleName + "/member/" + user.getUid() + "/autority");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             CircleInfoForDB get;
+
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.d("circlefinder",dataSnapshot.toString());
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    memberAuth = postSnapshot.getValue().toString();
+                Log.d("circlefinder", dataSnapshot.toString());
+                memberAuth = dataSnapshot.getValue().toString();
+                if (memberAuth.equalsIgnoreCase("member")) {
+                    btn_checkAttendance.setVisibility(View.INVISIBLE);
+                } else {
+                    btn_checkAttendance.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(viewGroup.getContext(), CheckAttendanceActivity.class);
+                            intent.putExtra("path", selectedAnswers.get(i).toString());
+                            intent.putExtra("circleName", circleName);
+                            viewGroup.getContext().startActivity(intent);
+                        }
+                    });
                 }
             }
 
@@ -135,5 +127,8 @@ public class CustomAdapterSchedule extends BaseAdapter {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+
+        question.setText(selectedAnswers.get(i).toString());
+        return view;
     }
 }

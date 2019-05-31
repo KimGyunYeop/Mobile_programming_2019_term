@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.BaseSwipeAdapter;
 import com.example.udong_mp2019.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -71,16 +72,17 @@ public class CustomAdapterFinanceCheck extends BaseSwipeAdapter {
     public void fillValues(int position, View convertView) {
         int i =position;
         View view = convertView;
-        view = inflter.inflate(R.layout.listview_finance_check, null);
         TextView tv_due = view.findViewById(R.id.TV_listVIewFinanceCheckDeu);
         TextView tv_amount = view.findViewById(R.id.TV_listVIewFinanceCheckAmount);
         TextView tv_result = view.findViewById(R.id.TV_listVIewFinanceCheck);
         TextView tv_name = view.findViewById(R.id.TV_listVIewFinanceCheckPlanName);
         LinearLayout delete = view.findViewById(R.id.delete_tosend);
+        SwipeLayout swipeLayout= view.findViewById(R.id.swipe_finance_check);
+
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                FirebaseDatabase.getInstance().getReference().child("circle/"+circleName+"/schedule/tosend/"+tv_due.getText().toString()).child(tv_name.getText().toString()).removeValue();
             }
         });
         tv_due.setText(due.get(i));
