@@ -162,8 +162,8 @@ public class AccountingFragment extends Fragment {
                     Log.d("AF_getToSend",postSnapshot.toString());
                     for(DataSnapshot childSnapshot: postSnapshot.getChildren()){
                         Boolean myCheck = (Boolean)childSnapshot.child("member").child(user.getUid()).getValue();
-                        if(myCheck == null) continue;
                         cafc_check.add(myCheck);
+                        Log.d("nullTest",cafc_check.toString());
                         cafc_due.add(due);
                         cafc_name.add(childSnapshot.getKey());
                         cafc_amount.add(childSnapshot.child("amount").getValue().toString());

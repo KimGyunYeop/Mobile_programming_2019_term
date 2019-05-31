@@ -29,7 +29,6 @@ public class CheckPaymentActivity extends AppCompatActivity {
     private DatabaseReference userRef = mRootRef.child("user");
 
     ArrayList<String> uid = new ArrayList<>();
-    ArrayList<Boolean> check = new ArrayList<>();
     String circleName, planName, due;
     String user;
     @Override
@@ -44,7 +43,7 @@ public class CheckPaymentActivity extends AppCompatActivity {
 
         LV_members=(ListView) findViewById(R.id.LV_memberList);
 
-        cafc_aad= new CustomAdapterFinanceChange(getApplicationContext(),uid,check,circleName,due,planName);
+        cafc_aad= new CustomAdapterFinanceChange(getApplicationContext(),uid,circleName,due,planName);
         LV_members.setAdapter(cafc_aad);
 
     }
@@ -52,17 +51,15 @@ public class CheckPaymentActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        FirebaseDatabase.getInstance().getReference().child("circle/"+circleName+"/schedule/tosend/"+due).child(planName+"/member").addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("circle/"+circleName+"/member").addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 uid.clear();
-                check.clear();
                 for(DataSnapshot postSnapshot: dataSnapshot.getChildren()){
                     uid.add(postSnapshot.getKey());
-                    check.add((Boolean)postSnapshot.getValue());
                 }
-                cafc_aad.reset(getApplicationContext(),uid,check);
+                cafc_aad.reset(getApplicationContext(),uid);
             }
 
             @Override

@@ -30,24 +30,21 @@ public class CustomAdapterFinanceChange extends BaseAdapter {
     final Context context;
     LayoutInflater inflter;
     ArrayList<String> uid;
-    ArrayList<Boolean> check;
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
     private String user = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private String circleName, date,planName;
 
-    public CustomAdapterFinanceChange(Context applicationContext, ArrayList<String> UID, ArrayList<Boolean> check, String circleName, String date, String planName) {
+    public CustomAdapterFinanceChange(Context applicationContext, ArrayList<String> UID, String circleName, String date, String planName) {
         this.context = applicationContext;
         this.uid =UID;
-        this.check = check;
         this.circleName = circleName;
         this.planName =planName;
         this.date = date;
         inflter = (LayoutInflater.from(applicationContext));
     }
 
-    public void reset(Context applicationContext, ArrayList<String> UID, ArrayList<Boolean> check) {
+    public void reset(Context applicationContext, ArrayList<String> UID) {
         this.uid =UID;
-        this.check = check;
     }
 
     @Override
@@ -74,11 +71,6 @@ public class CustomAdapterFinanceChange extends BaseAdapter {
         RadioButton no = (RadioButton) view.findViewById(R.id.RB_financeChangeNo);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        if(check.get(i)){
-            yes.setChecked(true);
-        }else{
-            no.setChecked(true);
-        }
 
         FirebaseDatabase.getInstance().getReference().child("user/"+uid.get(i)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -94,11 +86,33 @@ public class CustomAdapterFinanceChange extends BaseAdapter {
             }
         });
 
+        FirebaseDatabase.getInstance().getReference().child("circle/"+circleName+"/schedule/tosend/"+date).child(planName+"/member/"+uid.get(i)).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.d("AdapterFinanceChange",dataSnapshot.toString());
+                Boolean check = (Boolean)dataSnapshot.getValue();
+                if(check != null) {
+                    if (check) {
+                        yes.setChecked(true);
+                    } else {
+                        no.setChecked(true);
+                    }
+                }else{
+                    no.setChecked(true);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         yes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
-                    ref.child("circle/"+circleName+"/schedule/tosend/"+date+"/"+planName+"/member/"+user.getUid()).setValue(true);
+                    ref.child("circle/"+circleName+"/schedule/tosend/"+date+"/"+planName+"/member/"+uid.get(i)).setValue(true);
                 }
             }
         });
@@ -106,7 +120,7 @@ public class CustomAdapterFinanceChange extends BaseAdapter {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
-                    ref.child("circle/"+circleName+"/schedule/tosend/"+date+"/"+planName+"/member/"+user.getUid()).setValue(false);
+                    ref.child("circle/"+circleName+"/schedule/tosend/"+date+"/"+planName+"/member/"+uid.get(i)).setValue(false);
                 }
             }
         });

@@ -33,7 +33,7 @@ public class CustomAdapterSchedule extends BaseAdapter {
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
     private String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private String circleName;
-    private String memberAuth;
+    private String memberAuth = "";
 
     public CustomAdapterSchedule(Context applicationContext, ArrayList<ScheduleInfoForDB> questionsList,String circleName) {
         this.context = applicationContext;
@@ -71,10 +71,12 @@ public class CustomAdapterSchedule extends BaseAdapter {
         ref.child("circle/" + circleName + "/schedule/plan/" + selectedAnswers.get(i).toString() + "/attendance/" + uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if ((boolean) dataSnapshot.getValue()) {
-                    yes.setChecked(true);
-                } else {
-                    no.setChecked(true);
+                if(dataSnapshot.getValue() != null) {
+                    if ((boolean) dataSnapshot.getValue()) {
+                        yes.setChecked(true);
+                    } else {
+                        no.setChecked(true);
+                    }
                 }
             }
 
@@ -100,33 +102,49 @@ public class CustomAdapterSchedule extends BaseAdapter {
             }
         });
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        Query query = FirebaseDatabase.getInstance().getReference().child("circle/" + circleName + "/member/" + user.getUid() + "/autority");
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            CircleInfoForDB get;
+        if(memberAuth == "") {
+            Query query = FirebaseDatabase.getInstance().getReference().child("circle/" + circleName + "/member/" + user.getUid() + "/autority");
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                CircleInfoForDB get;
 
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.d("circlefinder", dataSnapshot.toString());
-                memberAuth = dataSnapshot.getValue().toString();
-                if (memberAuth.equalsIgnoreCase("member")) {
-                    btn_checkAttendance.setVisibility(View.INVISIBLE);
-                } else {
-                    btn_checkAttendance.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent = new Intent(viewGroup.getContext(), CheckAttendanceActivity.class);
-                            intent.putExtra("path", selectedAnswers.get(i).toString());
-                            intent.putExtra("circleName", circleName);
-                            viewGroup.getContext().startActivity(intent);
-                        }
-                    });
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Log.d("circlefinder", dataSnapshot.toString());
+                    memberAuth = dataSnapshot.getValue().toString();
+                    if (memberAuth.equalsIgnoreCase("member")) {
+                        btn_checkAttendance.setVisibility(View.INVISIBLE);
+                    } else {
+                        btn_checkAttendance.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(viewGroup.getContext(), CheckAttendanceActivity.class);
+                                intent.putExtra("path", selectedAnswers.get(i).toString());
+                                intent.putExtra("circleName", circleName);
+                                viewGroup.getContext().startActivity(intent);
+                            }
+                        });
+                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            });
+        }else{
+            if (memberAuth.equalsIgnoreCase("member")) {
+                btn_checkAttendance.setVisibility(View.INVISIBLE);
+            } else {
+                btn_checkAttendance.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(viewGroup.getContext(), CheckAttendanceActivity.class);
+                        intent.putExtra("path", selectedAnswers.get(i).toString());
+                        intent.putExtra("circleName", circleName);
+                        viewGroup.getContext().startActivity(intent);
+                    }
+                });
             }
-        });
+        }
 
         question.setText(selectedAnswers.get(i).toString());
         return view;
