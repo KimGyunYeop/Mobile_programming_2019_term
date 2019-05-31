@@ -1,113 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context=".login.MainActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".login.MainActivity">
 
-    <TextView
-        android:id="@+id/tv_info"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="비밀번호는 6글자 이상 10글자 이하의,\n영어와 숫자으로 입력해주세요."
-        android:layout_marginTop="150dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp" />
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal|center_vertical">
 
-    <TextView
+        <TextView
+            android:id="@+id/tv_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="50dp"
+            android:text="비밀번호는 6글자 이상 10글자 이하의,\n영어와 숫자로 입력해주세요." />
+
+        <TextView
             android:id="@+id/tv_email"
             android:layout_width="match_parent"
-        android:layout_below="@+id/tv_info"
             android:layout_height="wrap_content"
-            android:text="이메일"
+            android:layout_below="@+id/tv_info"
+            android:layout_marginLeft="50dp"
             android:layout_marginTop="30dp"
+            android:layout_marginRight="50dp"
+            android:text="이메일" />
+
+        <EditText
+            android:id="@+id/et_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_email"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp" />
 
-    <EditText
-            android:id="@+id/et_email"
-            android:layout_below="@id/tv_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"/>
-
-    <TextView
+        <TextView
             android:id="@+id/tv_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@id/et_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="비밀번호"
             android:layout_centerInParent="true"
             android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"/>
+            android:layout_marginRight="50dp"
+            android:text="비밀번호" />
 
-    <EditText
+        <EditText
             android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@id/tv_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"/>
-    <TextView
+            android:layout_marginRight="50dp" />
+
+        <TextView
             android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@id/et_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="이름"
             android:layout_centerInParent="true"
             android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"/>
+            android:layout_marginRight="50dp"
+            android:text="이름" />
 
-    <EditText
+        <EditText
             android:id="@+id/et_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@id/tv_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"/>
-    <TextView
+            android:layout_marginRight="50dp" />
+
+        <TextView
             android:id="@+id/tv_school"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@id/et_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="학교"
             android:layout_centerInParent="true"
             android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"/>
+            android:layout_marginRight="50dp"
+            android:text="학교" />
 
-    <EditText
+        <EditText
             android:id="@+id/et_school"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@id/tv_school"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"/>
-    <TextView
+            android:layout_marginRight="50dp" />
+
+        <TextView
             android:id="@+id/tv_studentId"
-            android:layout_below="@id/et_school"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="학번"
+            android:layout_below="@id/et_school"
             android:layout_centerInParent="true"
             android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"/>
+            android:layout_marginRight="50dp"
+            android:text="학번" />
 
-    <EditText
+        <EditText
             android:id="@+id/et_studentId"
-            android:layout_below="@id/tv_studentId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tv_studentId"
             android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"/>
-    <Button
+            android:layout_marginRight="50dp" />
+
+        <Button
             android:id="@+id/btn_signUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/et_studentId"
             android:layout_centerInParent="true"
             android:layout_marginLeft="50dp"
-            android:background="@color/main"
             android:layout_marginTop="0dp"
+            android:background="@color/main"
             android:text="확인" />
-</RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

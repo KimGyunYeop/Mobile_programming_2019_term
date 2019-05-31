@@ -64,7 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text = "submit"
+        android:text = "확인"
         android:background="@color/main"
         android:textColor="@color/black"
         android:layout_below = "@+id/ET_descripsion"/>

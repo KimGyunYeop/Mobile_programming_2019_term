@@ -26,7 +26,9 @@ public class HomeFragment extends Fragment {
     private DatabaseReference circleRef = mRootRef.child("circle");
 
     TextView TV_hello;
+    TextView TV_we;
     TextView TV_circlename;
+    TextView TV_circlemain;
     TextView TV_circleInfo;
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
@@ -51,6 +53,8 @@ public class HomeFragment extends Fragment {
         TV_hello=(TextView)v.findViewById(R.id.tv_hello);
         TV_circlename=(TextView) v.findViewById(R.id.tv_circlename);
         TV_circleInfo=(TextView) v.findViewById(R.id.tv_circleIntro);
+        TV_circlemain=(TextView)v.findViewById(R.id.tv_circlemain);
+        TV_we=(TextView) v.findViewById(R.id.tv_we);
 
         Bundle bundle=getArguments();
 
@@ -58,7 +62,8 @@ public class HomeFragment extends Fragment {
 
             circlename=bundle.getString("circleName");
             userid=bundle.getString("userID");
-
+            TV_circlemain.setText("메인 페이지입니다.");
+            TV_we.setText("우리는!");
             getFirebaseDatabase1(userid);
             getFirebaseDatabase2(circlename);
 
