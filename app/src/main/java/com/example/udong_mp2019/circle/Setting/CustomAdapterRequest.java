@@ -48,13 +48,13 @@ public class CustomAdapterRequest extends BaseSwipeAdapter {
 
     @Override
     public int getSwipeLayoutResourceId(int position) {
-        return R.id.swipe_member;
+        return R.id.swipe_join_request;
     }
 
     @Override
     public View generateView(int position, ViewGroup parent) {
         Log.d("errorDectection","fillValues"+context.toString());
-        return LayoutInflater.from(context).inflate(R.layout.listview_member, null);
+        return LayoutInflater.from(context).inflate(R.layout.listview_join_request, null);
     }
 
     @Override
