@@ -201,23 +201,14 @@ public class ScheduleFragment extends Fragment implements CalendarView {
     // autority 반환
     public void getAutorityFirebase(){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        Query query = FirebaseDatabase.getInstance().getReference().child("circle");
+        Query query = FirebaseDatabase.getInstance().getReference().child("circle/"+circleName+"/member/"+user.getUid()+"/autority");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
+            CircleInfoForDB get;
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.d("circlefinder",dataSnapshot.toString());
-
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    String key = postSnapshot.getKey();
-                    Log.d("circlefinder",postSnapshot.toString());
-                    if(key.equals(circleName) && postSnapshot.child("member/"+user.getUid()).hasChildren()) {
-                        memberAuth=postSnapshot.child("member/"+user.getUid()+"/autority").getValue().toString();
-                        if(memberAuth.equals("manager")) {
-                        }else{
-                            fab_calendar.hide();
-                        }
-                        Log.d("권한은"+memberAuth,"start");
-                    }
+                    memberAuth = postSnapshot.getValue().toString();
                 }
             }
 

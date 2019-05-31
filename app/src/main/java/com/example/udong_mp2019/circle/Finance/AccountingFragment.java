@@ -108,7 +108,7 @@ public class AccountingFragment extends Fragment {
         add_receipts = new CustomAdapterReceipt(getActivity().getApplicationContext(),car_due,car_amount,car_name);
         LV_receipts.setAdapter(add_receipts);
         //권한 읽어옴
-        getFirebaseDatabase1(userid);
+        getAutorityFirebase();
         Log.d(memberAuth,"권한이야");
 
         add_toSend = new CustomAdapterFinanceCheck(getActivity().getApplicationContext(),cafc_due,cafc_amount,cafc_name,cafc_check,circlename);
@@ -199,24 +199,16 @@ public class AccountingFragment extends Fragment {
 
     }
     // autority 반환
-    public void getFirebaseDatabase1(final String str){
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        Query query = circleRef;
+    public void getAutorityFirebase(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        Query query = FirebaseDatabase.getInstance().getReference().child("circle/"+circlename+"/member/"+user.getUid()+"/autority");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             CircleInfoForDB get;
-
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.d("circlefinder",dataSnapshot.toString());
-
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    String key = postSnapshot.getKey();
-                    Log.d("circlefinder",postSnapshot.toString());
-                    if(key.equals(circlename) && postSnapshot.child("member/"+user.getUid()).hasChildren()) {
-                        memberAuth=postSnapshot.child("member/"+user.getUid()+"/autority").getValue().toString();
-                        get = postSnapshot.child("info").getValue(CircleInfoForDB.class);
-                        Log.d("권한은"+memberAuth,"start");
-                    }
+                    memberAuth = postSnapshot.getValue().toString();
                 }
             }
 
