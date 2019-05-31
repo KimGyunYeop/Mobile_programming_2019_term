@@ -27,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class CustomAdapterSchedule extends BaseAdapter {
-    Context context;
+    final Context context;
     LayoutInflater inflter;
     public static ArrayList<ScheduleInfoForDB> selectedAnswers;
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
@@ -43,9 +43,7 @@ public class CustomAdapterSchedule extends BaseAdapter {
     }
 
     public void reset(Context applicationContext, ArrayList<ScheduleInfoForDB> questionsList) {
-        this.context = applicationContext;
         this.selectedAnswers = questionsList;
-        inflter = (LayoutInflater.from(applicationContext));
     }
 
     @Override
@@ -73,11 +71,11 @@ public class CustomAdapterSchedule extends BaseAdapter {
         ref.child("circle/"+circleName+"/schedule/plan/"+selectedAnswers.get(i).toString()+"/attendance/"+uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-               if((boolean)dataSnapshot.getValue()){
-                   yes.setChecked(true);
-               }else{
-                   no.setChecked(true);
-               }
+                if((boolean)dataSnapshot.getValue()){
+                    yes.setChecked(true);
+                }else{
+                    no.setChecked(true);
+                }
             }
 
             @Override

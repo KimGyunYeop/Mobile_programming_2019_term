@@ -52,7 +52,7 @@ public class CheckPaymentActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        FirebaseDatabase.getInstance().getReference().child("circle/"+circleName+"/schedule/tosend/"+due).child(planName+"/member").addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("circle/"+circleName+"/schedule/tosend/"+due).child(planName+"/member").addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

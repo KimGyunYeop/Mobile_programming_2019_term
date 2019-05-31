@@ -195,7 +195,7 @@ public class ScheduleFragment extends Fragment implements CalendarView {
         };
         Query qurey = FirebaseDatabase.getInstance().getReference().child("circle/"+circleName+"/schedule/plan/"+date).orderByValue();
         Log.d("date","circle/"+circleName+"/schedule/plan/"+date);
-        qurey.addListenerForSingleValueEvent(postListener);
+        qurey.addValueEventListener(postListener);
     }
 
     // autority 반환

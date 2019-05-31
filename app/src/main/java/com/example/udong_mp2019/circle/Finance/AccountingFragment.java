@@ -137,7 +137,7 @@ public class AccountingFragment extends Fragment {
         Log.d("circlefinder","start");
         user = FirebaseAuth.getInstance().getCurrentUser();
         Query query = FirebaseDatabase.getInstance().getReference().child("circle/"+circlename+"/schedule/receipt");
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+        query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 car_due.clear();
@@ -156,7 +156,7 @@ public class AccountingFragment extends Fragment {
                         Log.d("AF_getToSend",childSnapshot.toString());
                     }
                 }
-                add_receipts.reset(getActivity().getApplicationContext(),car_due,car_name,car_amount);
+                add_receipts.reset(getActivity(),car_due,car_name,car_amount);
                 add_receipts.notifyDataSetChanged();
             }
 

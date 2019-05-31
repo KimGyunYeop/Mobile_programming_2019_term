@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.daimajia.swipe.SwipeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/swipe_finance_check"
+    android:id="@+id/swipe_join_request"
     android:layout_width="match_parent" android:layout_height="match_parent">
     <LinearLayout
-        android:id = "@+id/delete_tosend"
+        android:id = "@+id/delete_join_request"
         android:layout_width="60dp"
         android:layout_height="match_parent"
         android:background="@color/red">
@@ -17,19 +17,12 @@
             android:src="@drawable/ic_clear_black_24dp"/>
     </LinearLayout>
     <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-    <!-- TextView for displaying question-->
         <TextView
-            android:id = "@+id/TV_listVIewFinanceCheckDeu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="10sp"
-            android:layout_centerHorizontal="true"
-            android:text = "sample"/>
-        <TextView
-            android:id = "@+id/TV_listVIewFinanceCheckPlanName"
+            android:id = "@+id/TV_listVIewMemberStdID_request"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="30sp"
@@ -37,20 +30,12 @@
             android:text = "sample"/>
 
         <TextView
-            android:id = "@+id/TV_listVIewFinanceCheckAmount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:layout_below="@id/TV_listVIewFinanceCheckDeu"
-            android:layout_alignLeft="@id/TV_listVIewFinanceCheckDeu"
-            android:text = "sample"/>
-        <TextView
-            android:id = "@+id/TV_listVIewFinanceCheck"
+            android:id = "@+id/TV_listVIewMemberName_request"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="30dp"
             android:textSize="30sp"
-            android:text = "X"/>
+            android:text = "이름"/>
     </RelativeLayout>
 </com.daimajia.swipe.SwipeLayout>

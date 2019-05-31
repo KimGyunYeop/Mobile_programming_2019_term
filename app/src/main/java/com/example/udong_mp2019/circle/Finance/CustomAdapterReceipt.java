@@ -15,7 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 public class CustomAdapterReceipt extends BaseAdapter {
-    Context context;
+    final Context context;
     LayoutInflater inflter;
     ArrayList<String> due, amount, name;
 
@@ -28,11 +28,9 @@ public class CustomAdapterReceipt extends BaseAdapter {
     }
 
     public void reset(Context applicationContext, ArrayList<String> due , ArrayList<String> amount, ArrayList<String> name) {
-        this.context = applicationContext;
         this.due = due;
         this.amount = amount;
         this.name = name;
-        inflter = (LayoutInflater.from(applicationContext));
     }
 
     @Override

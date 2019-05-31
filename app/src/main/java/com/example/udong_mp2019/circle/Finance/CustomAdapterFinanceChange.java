@@ -27,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class CustomAdapterFinanceChange extends BaseAdapter {
-    Context context;
+    final Context context;
     LayoutInflater inflter;
     ArrayList<String> uid;
     ArrayList<Boolean> check;
@@ -46,10 +46,8 @@ public class CustomAdapterFinanceChange extends BaseAdapter {
     }
 
     public void reset(Context applicationContext, ArrayList<String> UID, ArrayList<Boolean> check) {
-        this.context = applicationContext;
         this.uid =UID;
         this.check = check;
-        inflter = (LayoutInflater.from(applicationContext));
     }
 
     @Override

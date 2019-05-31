@@ -28,41 +28,26 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class SettingFragment extends Fragment {
-    public static SettingFragment newInstance() {
-        SettingFragment fragment = new SettingFragment();
-
-
-        return fragment;
-    }
-
     ListView LV_memberList;
     ListView LV_requestJoin;
-    ArrayAdapter<String> add_memberList;
-    ArrayAdapter<String> add_requestJoin;
-    FirebaseUser user;
+    CustomAdapterRequest add_requestJoin;
+    CustomAdapterMember add_memberList;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
     private DatabaseReference circleRef;
-    private DatabaseReference userRef = mRootRef.child("user");
-    //UserInfoForDB get;
-    String getName;
-    String getStudentId;
-    String getKey;
     String circleName;
-    String[] memberUid=new String[150];
-    int memberCount;
-    int requestorCount;
-    String[] requestorUid=new String[150];
-    Query query;
-    Query query2;
-    int count, checked ;
+    ArrayList<String> uid = new ArrayList<>();
+    ArrayList<String> uid_requset = new ArrayList<>();
+    ArrayList<String> autority = new ArrayList<>();
+    int checked ;
     String  memberAuth;
     Button B_secession;
 
-    static ArrayList<String> arrayMemberList = new ArrayList<>();
-    static ArrayList<String> arrayrequestList = new ArrayList<>();
-    String userUid;
-    Activity root=getActivity();
-    private FirebaseAuth firebaseAuth;
+
+    public static SettingFragment newInstance() {
+        SettingFragment fragment = new SettingFragment();
+        return fragment;
+    }
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,120 +56,7 @@ public class SettingFragment extends Fragment {
             String circle=bundle.getString("circleName");
             circleName = circle;
             Log.d("circleName!!!",circleName);
-
-
         }
-
-
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        circleRef = mRootRef.child("circle").child(circleName).child("member");
-        query = circleRef;
-        Log.d("권한은" + memberAuth, "start");
-
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                memberCount=0;
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-
-                    String findMember = postSnapshot.getKey().toString();
-                    Log.d("첫번째 listfinder", findMember);
-                    if( !postSnapshot.child("autority/").getValue().toString().equals("secession")) {
-                        memberUid[memberCount] = findMember;
-                        memberCount++;
-                    }
-
-                    if(findMember.equals(user.getUid())) {
-
-                        memberAuth=postSnapshot.child("autority/").getValue().toString();
-                        Log.d("권한은 " + memberAuth, "start");
-
-
-                    }
-
-                }
-
-            }
-
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-
-        });
-
-        circleRef = mRootRef.child("circle").child(circleName).child("request");
-        query = circleRef;
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                requestorCount=0;
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-
-                    String findrequest = postSnapshot.getKey().toString();
-                    if( !postSnapshot.getValue().equals("가입 승인")) {
-                        Log.d("두번째 listfinder", findrequest);
-                        requestorUid[requestorCount] = findrequest;
-                        requestorCount++;
-                    }
-                }
-            }
-
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-
-        });
-        query2 = userRef;
-        query2.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                arrayMemberList.clear();
-                arrayrequestList.clear();
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-
-                    for(int i=0;i<memberCount;i++) {
-                        String findMember=postSnapshot.getKey().toString();
-                        Log.d("listfinder",findMember);
-
-                        if(findMember.equals(memberUid[i])) {
-                            getName = postSnapshot.child("/name/").getValue().toString();
-                            getStudentId = postSnapshot.child("/studentId/").getValue().toString();
-                            arrayMemberList.add(getStudentId + " " + getName);
-                            Log.d("member listfinder",findMember);
-                        }
-                    }
-
-                    for(int i=0;i<requestorCount;i++) {
-                        String find1 = postSnapshot.getKey().toString();
-                        Log.d("listfinder", find1);
-                        if (find1.equals(requestorUid[i])) {
-                            getName = postSnapshot.child("/name/").getValue().toString();
-                            getStudentId = postSnapshot.child("/studentId/").getValue().toString();
-                            arrayrequestList.add(getStudentId + " " + getName);
-                            Log.d("request listfinder", find1);
-
-                        }
-                    }
-                }
-                add_memberList.clear();
-                add_memberList.addAll(arrayMemberList);
-                add_memberList.notifyDataSetChanged();
-                add_requestJoin.clear();
-                add_requestJoin.addAll(arrayrequestList);
-                add_requestJoin.notifyDataSetChanged();
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
     }
 
     @Override
@@ -192,8 +64,8 @@ public class SettingFragment extends Fragment {
                              Bundle savedInstanceState) {
         ViewGroup setting = (ViewGroup) inflater.inflate(R.layout.fragment_setting, container, false);
 
-        add_memberList= new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1);
-        add_requestJoin= new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1);
+        add_memberList= new CustomAdapterMember(getActivity(),uid,autority,circleName);
+        add_requestJoin= new CustomAdapterRequest(getActivity(),uid,circleName);
 
         LV_memberList = setting.findViewById(R.id.LV_memberList);
         LV_requestJoin = setting.findViewById(R.id.LV_requestJoin);
@@ -201,10 +73,25 @@ public class SettingFragment extends Fragment {
         LV_memberList.setAdapter(add_memberList);
         LV_requestJoin.setAdapter(add_requestJoin);
         B_secession=setting.findViewById(R.id.secession);
+
+        FirebaseDatabase.getInstance().getReference().child("circle").child(circleName).child("member").child(user.getUid()).child("autority").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                memberAuth = dataSnapshot.getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         B_secession.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder ad = new AlertDialog.Builder(getContext());
+                Log.d("errorDectection",getActivity().toString());
+                Log.d("errorDectection",getContext().toString());
 
                 ad.setTitle("탈퇴");       // 제목 설정
                 ad.setMessage(circleName+ " 동아리 탈퇴 하시겠습니까?");   // 내용 설정
@@ -239,61 +126,9 @@ public class SettingFragment extends Fragment {
 
         });
 
-        LV_memberList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                if (memberAuth.equals("manager")) {
-                    checked = position;
-                    AlertDialog.Builder ad = new AlertDialog.Builder(getContext());
-
-                    ad.setTitle("강퇴");       // 제목 설정
-                    ad.setMessage("강퇴 시키겠습니까?");   // 내용 설정
-
-                    // 확인 버튼 설정
-                    ad.setPositiveButton("네", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            //Log.v(TAG,"Yes Btn Click");
-                            Log.d("체크ㅡㅡ", "" + checked + arrayMemberList);
-                            arrayMemberList.remove(checked);
-                            Log.d("체크ㅡㅡ", "" + checked + arrayMemberList);
-
-                            LV_memberList.clearChoices();
-
-                            // listview 갱신.
-                            add_memberList.notifyDataSetChanged();
-                            LV_memberList.setAdapter(add_memberList);
-
-                            circleRef = mRootRef.child("circle").child(circleName).child("member");
-                            circleRef.child(memberUid[checked]).child("autority").setValue("secession");
-                            Toast.makeText(getContext(), "강퇴 시켰습니다 ", Toast.LENGTH_LONG).show();
-                            dialog.dismiss();     //닫기
-                            // Event
-                        }
-                    });
-
-
-                    // 취소 버튼 설정
-                    ad.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            //  Log.v(TAG,"No Btn Click");
-                            dialog.dismiss();     //닫기
-                            // Event
-                        }
-                    });
-
-                    // 창 띄우기
-                    ad.show();
-                }
-            }
-        });
-
         LV_requestJoin.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                 if (memberAuth.equals("manager")) {
                     checked = position;
                     AlertDialog.Builder ad = new AlertDialog.Builder(getContext());
@@ -305,27 +140,11 @@ public class SettingFragment extends Fragment {
                     ad.setPositiveButton("네", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            //Log.v(TAG,"Yes Btn Click");
-
-                            count = add_requestJoin.getCount();
-
-                            arrayrequestList.remove(checked);
-
-                            // listview 선택 초기화.
-                            LV_requestJoin.clearChoices();
-
-                            // listview 갱신.
-                            add_requestJoin.notifyDataSetChanged();
-
-                            LV_requestJoin.setAdapter(add_requestJoin);
-
-                            MemberInfoForDB memberInfoForDB = new MemberInfoForDB("member", new Date().toString());
-
-                            Log.d("가입 시키자", requestorUid[checked]);
-                            mRootRef.child("circle").child(circleName).child("request").child(requestorUid[checked]).setValue("가입 승인");
+                            CustomAdapterRequest item = (CustomAdapterRequest)parent.getAdapter();
+                            String uid = item.uid.get(position);
+                            mRootRef.child("circle/"+circleName+"/request").child(uid).removeValue();
                             MemberInfoForDB memberInfoForDB2 = new MemberInfoForDB("member", new Date().toString());
-                            circleRef = mRootRef.child("circle").child(circleName).child("member");
-                            circleRef.child(requestorUid[checked]).setValue(memberInfoForDB2);
+                            mRootRef.child("circle/"+circleName+"/member").child(uid).setValue(memberInfoForDB2);
                             Toast.makeText(getContext(), "동아리에 가입 시켰습니다 ", Toast.LENGTH_LONG).show();
                             dialog.dismiss();     //닫기
                             // Event
@@ -352,6 +171,46 @@ public class SettingFragment extends Fragment {
         return setting;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mRootRef.child("circle").child(circleName).child("member").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                uid.clear();
+                autority.clear();
+                Log.d("memberList",dataSnapshot.toString());
+                for(DataSnapshot postSnapshot: dataSnapshot.getChildren()){
+                    uid.add(postSnapshot.getKey());
+                    autority.add(postSnapshot.child("autority").getValue().toString());
+
+                }
+                add_memberList.reset(uid,autority);
+                add_memberList.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        mRootRef.child("circle/"+circleName+"/request").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                uid_requset.clear();
+                for(DataSnapshot postSnapshot:dataSnapshot.getChildren()){
+                   uid_requset.add(postSnapshot.getKey());
+                }
+                add_requestJoin.reset(uid_requset);
+                add_requestJoin.notifyDataSetChanged();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
 
 
 }

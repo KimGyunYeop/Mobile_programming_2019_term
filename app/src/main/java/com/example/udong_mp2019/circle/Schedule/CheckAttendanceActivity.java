@@ -31,12 +31,15 @@ public class CheckAttendanceActivity extends AppCompatActivity {
         aad_displayAttendance = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
         ListView lv_displayAttendance = findViewById(R.id.LV_checkAttendance);
         lv_displayAttendance.setAdapter(aad_displayAttendance);
-        getFirebaseDatabase();
-
     }
 
-    public void getFirebaseDatabase(){
-        ValueEventListener postListener = new ValueEventListener() {
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        String path = getIntent().getStringExtra("path");
+        String circleName = getIntent().getStringExtra("circleName");
+        FirebaseDatabase.getInstance().getReference().child("circle/"+circleName+"/schedule/plan/"+path+"/attendance").orderByValue().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 arrayData.clear();
@@ -74,13 +77,6 @@ public class CheckAttendanceActivity extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
-        };
-
-
-        String path = getIntent().getStringExtra("path");
-        String circleName = getIntent().getStringExtra("circleName");
-        Query qurey = FirebaseDatabase.getInstance().getReference().child("circle/"+circleName+"/schedule/plan/"+path+"/attendance").orderByValue();
-        Log.d("attendanceCheck","circle/"+circleName+"/schedule/plan/"+path+"/attendance");
-        qurey.addListenerForSingleValueEvent(postListener);
+        });
     }
 }

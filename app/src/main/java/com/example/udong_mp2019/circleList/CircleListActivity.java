@@ -183,7 +183,7 @@ public class CircleListActivity extends AppCompatActivity {
         Log.d("circlefinder","start");
         user = FirebaseAuth.getInstance().getCurrentUser();
         Query query = FirebaseDatabase.getInstance().getReference().child("circle").orderByChild("member/"+user.getUid()).startAt("autority");
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+        query.addValueEventListener(new ValueEventListener() {
             CircleInfoForDB get;
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
