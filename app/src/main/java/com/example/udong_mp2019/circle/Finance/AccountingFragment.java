@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -65,6 +67,8 @@ public class AccountingFragment extends Fragment {
         btn_plusReceipt=(ImageButton)v.findViewById(R.id.btn_plusReceipt);
         btn_plustoSend=(ImageButton)v.findViewById(R.id.btn_plustoSend);
 
+        Animation fab_click = AnimationUtils.loadAnimation(getContext(), R.anim.fab_click);
+
         Bundle bundle=getArguments();
         if(bundle!=null) {
             circleName = bundle.getString("circleName");
@@ -93,6 +97,7 @@ public class AccountingFragment extends Fragment {
         btn_plusReceipt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                btn_plusReceipt.startAnimation(fab_click);
                 Intent intent = new Intent(getContext(), ReceiptRegisterActivity.class);
                 intent.putExtra("circleName", circleName);
                 startActivity(intent);
@@ -101,6 +106,7 @@ public class AccountingFragment extends Fragment {
         btn_plustoSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                btn_plustoSend.startAnimation(fab_click);
                 Intent intent = new Intent(getContext(), ToSendRegisterActivity.class);
                 intent.putExtra("circleName", circleName);
                 startActivity(intent);

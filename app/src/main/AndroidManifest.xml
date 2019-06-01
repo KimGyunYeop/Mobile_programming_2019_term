@@ -12,8 +12,7 @@
 
         <activity
             android:name=".CircleLIst_NavigationDrawer"
-            android:label="@string/title_activity_circle_list__navigation_drawer"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_circle_list__navigation_drawer" />
         <activity android:name=".circle.Finance.ToSendRegisterActivity" />
         <activity android:name=".circle.Finance.ReceiptRegisterActivity" />
         <activity android:name=".circle.Finance.CheckPaymentActivity" />
@@ -24,12 +23,10 @@
         <activity android:name=".login.SignUpActivity" />
         <activity android:name=".login.LoginActivity" />
         <activity
-            android:name=".circleList.CircleListActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".circleList.CircleListActivity" />
         <activity android:name=".login.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
