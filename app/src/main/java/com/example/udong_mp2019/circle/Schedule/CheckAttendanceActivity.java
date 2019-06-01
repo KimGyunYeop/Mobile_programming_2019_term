@@ -20,15 +20,17 @@ import java.util.concurrent.CountDownLatch;
 
 public class CheckAttendanceActivity extends AppCompatActivity {
 
-    ArrayList<String> arrayData = new ArrayList<>();
-    ArrayAdapter<String> aad_displayAttendance;
-    public boolean syncronization = true;
+    ArrayList<String> uid = new ArrayList<>();
+    CutomAdapterChedkAttendance aad_displayAttendance;
+    String path,circleName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_attendance);
-        aad_displayAttendance = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
+        path = getIntent().getStringExtra("path");
+        circleName = getIntent().getStringExtra("circleName");
+        aad_displayAttendance = new CutomAdapterChedkAttendance(getApplicationContext(),uid,circleName,path);
         ListView lv_displayAttendance = findViewById(R.id.LV_checkAttendance);
         lv_displayAttendance.setAdapter(aad_displayAttendance);
     }
@@ -36,41 +38,14 @@ public class CheckAttendanceActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
-        String path = getIntent().getStringExtra("path");
-        String circleName = getIntent().getStringExtra("circleName");
-        FirebaseDatabase.getInstance().getReference().child("circle/"+circleName+"/schedule/plan/"+path+"/attendance").orderByValue().addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("circle/"+circleName+"/member").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                arrayData.clear();
+                uid.clear();
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    String uid = postSnapshot.getKey();
-                    String attendance;
-                    if((boolean)postSnapshot.getValue()){
-                        attendance = "yes";
-                    }else{
-                        attendance = "no";
-                    }
-                    Log.d("attendanceCheck",uid+attendance);
-                    Log.d("attendanceCheck","user/"+uid+"/name");
-                    CountDownLatch done = new CountDownLatch(1);
-                    FirebaseDatabase.getInstance().getReference().child("user/"+uid+"/name").addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            Log.d("attendanceCheck","dataSnapshot="+dataSnapshot.toString());
-                            String name = dataSnapshot.getValue().toString();
-                            aad_displayAttendance.add(name+":"+attendance);
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
+                    uid.add(postSnapshot.getKey());
                 }
-                Log.d("attendanceCheck",arrayData.toString());
-                Collections.sort(arrayData);
-                //aad_displayAttendance.addAll(arrayData);
+                aad_displayAttendance.reset(uid);
                 aad_displayAttendance.notifyDataSetChanged();
             }
 

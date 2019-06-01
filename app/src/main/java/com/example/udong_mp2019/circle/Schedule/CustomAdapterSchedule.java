@@ -64,7 +64,8 @@ public class CustomAdapterSchedule extends BaseAdapter {
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
         view = inflter.inflate(R.layout.listview_with_radio, null);
-        TextView question = (TextView) view.findViewById(R.id.question);
+        TextView name = (TextView) view.findViewById(R.id.TV_name_schedule);
+        TextView time = view.findViewById(R.id.TV_time_schedule);
         RadioButton yes = (RadioButton) view.findViewById(R.id.yes);
         RadioButton no = (RadioButton) view.findViewById(R.id.no);
         Button btn_checkAttendance = (Button) view.findViewById(R.id.btn_checkAttendance);
@@ -145,8 +146,8 @@ public class CustomAdapterSchedule extends BaseAdapter {
                 });
             }
         }
-
-        question.setText(selectedAnswers.get(i).toString());
+        name.setText(selectedAnswers.get(i).getName());
+        time.setText(selectedAnswers.get(i).getTime());
         return view;
     }
 }
