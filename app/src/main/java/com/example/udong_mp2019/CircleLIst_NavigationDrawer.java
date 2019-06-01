@@ -91,7 +91,6 @@ public class CircleLIst_NavigationDrawer extends AppCompatActivity
         et_searchCircle = findViewById(R.id.ET_searchCircle);
         firebaseAuth = FirebaseAuth.getInstance();
         TVuserName=container.findViewById(R.id.userName);
-        TVuserEmail=container.findViewById(R.id.userEmail);
 
         aad_myCircleList = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
         lv_myCircleList.setAdapter(aad_myCircleList);
@@ -293,18 +292,19 @@ public class CircleLIst_NavigationDrawer extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("circlefinder","start");
+        Log.d("circlefinder", "start");
         user = FirebaseAuth.getInstance().getCurrentUser();
-        Query query = FirebaseDatabase.getInstance().getReference().child("circle").orderByChild("member/"+user.getUid()).startAt("autority");
+        Query query = FirebaseDatabase.getInstance().getReference().child("circle").orderByChild("member/" + user.getUid()).startAt("autority");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             CircleInfoForDB get;
+
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 arrayDataForMyCircleList.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    Log.d("circlefinder","mycircleList"+postSnapshot.child("info").getValue().toString());
+                    Log.d("circlefinder", "mycircleList" + postSnapshot.child("info").getValue().toString());
                     String key = postSnapshot.getKey();
-                    if(!postSnapshot.child("member/"+user.getUid()).child("autority").getValue().toString().equals("secession")) {
+                    if (!postSnapshot.child("member/" + user.getUid()).child("autority").getValue().toString().equals("secession")) {
                         CircleInfoForDB get = postSnapshot.child("info").getValue(CircleInfoForDB.class);
                         arrayDataForMyCircleList.add(get);
                         arrayIndex.add(key);
@@ -322,20 +322,7 @@ public class CircleLIst_NavigationDrawer extends AppCompatActivity
             }
         });
 
-        FirebaseDatabase.getInstance().getReference().child("user/"+user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                TVuserName.setText(dataSnapshot.child("name").getValue().toString() + " 님");
-                TVuserEmail.setText(dataSnapshot.child("email").getValue().toString());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
     }
-
     public void getFirebaseDatabase(final String str){
         FirebaseDatabase.getInstance().getReference().child("circle").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
