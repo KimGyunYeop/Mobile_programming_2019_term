@@ -20,8 +20,7 @@
             android:text="멤버리스트"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
+/>/            android:layout_marginLeft="50dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
         <Button
@@ -32,6 +31,7 @@
             android:text="탈퇴"
             android:background="@color/main"/>
         </LinearLayout>
+
     </LinearLayout>
     <ListView
         android:id = "@+id/LV_memberList"
@@ -47,8 +47,6 @@
         android:text="가입 승인"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
     <ListView
