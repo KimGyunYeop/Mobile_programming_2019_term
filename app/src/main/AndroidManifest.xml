@@ -9,10 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".CircleLIst_NavigationDrawer"
             android:label="@string/title_activity_circle_list__navigation_drawer"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".circle.Finance.ToSendRegisterActivity" />
         <activity android:name=".circle.Finance.ReceiptRegisterActivity" />
         <activity android:name=".circle.Finance.CheckPaymentActivity" />

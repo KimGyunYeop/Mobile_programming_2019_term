@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.udong_mp2019.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,6 +21,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.regex.Pattern;
+
 public class ToSendRegisterActivity extends AppCompatActivity {
     Button btn_register;
 
@@ -27,6 +31,8 @@ public class ToSendRegisterActivity extends AppCompatActivity {
 
     DatePicker dp;
     FirebaseUser user;
+
+    private static final Pattern INTEGER_PATTERN =  Pattern.compile("(^[0-9]*$)");
 
     private DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
     private DatabaseReference circleRef = mRootRef.child("circle");
@@ -51,11 +57,16 @@ public class ToSendRegisterActivity extends AppCompatActivity {
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toSendRef = mRootRef.child("circle/" + circlename + "/schedule/tosend");
-                String date=dp.getYear()+"-"+dp.getMonth()+"-"+dp.getDayOfMonth();
-                Log.d(et_name.getText().toString(),"ET_NAME");
-                toSendRef.child(date).child(et_name.getText().toString()).child("amount").setValue(et_amount.getText().toString());
-                setCheckFinanceFirebaseDatabase(date);
+                if (!INTEGER_PATTERN.matcher(et_amount.getText().toString()).matches()) {
+                    Toast.makeText(ToSendRegisterActivity.this,"금액은 숫자로 입력해주세요.",Toast.LENGTH_LONG).show();
+                }
+                else {
+                    toSendRef = mRootRef.child("circle/" + circlename + "/schedule/tosend");
+                    String date = dp.getYear() + "-" + dp.getMonth() + "-" + dp.getDayOfMonth();
+                    Log.d(et_name.getText().toString(), "ET_NAME");
+                    toSendRef.child(date).child(et_name.getText().toString()).child("amount").setValue(et_amount.getText().toString());
+                    setCheckFinanceFirebaseDatabase(date);
+                }
             }
 
             void setCheckFinanceFirebaseDatabase(String date){
