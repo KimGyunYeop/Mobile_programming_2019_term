@@ -7,12 +7,21 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="50dp">
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
             android:layout_width="299dp"
             android:layout_height="55dp"
             android:text="멤버리스트"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
         <Button
@@ -22,6 +31,7 @@
             android:layout_gravity="right"
             android:text="탈퇴"
             android:background="@color/main"/>
+        </LinearLayout>
     </LinearLayout>
     <ListView
         android:id = "@+id/LV_memberList"
@@ -35,6 +45,10 @@
         android:layout_height="49dp"
         android:layout_gravity="center"
         android:text="가입 승인"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
     <ListView
