@@ -34,7 +34,7 @@
             android:id = "@+id/TV_listVIewReceiptPlanName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:layout_marginLeft="30dp"
             android:text = "sample"/>
 
@@ -42,7 +42,7 @@
             android:id = "@+id/TV_listVIewReceiptAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:layout_below="@id/TV_listVIewReceiptDate"
             android:layout_alignLeft="@id/TV_listVIewReceiptDate"
             android:layout_alignParentRight="true"
