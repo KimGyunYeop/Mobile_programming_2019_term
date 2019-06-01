@@ -31,7 +31,6 @@ public class CircleMainActivity extends AppCompatActivity {
         userID=receive.getStringExtra("userID");
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-        tv=(TextView) findViewById(R.id.tv_main);
 
         final Bundle bundle= new Bundle(2);
         bundle.putString("circleName",circleName);
