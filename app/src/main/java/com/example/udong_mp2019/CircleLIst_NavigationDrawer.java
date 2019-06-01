@@ -83,9 +83,7 @@ public class CircleLIst_NavigationDrawer extends AppCompatActivity
         firebaseAuth = FirebaseAuth.getInstance();
         TVuserName=findViewById(R.id.userName);
         TVuserEmail=findViewById(R.id.userEmail);
-
-
-
+        
         aad_myCircleList = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
         lv_myCircleList.setAdapter(aad_myCircleList);
         //해당 동아리 메뉴 페이지로 이동
@@ -176,7 +174,9 @@ public class CircleLIst_NavigationDrawer extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+        FirebaseUser user=firebaseAuth.getCurrentUser();
         getMenuInflater().inflate(R.menu.circle_list__navigation_drawer, menu);
+        getFirebaseDatabase_userinfo(user.getUid().toString());
         return true;
     }
 
@@ -215,7 +215,10 @@ public class CircleLIst_NavigationDrawer extends AppCompatActivity
                     Toast.makeText(getApplicationContext(), "로그아웃 되었습니다.", Toast.LENGTH_LONG).show();
 
                     firebaseAuth.signOut();
-                    finish();
+                    Intent intent = new Intent(getApplicationContext(),com.example.udong_mp2019.login.MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    //finish();
                     // Event
                 }
             });
@@ -338,7 +341,7 @@ public class CircleLIst_NavigationDrawer extends AppCompatActivity
         });
     }
 
-    public void getFirebaseDatabase1(final String str){
+    public void getFirebaseDatabase_userinfo(final String str){
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -347,7 +350,8 @@ public class CircleLIst_NavigationDrawer extends AppCompatActivity
                     UserInfoForDB get = postSnapshot.getValue(UserInfoForDB.class);
 
                     if(key.equals(str)) {
-                        
+                        TVuserName.setText(get.getName() + " 님");
+                        TVuserEmail.setText(get.getEmail());
                     }
                 }
             }

@@ -50,8 +50,6 @@ public class CircleListActivity extends AppCompatActivity {
         bu_createCircle = findViewById(R.id.IB_createCircle);
         et_searchCircle = findViewById(R.id.ET_searchCircle);
         firebaseAuth = FirebaseAuth.getInstance();
-        secession_App=findViewById(R.id.secession_App);
-
 
         aad_myCircleList = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
         lv_myCircleList.setAdapter(aad_myCircleList);
