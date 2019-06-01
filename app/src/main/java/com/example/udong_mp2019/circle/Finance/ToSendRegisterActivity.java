@@ -62,7 +62,8 @@ public class ToSendRegisterActivity extends AppCompatActivity {
                 }
                 else {
                     toSendRef = mRootRef.child("circle/" + circlename + "/schedule/tosend");
-                    String date = dp.getYear() + "-" + dp.getMonth() + "-" + dp.getDayOfMonth();
+                    int month= 1+dp.getMonth();
+                    String date = dp.getYear() + "-" + month + "-" + dp.getDayOfMonth();
                     Log.d(et_name.getText().toString(), "ET_NAME");
                     toSendRef.child(date).child(et_name.getText().toString()).child("amount").setValue(et_amount.getText().toString());
                     setCheckFinanceFirebaseDatabase(date);

@@ -60,7 +60,8 @@ public class ReceiptRegisterActivity extends AppCompatActivity {
                 } else {
                     receiptRef = mRootRef.child("circle/" + circlename + "/schedule/receipt");
                     Log.d("find receipt", "find");
-                    String date = dp.getYear() + "-" + dp.getMonth() + "-" + dp.getDayOfMonth();
+                    int month= 1+dp.getMonth();
+                    String date = dp.getYear() + "-" + month + "-" + dp.getDayOfMonth();
                     receiptRef.child(date).child(et_name.getText().toString()).child("amount").setValue(et_amount.getText().toString());
                     finish();
                 }
