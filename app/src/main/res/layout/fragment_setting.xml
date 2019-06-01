@@ -8,19 +8,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="50dp">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:orientation="horizontal">
 
         <TextView
-            android:layout_width="299dp"
-            android:layout_height="55dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
             android:text="멤버리스트"
             android:textSize="20sp"
             android:textStyle="bold"
-/>/            android:layout_marginLeft="50dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
         <Button
@@ -30,7 +27,6 @@
             android:layout_gravity="right"
             android:text="탈퇴"
             android:background="@color/main"/>
-        </LinearLayout>
 
     </LinearLayout>
     <ListView
@@ -40,15 +36,18 @@
         android:layout_height="0dp"
         android:layout_weight="2"/>
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="49dp"
-        android:layout_gravity="center"
-        android:text="가입 승인"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
-
+        android:layout_height="50dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="가입 승인"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+    </LinearLayout>
     <ListView
         android:id = "@+id/LV_requestJoin"
         android:divider="#000000"

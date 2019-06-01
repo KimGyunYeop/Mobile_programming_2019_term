@@ -50,6 +50,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:elevation="5px"
         android:background="@color/main"
         android:stretchColumns="0">
         <TableRow>
