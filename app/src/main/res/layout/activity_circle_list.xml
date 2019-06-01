@@ -40,7 +40,7 @@
 
     <ListView
         android:id = "@+id/LV_searchResult"
-        android:divider="@color/divider"
+        android:divider="@color/black"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"/>
@@ -58,7 +58,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_weight="1"
                 android:textStyle="bold"
-                android:textColor="#000000"
+                android:textColor="@color/black"
                 android:textSize="25sp"
                 />
             <ImageButton
@@ -74,7 +74,7 @@
 
     <ListView
         android:id = "@+id/LV_myCircleList"
-        android:divider="@color/divider"
+        android:divider="@color/black"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />

@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="이름"
+        android:textColor="@color/black"
         android:layout_marginTop="200dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp" />
@@ -20,6 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
+        android:textColor="@color/black"
         android:layout_marginRight="50dp"/>
 
     <TextView
@@ -28,6 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="학번(2017->17)"
+        android:textColor="@color/black"
         android:layout_centerInParent="true"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"/>
@@ -37,6 +40,7 @@
         android:layout_below="@id/tv_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"/>
 

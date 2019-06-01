@@ -46,11 +46,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="20sp"
+            android:textColor="@color/black"
             android:layout_marginLeft="30dp"
             android:text = "sample"/>
 
         <TextView
             android:id = "@+id/TV_listVIewMemberName"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"

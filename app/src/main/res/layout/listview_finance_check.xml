@@ -25,6 +25,7 @@
             android:id = "@+id/TV_listVIewFinanceCheckDeu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:textSize="10sp"
             android:layout_centerHorizontal="true"
             android:text = "sample"/>
@@ -32,6 +33,7 @@
             android:id = "@+id/TV_listVIewFinanceCheckPlanName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:textSize="20sp"
             android:layout_marginLeft="30dp"
             android:text = "sample"/>
@@ -40,6 +42,7 @@
             android:id = "@+id/TV_listVIewFinanceCheckAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:textSize="15sp"
             android:layout_below="@id/TV_listVIewFinanceCheckDeu"
             android:layout_alignLeft="@id/TV_listVIewFinanceCheckDeu"
@@ -48,6 +51,7 @@
             android:id = "@+id/TV_listVIewFinanceCheck"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:layout_alignParentRight="true"
             android:layout_marginRight="30dp"
             android:textSize="20sp"

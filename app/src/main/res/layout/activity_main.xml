@@ -25,7 +25,8 @@
             android:layout_height="wrap_content"
             android:text="@string/signin_email"
             android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp" />
+            android:layout_marginRight="50dp"
+            android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/et_email"
@@ -34,7 +35,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
-            android:hint="@string/signin_email_hint"/>
+            android:hint="@string/signin_email_hint"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/tv_password"
@@ -44,7 +46,8 @@
             android:text="@string/signin_pw"
             android:layout_centerInParent="true"
             android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"/>
+            android:layout_marginRight="50dp"
+            android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/et_password"
@@ -53,6 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
+            android:textColor="@color/black"
             android:inputType="textPassword"/>
         <LinearLayout
             android:layout_width="wrap_content"

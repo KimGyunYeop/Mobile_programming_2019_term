@@ -23,6 +23,7 @@
             android:text="1년 영수증"
             android:textSize="20sp"
             android:layout_weight="1"
+            android:textColor="@color/black"
             android:textStyle="bold"/>
         <ImageButton
             android:background="@color/main"
@@ -58,6 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:text="납부해 주세요!"
+            android:textColor="@color/black"
             android:layout_weight="1"
             android:textSize="20sp"
             android:textStyle="bold"/>

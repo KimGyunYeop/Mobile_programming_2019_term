@@ -17,6 +17,7 @@
 
     <TextView
         android:id="@+id/tv_name"
+        android:textColor="@color/black"
         android:layout_below="@id/datepicker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,6 +28,7 @@
 
     <EditText
         android:id="@+id/et_name"
+        android:textColor="@color/black"
         android:layout_below="@id/tv_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,6 +36,7 @@
         android:layout_marginRight="50dp"/>
     <TextView
         android:id="@+id/tv_amount"
+        android:textColor="@color/black"
         android:layout_below="@id/et_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,6 +47,7 @@
 
     <EditText
         android:id="@+id/et_amount"
+        android:textColor="@color/black"
         android:layout_below="@id/tv_amount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

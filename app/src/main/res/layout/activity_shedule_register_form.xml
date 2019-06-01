@@ -29,6 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text = "name"
+        android:textColor="@color/black"
         android:layout_below="@+id/TP_time"
         android:padding="12dp"
         android:textSize="20sp"/>
@@ -37,6 +38,7 @@
         android:id="@+id/ET_schedule_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:layout_toRightOf="@+id/TV_schedule_name"
         android:layout_alignBottom="@+id/TV_schedule_name"
         android:hint="일정이름"/>
@@ -46,12 +48,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text = "description"
+        android:textColor="@color/black"
         android:layout_below="@+id/ET_schedule_name"
         android:padding="12dp"
         android:textSize="20sp"/>
 
     <EditText
         android:id="@+id/ET_descripsion"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/TV_description"

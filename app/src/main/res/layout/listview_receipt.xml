@@ -29,12 +29,14 @@
             android:textSize="10sp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="80dp"
+            android:textColor="@color/black"
             android:text = "sample"/>
         <TextView
             android:id = "@+id/TV_listVIewReceiptPlanName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
+            android:textColor="@color/black"
             android:layout_marginLeft="30dp"
             android:text = "sample"/>
 
@@ -43,6 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
+            android:textColor="@color/black"
             android:layout_below="@id/TV_listVIewReceiptDate"
             android:layout_alignLeft="@id/TV_listVIewReceiptDate"
             android:layout_alignParentRight="true"

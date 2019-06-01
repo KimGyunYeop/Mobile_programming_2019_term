@@ -16,6 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
+            android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"/>
 
@@ -26,6 +27,7 @@
             android:layout_below="@id/tv_hello"
             android:layout_marginTop="30dp"
             android:layout_marginLeft="50dp"
+            android:textColor="@color/black"
             android:layout_marginRight="50dp"
             android:textSize="20sp"
             android:textStyle="bold"/>
@@ -35,6 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_circlename"
+            android:textColor="@color/black"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
@@ -45,6 +48,7 @@
             android:layout_below="@id/tv_circlemain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:layout_marginTop="30dp"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
@@ -53,6 +57,7 @@
 
         <TextView
             android:id="@+id/tv_circleIntro"
+            android:textColor="@color/black"
             android:layout_below="@id/tv_we"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
