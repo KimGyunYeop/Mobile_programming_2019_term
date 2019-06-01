@@ -57,7 +57,7 @@ public class ToSendRegisterActivity extends AppCompatActivity {
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!INTEGER_PATTERN.matcher(et_amount.getText().toString()).matches()) {
+                if (!INTEGER_PATTERN.matcher(et_amount.getText().toString()).matches() || et_amount.getText().toString().equals("")) {
                     Toast.makeText(ToSendRegisterActivity.this,"금액은 숫자로 입력해주세요.",Toast.LENGTH_LONG).show();
                 }
                 else {
