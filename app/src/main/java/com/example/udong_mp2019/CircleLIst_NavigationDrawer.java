@@ -59,6 +59,7 @@ public class CircleLIst_NavigationDrawer extends AppCompatActivity
     static ArrayList<String> arrayIndex = new ArrayList<>();
     private FirebaseAuth firebaseAuth;
     String circleName;
+    String userUid_bar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +84,7 @@ public class CircleLIst_NavigationDrawer extends AppCompatActivity
         firebaseAuth = FirebaseAuth.getInstance();
         TVuserName=findViewById(R.id.userName);
         TVuserEmail=findViewById(R.id.userEmail);
-        
+
         aad_myCircleList = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
         lv_myCircleList.setAdapter(aad_myCircleList);
         //해당 동아리 메뉴 페이지로 이동
@@ -174,9 +175,8 @@ public class CircleLIst_NavigationDrawer extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        FirebaseUser user=firebaseAuth.getCurrentUser();
         getMenuInflater().inflate(R.menu.circle_list__navigation_drawer, menu);
-        getFirebaseDatabase_userinfo(user.getUid().toString());
+
         return true;
     }
 
@@ -313,6 +313,19 @@ public class CircleLIst_NavigationDrawer extends AppCompatActivity
 
             }
         });
+
+        FirebaseDatabase.getInstance().getReference().child("user/"+user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                TVuserName.setText(dataSnapshot.child("name").getValue().toString() + " 님");
+                TVuserEmail.setText(dataSnapshot.child("email").getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     public void getFirebaseDatabase(final String str){
@@ -341,28 +354,6 @@ public class CircleLIst_NavigationDrawer extends AppCompatActivity
         });
     }
 
-    public void getFirebaseDatabase_userinfo(final String str){
-        ValueEventListener postListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    String key = postSnapshot.getKey();
-                    UserInfoForDB get = postSnapshot.getValue(UserInfoForDB.class);
-
-                    if(key.equals(str)) {
-                        TVuserName.setText(get.getName() + " 님");
-                        TVuserEmail.setText(get.getEmail());
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        };
-        Query sortbyAge = FirebaseDatabase.getInstance().getReference().child("user").orderByKey();
-        sortbyAge.addListenerForSingleValueEvent(postListener);
-    }
     @Override
     protected void onStart() {
         super.onStart();
