@@ -210,7 +210,7 @@ public class CircleListActivity extends AppCompatActivity {
     }
 
     public void getFirebaseDatabase(final String str){
-        FirebaseDatabase.getInstance().getReference().child("circle").addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("circle").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 arrayDataforsearch.clear();

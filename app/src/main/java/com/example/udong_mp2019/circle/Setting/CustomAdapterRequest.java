@@ -68,8 +68,7 @@ public class CustomAdapterRequest extends BaseSwipeAdapter {
         TextView tv_name = convertView.findViewById(R.id.TV_listVIewMemberName_request);
         LinearLayout delete_join_request = convertView.findViewById(R.id.delete_join_request);
         Log.d("errorDectection","fillValues"+context.toString());
-
-        SwipeLayout swipeLayout= convertView.findViewById(R.id.swipe_finance_check);
+        SwipeLayout swipeLayout= convertView.findViewById(R.id.swipe_join_request);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if(memberAuth.equalsIgnoreCase("")) {
