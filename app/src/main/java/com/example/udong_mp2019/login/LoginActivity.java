@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.udong_mp2019.CircleLIst_NavigationDrawer;
 import com.example.udong_mp2019.circleList.CircleListActivity;
 import com.example.udong_mp2019.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -100,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, R.string.success_login, Toast.LENGTH_SHORT).show();
                     FirebaseUser user=firebaseAuth.getCurrentUser();
                     String uid = user.getUid();
-                    Intent intent = new Intent(getApplicationContext(), CircleListActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), CircleLIst_NavigationDrawer.class);
                     intent.putExtra("uid",uid);
                     startActivity(intent);
                     finish();

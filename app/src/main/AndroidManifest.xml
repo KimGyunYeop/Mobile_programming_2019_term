@@ -9,9 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".circle.Finance.ToSendRegisterActivity"></activity>
+        <activity
+            android:name=".CircleLIst_NavigationDrawer"
+            android:label="@string/title_activity_circle_list__navigation_drawer"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".circle.Finance.ToSendRegisterActivity" />
         <activity android:name=".circle.Finance.ReceiptRegisterActivity" />
-        <activity android:name=".circle.Finance.CheckPaymentActivity"/>
+        <activity android:name=".circle.Finance.CheckPaymentActivity" />
         <activity android:name=".circle.Schedule.CheckAttendanceActivity" />
         <activity android:name=".circle.Schedule.ScheduleRegisterFormActivity" />
         <activity android:name=".circleList.CircleRegisterFormActivity" />
