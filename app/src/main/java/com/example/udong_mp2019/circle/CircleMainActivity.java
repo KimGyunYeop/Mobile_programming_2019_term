@@ -31,7 +31,6 @@ public class CircleMainActivity extends AppCompatActivity {
         userID=receive.getStringExtra("userID");
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-        tv=(TextView) findViewById(R.id.tv_main);
 
         final Bundle bundle= new Bundle(2);
         bundle.putString("circleName",circleName);
@@ -44,11 +43,6 @@ public class CircleMainActivity extends AppCompatActivity {
                         FragmentManager fm = getSupportFragmentManager();
                         FragmentTransaction transaction = fm.beginTransaction();
                         switch (item.getItemId()) {
-                            case R.id.menu_home:
-                                HomeFragment Hfragment= new HomeFragment();
-                                Hfragment.setArguments(bundle);
-                                transaction.replace(R.id.frame_layout, Hfragment);
-                                break;
                             case R.id.menu_schedule:
                                 com.example.udong_mp2019.ScheduleFragment Sfragment= new com.example.udong_mp2019.ScheduleFragment();
                                 Sfragment.setArguments(bundle);
@@ -71,7 +65,7 @@ public class CircleMainActivity extends AppCompatActivity {
                 });
         // 첫 화면
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        HomeFragment fragment= new HomeFragment();
+        com.example.udong_mp2019.ScheduleFragment fragment= new com.example.udong_mp2019.ScheduleFragment();
         fragment.setArguments(bundle);
         transaction.replace(R.id.frame_layout, fragment);
         transaction.commit();

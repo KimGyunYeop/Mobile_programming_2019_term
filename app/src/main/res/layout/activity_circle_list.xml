@@ -44,24 +44,22 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"/>
-    <TableLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="@color/main"
-        android:stretchColumns="0">
-        <TableRow>
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:elevation="5px"
+        android:background="@color/main">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:text="My Circle List"
-                android:textAlignment="center"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
                 android:textStyle="bold"
                 android:textColor="#000000"
-                android:textSize="30sp"
-                android:background="@color/main"
+                android:textSize="25sp"
                 />
             <ImageButton
                 android:id = "@+id/IB_createCircle"
@@ -72,11 +70,7 @@
                 android:src="@drawable/ic_add_black_24dp"
                 android:background="@color/main"
                 android:scaleType="fitXY"/>
-        </TableRow>
-        <View
-            android:background="@color/main_dark"
-            android:layout_height="2dp"/>
-    </TableLayout>
+    </LinearLayout>
 
     <ListView
         android:id = "@+id/LV_myCircleList"

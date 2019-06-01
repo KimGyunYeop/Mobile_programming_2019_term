@@ -51,6 +51,7 @@ public class CircleListActivity extends AppCompatActivity {
         et_searchCircle = findViewById(R.id.ET_searchCircle);
         firebaseAuth = FirebaseAuth.getInstance();
 
+
         aad_myCircleList = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
         lv_myCircleList.setAdapter(aad_myCircleList);
         //해당 동아리 메뉴 페이지로 이동

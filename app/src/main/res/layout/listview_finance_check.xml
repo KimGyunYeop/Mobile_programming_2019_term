@@ -32,7 +32,7 @@
             android:id = "@+id/TV_listVIewFinanceCheckPlanName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:layout_marginLeft="30dp"
             android:text = "sample"/>
 
@@ -40,7 +40,7 @@
             android:id = "@+id/TV_listVIewFinanceCheckAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:layout_below="@id/TV_listVIewFinanceCheckDeu"
             android:layout_alignLeft="@id/TV_listVIewFinanceCheckDeu"
             android:text = "sample"/>
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="30dp"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:text = "X"/>
     </RelativeLayout>
 </com.daimajia.swipe.SwipeLayout>
