@@ -100,12 +100,17 @@ public class SettingFragment extends Fragment {
                 ad.setPositiveButton("네", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
-                        circleRef = mRootRef.child("circle").child(circleName).child("member");
-                        circleRef.child(user.getUid()).child("autority").setValue("secession");
-                        Toast.makeText(getContext(), circleName+" 동아리 탈퇴하였습니다 ", Toast.LENGTH_LONG).show();
-                        dialog.dismiss();     //닫기
-                        // Event
+                        if(memberAuth!=null){
+                            if(memberAuth.equals("manager")){
+                                Toast.makeText(getContext(), "매니저는 탈퇴할 수 없습니다.", Toast.LENGTH_LONG).show();
+                                dialog.dismiss();
+                            }else{
+                                circleRef = mRootRef.child("circle").child(circleName).child("member");
+                                circleRef.child(user.getUid()).child("autority").setValue("secession");
+                                Toast.makeText(getContext(), circleName+" 동아리 탈퇴하였습니다 ", Toast.LENGTH_LONG).show();
+                                dialog.dismiss();
+                            }
+                        }
                     }
                 });
 
