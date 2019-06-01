@@ -132,7 +132,7 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             FirebaseUser user=task.getResult().getUser();
-                            UserInfoForDB userInfoForDB = new UserInfoForDB(email, password, name, school, studentId);
+                            UserInfoForDB userInfoForDB = new UserInfoForDB(email,name, school, studentId);
                             userInfoRef.child(user.getUid()).setValue(userInfoForDB);
                             // 회원가입 성공
                             Toast.makeText(SignUpActivity.this, R.string.success_signup, Toast.LENGTH_SHORT).show();
