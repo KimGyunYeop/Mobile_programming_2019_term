@@ -79,18 +79,12 @@ public class CircleLIst_NavigationDrawer extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        LinearLayout container = (LinearLayout)findViewById(R.id.header_navigation);
-        LayoutInflater inflater=(LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        inflater.inflate(R.layout.nav_header_circle_list__navigation_drawer,container,true);
-
         lv_searchResult = findViewById(R.id.LV_searchResult);
         lv_myCircleList = findViewById(R.id.LV_myCircleList);
         bu_search = findViewById(R.id.IB_searchCircle);
         bu_createCircle = findViewById(R.id.IB_createCircle);
         et_searchCircle = findViewById(R.id.ET_searchCircle);
         firebaseAuth = FirebaseAuth.getInstance();
-        TVuserName=container.findViewById(R.id.userName);
 
         aad_myCircleList = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
         lv_myCircleList.setAdapter(aad_myCircleList);
