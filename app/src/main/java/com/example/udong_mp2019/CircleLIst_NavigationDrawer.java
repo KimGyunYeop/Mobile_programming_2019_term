@@ -1,11 +1,13 @@
 package com.example.udong_mp2019;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -20,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -76,14 +79,19 @@ public class CircleLIst_NavigationDrawer extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+        LinearLayout container = (LinearLayout)findViewById(R.id.header_navigation);
+        LayoutInflater inflater=(LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        inflater.inflate(R.layout.nav_header_circle_list__navigation_drawer,container,true);
+
         lv_searchResult = findViewById(R.id.LV_searchResult);
         lv_myCircleList = findViewById(R.id.LV_myCircleList);
         bu_search = findViewById(R.id.IB_searchCircle);
         bu_createCircle = findViewById(R.id.IB_createCircle);
         et_searchCircle = findViewById(R.id.ET_searchCircle);
         firebaseAuth = FirebaseAuth.getInstance();
-        TVuserName=findViewById(R.id.userName);
-        TVuserEmail=findViewById(R.id.userEmail);
+        TVuserName=container.findViewById(R.id.userName);
+        TVuserEmail=container.findViewById(R.id.userEmail);
 
         aad_myCircleList = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
         lv_myCircleList.setAdapter(aad_myCircleList);
