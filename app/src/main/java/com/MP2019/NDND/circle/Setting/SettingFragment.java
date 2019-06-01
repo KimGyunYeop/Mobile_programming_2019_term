@@ -102,7 +102,7 @@ public class SettingFragment extends Fragment {
                                 dialog.dismiss();
                             }else{
                                 circleRef = mRootRef.child("circle").child(circleName).child("member");
-                                circleRef.child(user.getUid()).child("autority").setValue("secession");
+                                circleRef.child(user.getUid()).removeValue();
                                 Toast.makeText(getContext(), circleName+" 동아리 탈퇴하였습니다 ", Toast.LENGTH_LONG).show();
                                 dialog.dismiss();
                             }

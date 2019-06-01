@@ -202,13 +202,13 @@ public class ScheduleFragment extends Fragment implements CalendarView {
     public void getAutorityFirebase(){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         Query query = FirebaseDatabase.getInstance().getReference().child("circle/"+circleName+"/member/"+user.getUid()+"/autority");
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+        query.addValueEventListener(new ValueEventListener() {
             CircleInfoForDB get;
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.d("circlefinder",dataSnapshot.toString());
                 memberAuth = dataSnapshot.getValue().toString();
-                if(memberAuth.equalsIgnoreCase("member")){
+                if(!memberAuth.equalsIgnoreCase("manager")){
                     fab_calendar.hide();
                 }
             }
