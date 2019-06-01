@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.udong_mp2019.circleList.CircleListActivity"
+    tools:context="com.MP2019.NDND.circleList.CircleListActivity"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/app_bar_circle_list__navigation_drawer">
 

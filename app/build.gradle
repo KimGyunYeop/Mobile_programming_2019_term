@@ -3,7 +3,7 @@ apply plugin: "jacoco"
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.udong_mp2019"
+        applicationId "com.MP2019.NDND"
         minSdkVersion 15
         targetSdkVersion 28
         versionCode 1

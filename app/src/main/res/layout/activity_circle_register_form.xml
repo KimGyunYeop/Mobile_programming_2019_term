@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.udong_mp2019.circleList.CircleRegisterFormActivity">
+    tools:context="com.MP2019.NDND.circleList.CircleRegisterFormActivity">
 
     <TextView
         android:layout_marginTop="200dp"
