@@ -41,6 +41,8 @@ public class CustomAdapterFinanceChange extends BaseAdapter {
 
     public void reset(Context applicationContext, ArrayList<String> UID) {
         this.uid =UID;
+
+        Log.d("paymentChange",uid.toString()+circleName+planName+date);
     }
 
     @Override
@@ -67,8 +69,7 @@ public class CustomAdapterFinanceChange extends BaseAdapter {
         RadioButton no = (RadioButton) view.findViewById(R.id.RB_financeChangeNo);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-
-        FirebaseDatabase.getInstance().getReference().child("user/"+uid.get(i)).addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("user/"+uid.get(i)).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.d("AdapterFinanceChange",dataSnapshot.toString());
@@ -82,7 +83,7 @@ public class CustomAdapterFinanceChange extends BaseAdapter {
             }
         });
 
-        FirebaseDatabase.getInstance().getReference().child("circle/"+circleName+"/schedule/tosend/"+date).child(planName+"/member/"+uid.get(i)).addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("circle/"+circleName+"/schedule/tosend/"+date).child(planName+"/member/"+uid.get(i)).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.d("AdapterFinanceChange",dataSnapshot.toString());

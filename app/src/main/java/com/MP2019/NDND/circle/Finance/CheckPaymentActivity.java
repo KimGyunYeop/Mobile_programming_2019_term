@@ -58,37 +58,14 @@ public class CheckPaymentActivity extends AppCompatActivity {
                 for(DataSnapshot postSnapshot: dataSnapshot.getChildren()){
                     uid.add(postSnapshot.getKey());
                 }
+                Log.d("paymentChange",uid.toString());
                 cafc_aad.reset(getApplicationContext(),uid);
+                cafc_aad.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
-    }
-    // 유저이름 반환
-    public void getFirebaseDatabase1(final String str){
-        Query query = userRef;
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            UserInfoForDB get;
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.d("circlefinder",dataSnapshot.toString());
-
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    String key = postSnapshot.getKey();
-                    Log.d("circlefinder",postSnapshot.toString());
-                    if(key.equals(str)){
-                        get = postSnapshot.child("name").getValue(UserInfoForDB.class);
-                        user=get.getName();
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
             }
         });
     }
