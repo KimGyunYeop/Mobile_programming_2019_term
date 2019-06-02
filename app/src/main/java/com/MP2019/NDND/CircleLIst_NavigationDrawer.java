@@ -272,7 +272,12 @@ public class CircleLIst_NavigationDrawer extends AppCompatActivity
 
             // 창 띄우기
             ad.show();
-        }
+        }else if(id == R.id.openSource)
+         {
+             Intent openSource=new Intent(getApplicationContext(), OpensourceLicenceActivity .class);
+             startActivity(openSource);
+
+         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

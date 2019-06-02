@@ -7,14 +7,19 @@
         <menu>
             <item
                 android:id="@+id/nav_share"
-                android:icon="@drawable/secession"
+
                 android:background="@color/white"
                 android:title="로그아웃" />
             <item
                 android:id="@+id/nav_send"
-                android:icon="@drawable/secession"
+
                 android:background="@color/white"
                 android:title="앱 탈퇴" />
+            <item
+                android:id="@+id/openSource"
+
+                android:background="@color/white"
+                android:title="오픈소스정보" />
         </menu>
     </item>
 
