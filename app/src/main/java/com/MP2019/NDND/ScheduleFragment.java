@@ -37,6 +37,12 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/*
+*MIT License
+
+Copyright (c) 2016 BlackBox Vision
+*
+ */
 public class ScheduleFragment extends Fragment implements CalendarView {
     private static final String DATE_TEMPLATE = "yyyy-MM-dd";
     private static final String MONTH_TEMPLATE = "MMMM yyyy";
