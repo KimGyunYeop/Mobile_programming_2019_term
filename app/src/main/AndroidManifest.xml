@@ -9,24 +9,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".OpensourceLicenceActivity"></activity>
         <activity
-            android:name="com.MP2019.NDND.CircleLIst_NavigationDrawer"
+            android:name=".CircleLIst_NavigationDrawer"
             android:label="@string/title_activity_circle_list__navigation_drawer" />
-        <activity android:name="com.MP2019.NDND.circle.Finance.ToSendRegisterActivity" />
-        <activity android:name="com.MP2019.NDND.circle.Finance.ReceiptRegisterActivity" />
-        <activity android:name="com.MP2019.NDND.circle.Finance.CheckPaymentActivity" />
-        <activity android:name="com.MP2019.NDND.circle.Schedule.CheckAttendanceActivity" />
-        <activity android:name="com.MP2019.NDND.circle.Schedule.ScheduleRegisterFormActivity" />
-        <activity android:name="com.MP2019.NDND.circleList.CircleRegisterFormActivity" />
-        <activity android:name="com.MP2019.NDND.circle.CircleMainActivity" />
-        <activity android:name="com.MP2019.NDND.login.SignUpActivity" />
-        <activity android:name="com.MP2019.NDND.login.LoginActivity" />
-        <activity
-            android:name="com.MP2019.NDND.circleList.CircleListActivity" />
-        <activity android:name="com.MP2019.NDND.login.MainActivity">
+        <activity android:name=".circle.Finance.ToSendRegisterActivity" />
+        <activity android:name=".circle.Finance.ReceiptRegisterActivity" />
+        <activity android:name=".circle.Finance.CheckPaymentActivity" />
+        <activity android:name=".circle.Schedule.CheckAttendanceActivity" />
+        <activity android:name=".circle.Schedule.ScheduleRegisterFormActivity" />
+        <activity android:name=".circleList.CircleRegisterFormActivity" />
+        <activity android:name=".circle.CircleMainActivity" />
+        <activity android:name=".login.SignUpActivity" />
+        <activity android:name=".login.LoginActivity" />
+        <activity android:name=".circleList.CircleListActivity" />
+        <activity android:name=".login.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
