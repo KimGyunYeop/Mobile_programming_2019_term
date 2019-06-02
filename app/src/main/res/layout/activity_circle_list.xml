@@ -40,7 +40,7 @@
 
     <ListView
         android:id = "@+id/LV_searchResult"
-        android:divider="@color/black"
+        android:divider="@color/divider"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"/>
